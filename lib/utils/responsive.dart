@@ -5,6 +5,7 @@ class Responsive {
   late double _width;
   late double _height;
   late double _diagonal;
+  late bool _isTablet;
 
   Responsive(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -12,11 +13,13 @@ class Responsive {
     this._height = size.height;
     this._diagonal = math.sqrt(math.pow(_width, 2) + math.pow(_height, 2));
     //c2 + a2 + b2 = c
+    this._isTablet = size.shortestSide >= 600; //retorna el valor mas pequeno.
   }
 
   double get width => _width;
   double get height => _height;
   double get diagonal => _diagonal;
+  bool get isTablet => _isTablet;
 
   //returna una nueva instancia de la clase
   static Responsive of(BuildContext context) => Responsive(context);
