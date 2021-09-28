@@ -21,24 +21,20 @@ class _LoginFormState extends State<LoginForm> {
             keyboardType: TextInputType.emailAddress,
             label: 'E-MAIL ADDRESS',
           ),
-          InputText(
-            obscureText: true,
-            //borderEnabled: false,
-            label: 'ASSWORD',
-          ),
-          /**Container(
+          Container(
             child: Row(
               children: <Widget>[
                 Expanded(
                   child: InputText(
                     obscureText: true,
                     borderEnabled: false,
-                    label: 'ASSWORD',
+                    label: 'PASSWORD',
                   ),
                 ),
+                
               ],
             ),
-          ),**/
+          ),
         ],
       ),
     );
