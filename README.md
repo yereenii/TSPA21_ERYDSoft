@@ -1,6 +1,6 @@
 # diabits
 
-Aplicacion que ayuda a llevar un control de diabetes
+Aplicacion que ayuda a llevar un control de diabetes.
 
 ## Getting Started
 
