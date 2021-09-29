@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
     final double blueSize = responsive.wp(80); //80% del ancho del dispo
-    final double cyanSize = responsive.wp(60);
+    final double tealAccentSize = responsive.wp(60);
 
     return Scaffold(
       body: GestureDetector(
@@ -43,10 +43,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Positioned(
                   //Circulo cyan
-                  top: -cyanSize * 0.55,
-                  left: -cyanSize * 0.17,
+                  top: -tealAccentSize * 0.45,
+                  left: -tealAccentSize * 0.17,
                   child: Circle(
-                    size: cyanSize,
+                    size: tealAccentSize,
                     colors: [
                       Colors.tealAccent.shade400,
                       Colors.tealAccent.shade400
