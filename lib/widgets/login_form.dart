@@ -15,7 +15,7 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
     return Positioned(
-      bottom: 30,
+      bottom: 0,
       child: Container(
         constraints: BoxConstraints(
           //ancho del dispositivo si es tablet 430 si no ancho-30
@@ -25,8 +25,8 @@ class _LoginFormState extends State<LoginForm> {
           children: <Widget>[
             InputText(
               keyboardType: TextInputType.emailAddress,
-              fontSize: responsive.dp(responsive.isTablet ? 1.7 : 1.4),
-              label: 'E-MAIL ADDRESS',
+              fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
+              label: 'CORREO ELECTRÓNICO',
             ),
             SizedBox(height: responsive.dp(2)),
             Container(
@@ -43,20 +43,8 @@ class _LoginFormState extends State<LoginForm> {
                     child: InputText(
                       obscureText: true,
                       borderEnabled: false,
-                      fontSize: responsive.dp(responsive.isTablet ? 1.7 : 1.4),
-                      label: 'PASSWORD',
-                    ),
-                  ),
-                  MaterialButton(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    onPressed: () {},
-                    child: Text(
-                      'Forgot Password',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize:
-                            responsive.dp(responsive.isTablet ? 1.7 : 1.4),
-                      ),
+                      fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
+                      label: 'CONTRASEÑA',
                     ),
                   ),
                 ],
@@ -64,34 +52,54 @@ class _LoginFormState extends State<LoginForm> {
             ),
             SizedBox(height: responsive.dp(5)),
             SizedBox(
-              width: double.infinity,
+              width: responsive.width * 0.50,
               child: MaterialButton(
                 padding: EdgeInsets.symmetric(vertical: 15),
                 child: Text(
-                  'Sign in',
+                  'Ingresar',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: responsive.dp(1.5),
+                    fontSize: responsive.dp(2),
                   ),
                 ),
                 onPressed: () {},
-                color: Colors.blue[700],
+                color: Colors.blue.shade800,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
               ),
             ),
             SizedBox(height: responsive.dp(2)),
+            MaterialButton(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              onPressed: () {},
+              child: Text(
+                '¿Tienes problemas para iniciar sesión?',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: responsive.dp(responsive.isTablet ? 2 : 1.8),
+                ),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Nuevo usuario?',
-                  style: TextStyle(fontSize: responsive.dp(1.5)),
+                  '¿Nuevo aquí?',
+                  style: TextStyle(
+                    fontSize: responsive.dp(1.8),
+                    color: Colors.black,
+                  ),
                 ),
                 MaterialButton(
                   onPressed: () {},
                   child: Text(
-                    'Sign UP',
+                    'Registrate ahora',
                     style: TextStyle(
-                        color: Colors.blueAccent, fontSize: responsive.dp(1.5)),
+                      color: Colors.blueAccent,
+                      fontSize: responsive.dp(1.8),
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
               ],

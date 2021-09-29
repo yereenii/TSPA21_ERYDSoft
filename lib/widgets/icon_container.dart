@@ -12,24 +12,24 @@ class IconContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: this.size,
-      height: this.size,
+      height: this.size * 0.30,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(this.size * 0.20),
+        borderRadius: BorderRadius.circular(this.size * 0.05),
         boxShadow: [
           BoxShadow(
-            color: Colors.black26,
-            blurRadius: 25,
-            offset: Offset(0, 15),
+            color: Colors.white,
+            //blurRadius: 5,
+            //offset: Offset(0, 5), //sombra
           ),
         ],
       ),
-      padding: EdgeInsets.all(this.size * 0.20),
+      padding: EdgeInsets.all(this.size * .02), //8.0), //this.size * 0.20),
       child: Center(
         child: SvgPicture.asset(
           'assets/icon.svg',
-          width: this.size * 0.60,
-          height: this.size * 0.60,
+          width: this.size,
+          height: this.size * 0.25,
         ),
       ),
     );

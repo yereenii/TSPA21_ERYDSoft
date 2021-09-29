@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                   right: -blueSize * 0.2,
                   child: Circle(
                     size: blueSize,
-                    colors: [Colors.blue, Colors.blueGrey],
+                    colors: [Colors.blue, Colors.blue],
                   ),
                 ),
                 Positioned(
@@ -47,27 +47,30 @@ class _HomePageState extends State<HomePage> {
                   left: -cyanSize * 0.17,
                   child: Circle(
                     size: cyanSize,
-                    colors: [Colors.cyan, Colors.cyanAccent],
+                    colors: [
+                      Colors.tealAccent.shade400,
+                      Colors.tealAccent.shade400
+                    ],
                   ),
                 ),
                 Positioned(
                   //icono
-                  top: blueSize * 0.30,
+                  top: blueSize * 0.60,
                   child: Column(
                     children: <Widget>[
                       IconContainer(
-                        size: responsive.wp(17),
+                        size: responsive.wp(85),
                       ),
                       SizedBox(
-                        height: responsive.dp(3),
+                        height: responsive.dp(10), //*********** */
                       ),
-                      Text(
+                      /**Text(
                         "Hello Again\nWelcome Back!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: responsive.dp(1.8),
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                 ),
