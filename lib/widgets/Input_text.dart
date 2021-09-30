@@ -6,6 +6,8 @@ class InputText extends StatelessWidget {
   final bool obscureText;
   final bool borderEnabled; //esconde el border
   final double fontSize;
+    final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
 
   const InputText({
     Key? key,
@@ -14,6 +16,8 @@ class InputText extends StatelessWidget {
     this.obscureText = false,
     this.borderEnabled = true,
     this.fontSize = 15,
+    this.onChanged,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -21,6 +25,8 @@ class InputText extends StatelessWidget {
     return TextFormField(
       keyboardType: this.keyboardType, //tipo de teclado
       obscureText: this.obscureText,
+      onChanged: this.onChanged, //obtiene el texto del campo
+      validator: this.validator,
       style: TextStyle(
         fontSize: this.fontSize,
       ),
