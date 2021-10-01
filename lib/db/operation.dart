@@ -51,17 +51,19 @@ class OperationDB {
             password: usuariosMap[i]['password']));
   }
 
-  static Future<bool> exite(String email, String password ) async {
+  static Future<bool> exite(String correo, String password) async {
     bool seEncontro = false;
     Database database = await _openDB();
     final List<Map<String, dynamic>> usuariosMap =
         await database.query("usuarios");
     //usuariosMap.contains(Usuario(id_usuario: ,nombre: , correo: , password:))
     for (var n in usuariosMap) {
-      if( n['email'].toString()==email && n['password'].toString() == password){
-        seEncontro = true;
+      if (n['correo'].toString() == correo &&
+          n['password'].toString() == password) {
+        print("####### si existe");
+        return Future<bool>.value(true);
       }
     }
-    return seEncontro;
+    return Future<bool>.value(false);
   }
 }
