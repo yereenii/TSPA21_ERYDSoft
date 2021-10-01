@@ -1,4 +1,5 @@
-class Usuario {
+
+class Usuarios {
   final String id_usuario;
   final String nombre;
   final String correo;
