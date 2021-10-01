@@ -25,14 +25,14 @@ class _LoginFormState extends State<LoginForm> {
       print(_email);
       print(_password);
 
-      /**OperationDB.insert(Usuarios(
+      OperationDB.insert(Usuarios(
           id_usuario: '1',
           nombre: 'Fulano',
           correo: 'ful@.com',
           password: '1234'));
       //consumir servicio rest para iniciar sesion
-    }*/
-    
+    }
+    //print(OperationDB.usuarios();
   }
 
   @override
