@@ -51,7 +51,7 @@ class OperationDB {
             password: usuariosMap[i]['password']));
   }
 
-  /*static bool exite() async {
+  static Future<bool> exite() async {
     bool seEncontro = false;
     Database database = await _openDB();
     final List<Map<String, dynamic>> usuariosMap =
@@ -60,5 +60,5 @@ class OperationDB {
 
     }
     return seEncontro;
-  }*/
+  }
 }
