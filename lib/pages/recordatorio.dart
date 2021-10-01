@@ -34,7 +34,7 @@ class _RecordatorioState extends State<Recordatorio> {
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
-                Calendario(),
+
                 Positioned(
                   //circulo blue
                   top: -blueSize * 0.4,
@@ -56,28 +56,7 @@ class _RecordatorioState extends State<Recordatorio> {
                     ],
                   ),
                 ),
-                Positioned(
-                  //icono
-                  top: blueSize * 0.60,
-                  child: Column(
-                    children: <Widget>[
-                      IconContainer(
-                        size: responsive.wp(85),
-                      ),
-                      SizedBox(
-                        height: responsive.dp(10), //*********** */
-                      ),
-                      /**Text(
-                          "Hello Again\nWelcome Back!",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                          fontSize: responsive.dp(1.8),
-                          ),
-                          ),*/
-                    ],
-                  ),
-                ),
-
+                Calendario(),
               ],
             ),
             //child: Stack(children: <Widget>[IconContainer()]),
