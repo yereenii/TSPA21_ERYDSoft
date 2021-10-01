@@ -6,7 +6,7 @@ class InputText extends StatelessWidget {
   final bool obscureText;
   final bool borderEnabled; //esconde el border
   final double fontSize;
-    final void Function(String)? onChanged;
+  final void Function(String)? onChanged;
   final String? Function(String?)? validator;
 
   const InputText({

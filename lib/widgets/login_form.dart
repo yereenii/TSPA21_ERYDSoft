@@ -1,3 +1,5 @@
+import 'package:diabits/db/operation.dart';
+import 'package:diabits/models/usuario.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +24,15 @@ class _LoginFormState extends State<LoginForm> {
     if (isoOK) {
       print(_email);
       print(_password);
+
+      /**OperationDB.insert(Usuarios(
+          id_usuario: '1',
+          nombre: 'Fulano',
+          correo: 'ful@.com',
+          password: '1234'));
       //consumir servicio rest para iniciar sesion
-    }
+    }*/
+    
   }
 
   @override
