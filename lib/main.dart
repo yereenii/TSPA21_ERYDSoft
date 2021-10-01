@@ -18,14 +18,14 @@ class MyApp extends StatelessWidget {
     ]);
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Dia Bits',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: HomePage(),
       routes: {
         Recordatorio.routeName: (_) => Recordatorio(),
-        NewReminderPage.routeName:(_) => Recordatorio(),
+        NewReminderPage.routeName: (_) => NewReminderPage(),
       },
     );
   }

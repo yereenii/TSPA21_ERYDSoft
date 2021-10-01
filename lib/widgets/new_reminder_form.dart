@@ -83,7 +83,6 @@ class _NewReminderFormState extends State<NewReminderForm> {
         _timeController.text = formatDate(
             DateTime(2021, 09, 09, selectedTime.hour, selectedTime.minute),
             [HH, ':', nn, ' ']).toString();
-        selectedTime = picked;
       });
     }
   }
