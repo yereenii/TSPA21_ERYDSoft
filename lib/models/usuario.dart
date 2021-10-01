@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
-
 class Usuarios {
-  late final String id_usuario;
+  final String id_usuario;
   final String nombre;
   final String correo;
   final String password;
