@@ -21,13 +21,13 @@ class OperationDB {
     );
   }
 
-  static Future<int> insert(Usuarios usuarios) async {
+  static Future<int> insert(Usuario usuarios) async {
     Database database = await _openDB();
     return database.insert('usuarios', usuarios.toMap());
   }
 
   //se trae una lista de la base de datos.
-  static Future<List<Usuarios>> usuarios() async {
+  static Future<List<Usuario>> usuarios() async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> usuariosMap =
         await database.query("usuarios");
@@ -44,20 +44,23 @@ class OperationDB {
     }
     return List.generate(
         usuariosMap.length,
-        (i) => Usuarios(
+        (i) => Usuario(
             id_usuario: usuariosMap[i]['id_usuario'],
             nombre: usuariosMap[i]['nombre'],
             correo: usuariosMap[i]['correo'],
             password: usuariosMap[i]['password']));
   }
 
-  static Future<bool> exite() async {
+  static Future<bool> exite(String email, String password ) async {
     bool seEncontro = false;
     Database database = await _openDB();
     final List<Map<String, dynamic>> usuariosMap =
         await database.query("usuarios");
+    //usuariosMap.contains(Usuario(id_usuario: ,nombre: , correo: , password:))
     for (var n in usuariosMap) {
-
+      if( n['email'].toString()==email && n['password'].toString() == password){
+        seEncontro = true;
+      }
     }
     return seEncontro;
   }

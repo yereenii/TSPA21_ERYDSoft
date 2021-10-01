@@ -22,7 +22,7 @@ class _LoginFormState extends State<LoginForm> {
     final isoOK = _formKey.currentState!.validate();
     //print("form isOK $isoOK");
     print("Se inserto : " +
-        OperationDB.insert(Usuarios(
+        OperationDB.insert(Usuario(
                 id_usuario: '1',
                 nombre: 'user',
                 correo: 'user@erydsoft',
