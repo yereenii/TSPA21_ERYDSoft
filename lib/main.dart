@@ -25,8 +25,6 @@ class MyApp extends StatelessWidget {
       routes: {
         Recordatorio.routeName: (_) => Recordatorio(),
       },
-
-      
     );
   }
 }
