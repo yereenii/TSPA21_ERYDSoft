@@ -30,6 +30,8 @@ class _LoginFormState extends State<LoginForm> {
             .toString());
     OperationDB.usuarios();
     print("login");
+    print("#### existe "+OperationDB.exite(_email, _password).toString());
+    print("login");
     if (isoOK) {
       print(_email);
       print(_password);
