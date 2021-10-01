@@ -31,10 +31,16 @@ class OperationDB {
     Database database = await _openDB();
     final List<Map<String, dynamic>> usuariosMap =
         await database.query("usuarios");
-
     for (var n in usuariosMap) {
       //ver que funcione
-      print("____" + n['nombre']);
+      print("____" +
+          n['nombre'] +
+          "_" +
+          n['id_usuario'] +
+          "_" +
+          n['correo'] +
+          "_" +
+          n['password']);
     }
     return List.generate(
         usuariosMap.length,
@@ -44,4 +50,15 @@ class OperationDB {
             correo: usuariosMap[i]['correo'],
             password: usuariosMap[i]['password']));
   }
+
+  /*static bool exite() async {
+    bool seEncontro = false;
+    Database database = await _openDB();
+    final List<Map<String, dynamic>> usuariosMap =
+        await database.query("usuarios");
+    for (var n in usuariosMap) {
+
+    }
+    return seEncontro;
+  }*/
 }

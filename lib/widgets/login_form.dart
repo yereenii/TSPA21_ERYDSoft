@@ -20,20 +20,19 @@ class _LoginFormState extends State<LoginForm> {
   _summit() {
     //metodo que ejecuta las validaciones que pongas en el form
     final isoOK = _formKey.currentState!.validate();
-    print("form isOK $isoOK");
+    //print("form isOK $isoOK");
+    OperationDB.insert(Usuarios(
+        id_usuario: '1',
+        nombre: 'user',
+        correo: 'user@erydsoft',
+        password: '1234'));
+    OperationDB.usuarios();
+    print("login");
     if (isoOK) {
       print(_email);
       print(_password);
-
-      OperationDB.insert(Usuarios(
-          id_usuario: '1',
-          nombre: 'Fulano',
-          correo: 'ful@.com',
-          password: '1234'));
-      //consumir servicio rest para iniciar sesion
+      Navigator.pushNamed(context, 'recordatorio');
     }
-    //print(OperationDB.usuarios();
-    Navigator.pushNamed(context, 'recordatorio');
   }
 
   @override

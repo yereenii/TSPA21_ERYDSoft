@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
 class Usuarios {
-  late final int id_usuario;
+  late final String id_usuario;
   final String nombre;
   final String correo;
   final String password;
 
   Usuarios(
-      {id_usuario,
+      {required this.id_usuario,
       required this.nombre,
       required this.correo,
       required this.password});

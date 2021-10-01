@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 //sft
 class NewReminderPage extends StatefulWidget {
-  const NewReminderPage({Key? key}) : super(key: key);
+  static const routeName = 'nuevorecordatorio';
+  //const NewReminderPage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();

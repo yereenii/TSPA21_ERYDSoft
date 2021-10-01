@@ -1,4 +1,5 @@
 import 'package:diabits/pages/home_page.dart';
+import 'package:diabits/pages/new_reminder_page.dart';
 import 'package:diabits/pages/recordatorio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
       routes: {
         Recordatorio.routeName: (_) => Recordatorio(),
+        NewReminderPage.routeName:(_) => Recordatorio(),
       },
     );
   }
