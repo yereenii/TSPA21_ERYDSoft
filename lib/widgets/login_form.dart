@@ -33,6 +33,7 @@ class _LoginFormState extends State<LoginForm> {
       //consumir servicio rest para iniciar sesion
     }
     //print(OperationDB.usuarios();
+    Navigator.pushNamed(context, 'recordatorio');
   }
 
   @override
