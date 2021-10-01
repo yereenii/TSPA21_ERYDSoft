@@ -3,6 +3,7 @@ import 'package:diabits/pages/new_reminder_page.dart';
 import 'package:diabits/pages/recordatorio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,6 +19,16 @@ class MyApp extends StatelessWidget {
     ]);
 
     return MaterialApp(
+      localizationsDelegates: [
+        // ... app-specific localization delegate[s] here
+        SfGlobalLocalizations.delegate
+      ],
+      supportedLocales: [
+        const Locale('es'),
+        const Locale.fromSubtags(languageCode: 'es'),
+        // ... other locales the app supports
+      ],
+      locale: const Locale('es'),
       title: 'Dia Bits',
       theme: ThemeData(
         primarySwatch: Colors.blue,
