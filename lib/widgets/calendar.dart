@@ -32,7 +32,7 @@ class _CalendarioState extends State<Calendario> {
   GlobalKey<FormState> _formKey = GlobalKey();
 
   _summit() {
-    Navigator.pushNamed(context, '');
+    Navigator.pushNamed(context, 'nuevorecordatorio');
   }
 
   @override

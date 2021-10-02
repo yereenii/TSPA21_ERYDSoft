@@ -4,8 +4,9 @@ import 'package:path/path.dart';
 import 'dart:async';
 
 class OperationDB {
+  static bool _existeUsuario = false;
 // Abre la base de datos y guarda la referencia.
-  static Future<Database> _openDB() async {
+  Future<Database> _openDB() async {
     // Establecer la ruta a la base de datos. Nota: Usando la función `join` del
     // complemento `path` es la mejor práctica para asegurar que la ruta sea correctamente
     // construida para cada plataforma.
@@ -21,13 +22,13 @@ class OperationDB {
     );
   }
 
-  static Future<int> insert(Usuario usuarios) async {
+  Future<int> insert(Usuario usuarios) async {
     Database database = await _openDB();
     return database.insert('usuarios', usuarios.toMap());
   }
 
   //se trae una lista de la base de datos.
-  static Future<List<Usuario>> usuarios() async {
+  Future<List<Usuario>> usuarios() async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> usuariosMap =
         await database.query("usuarios");
@@ -51,19 +52,24 @@ class OperationDB {
             password: usuariosMap[i]['password']));
   }
 
-  static Future<bool> exite(String correo, String password) async {
+  Future<bool> exiteUser(String correo, String password) async {
     bool seEncontro = false;
     Database database = await _openDB();
     final List<Map<String, dynamic>> usuariosMap =
         await database.query("usuarios");
-    //usuariosMap.contains(Usuario(id_usuario: ,nombre: , correo: , password:))
     for (var n in usuariosMap) {
       if (n['correo'].toString() == correo &&
           n['password'].toString() == password) {
         print("####### si existe");
+        _existeUsuario = true;
         return Future<bool>.value(true);
       }
     }
+     _existeUsuario = false;
     return Future<bool>.value(false);
+  }
+
+  bool existeUser2() {
+    return _existeUsuario;
   }
 }
