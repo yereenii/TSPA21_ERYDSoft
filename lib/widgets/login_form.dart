@@ -17,21 +17,37 @@ class _LoginFormState extends State<LoginForm> {
   String _email = '';
   String _password = '';
   OperationDB _operationDB = OperationDB();
-  bool seInsertoPrimerUser = false;
+
+  bool _existeUsuario(String e, String p) {
+    bool existe = _operationDB.existeUser(e, p);
+    print(
+        "####### metodo existeUsuario return>>> email: $e password: $p $existe");
+    return existe;
+  }
 
   _summit() {
     final isoOK = _formKey.currentState!.validate();
-    if (!seInsertoPrimerUser) {
-      _operationDB.insert(Usuario(
-          id_usuario: '1',
-          nombre: 'user',
-          correo: 'user@erydsoft',
-          password: '1234'));
-      seInsertoPrimerUser = true;
-    }
-    _operationDB.exiteUser(_email, _password);
-    if (_operationDB.existeUser2() && isoOK) {
-      Navigator.pushNamed(context, 'recordatorio');
+    if (isoOK) {
+      bool existeRegistro = _existeUsuario('user@erydsoft', '1234');
+      print("####### Existe registro user@erydsoft  $existeRegistro");
+      if (!existeRegistro) {
+        //si no existe el usuairo lo crea
+        _operationDB.insertUser(Usuario(
+            id_usuario: '1',
+            nombre: 'user',
+            correo: 'user@erydsoft',
+            password: '1234'));
+        print("##### lo Crea");
+      } else {
+        print("##### No lo Crea");
+      }
+      if (_existeUsuario(_email, _password)) {
+        print("##### Entra");
+        //si existe el usuario se puede logear.
+        // Navigator.pushNamed(context, 'recordatorio');
+      } else {
+        print("##### No Entra");
+      }
     }
   }
 
@@ -107,7 +123,7 @@ class _LoginFormState extends State<LoginForm> {
                       fontSize: responsive.dp(2),
                     ),
                   ),
-                  onPressed: this._summit,
+                  onPressed: _summit,
                   color: Colors.blue.shade800,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),

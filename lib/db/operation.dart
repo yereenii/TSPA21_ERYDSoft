@@ -1,10 +1,11 @@
+import 'package:diabits/models/recordatorio.dart';
 import 'package:diabits/models/usuario.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'dart:async';
 
 class OperationDB {
-  static bool _existeUsuario = false;
+  bool _existeUsuario = false;
 // Abre la base de datos y guarda la referencia.
   Future<Database> _openDB() async {
     // Establecer la ruta a la base de datos. Nota: Usando la función `join` del
@@ -15,20 +16,21 @@ class OperationDB {
       onCreate: (db, version) {
         return db.execute(
           // Ejecuta la sentencia CREATE TABLE en la base de datos
-          "CREATE TABLE usuarios (id_usuario CHAR PRIMARY KEY, nombre VARCHAR2 NOT NULL, correo VARCHAR2 NOT NULL, password VARCHAR2 NOT NULL);",
+          "CREATE TABLE usuarios (id_usuario CHAR PRIMARY KEY, nombre VARCHAR2 NOT NULL, correo VARCHAR2 NOT NULL, password VARCHAR2 NOT NULL);" +
+              "CREATE TABLE recordatorios (id_recordatorios CHAR PRIMARY KEY, nombre_recordatorio VARCHAR2 NOT NULL, fecha DATE NOT NULL, FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario) );",
         );
       },
-      version: 1,
+      version: 2,
     );
   }
 
-  Future<int> insert(Usuario usuarios) async {
+  Future<int> insertUser(Usuario usuario) async {
     Database database = await _openDB();
-    return database.insert('usuarios', usuarios.toMap());
+    return database.insert('usuarios', usuario.toMap());
   }
 
   //se trae una lista de la base de datos.
-  Future<List<Usuario>> usuarios() async {
+  Future<List<Usuario>> getUsers() async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> usuariosMap =
         await database.query("usuarios");
@@ -52,24 +54,54 @@ class OperationDB {
             password: usuariosMap[i]['password']));
   }
 
-  Future<bool> exiteUser(String correo, String password) async {
-    bool seEncontro = false;
+  Future<bool> _existeUser2(String correo, String password) async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> usuariosMap =
         await database.query("usuarios");
+    _existeUsuario = false;
     for (var n in usuariosMap) {
-      if (n['correo'].toString() == correo &&
-          n['password'].toString() == password) {
-        print("####### si existe");
+      if (n['correo'].toString().compareTo(correo) == 0 &&
+          n['password'].toString().compareTo(password) == 0) {
+        print("####### si existeUser");
         _existeUsuario = true;
-        return Future<bool>.value(true);
       }
     }
-     _existeUsuario = false;
-    return Future<bool>.value(false);
+    print(
+        "####### existeUser >>> correo: $correo password: $password  $_existeUsuario");
+    return Future<bool>.value(true);
   }
 
-  bool existeUser2() {
+  bool existeUser(String correo, String password) {
+    _existeUser2(correo, password);
+    print(" valor final existeUser : $_existeUsuario");
     return _existeUsuario;
+  }
+
+  Future<int> insertRecordatorio(Recordatorio recordatorio) async {
+    Database database = await _openDB();
+    return database.insert('recordatorios', recordatorio.toMap());
+  }
+
+  Future<List<Recordatorio>> getRecordatorio() async {
+    Database database = await _openDB();
+    final List<Map<String, dynamic>> recordatorioMap =
+        await database.query("recordatorio");
+    for (var n in recordatorioMap) {
+      //ver que funcione
+      print("____" +
+          n['nombre'] +
+          "_" +
+          n['id_usuario'] +
+          "_" +
+          n['correo'] +
+          "_" +
+          n['password']);
+    }
+    return List.generate(
+        recordatorioMap.length,
+        (i) => Recordatorio(
+            id_recordatorios: recordatorioMap[i]['fecha'],
+            nombre_recordatorio: recordatorioMap[i]['nombre_recordatorio'],
+            fecha: recordatorioMap[i]['fecha']));
   }
 }
