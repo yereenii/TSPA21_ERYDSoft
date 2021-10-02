@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:diabits/utils/responsive.dart';
+import 'package:diabits/widgets/inkWellTabs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Input_text.dart';
@@ -50,7 +51,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
   }
 
   //call del datePickerSelect
-  _selectDate(BuildContext context) async {
+  _selectDate() async {
     final DateTime? selected = await showDatePicker(
       context: context,
       initialDate: selectedDate,
@@ -120,36 +121,13 @@ class _NewReminderFormState extends State<NewReminderForm> {
               SizedBox(
                 width: responsive.width * 0.50,
                 child: Column(
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        const Text('Elegir la Fecha'),
-                        InkWell(
-                          onTap: () {
-                            _selectDate(context);
-                          },
-                          child: Container(
-                            width: responsive.width / 1.7,
-                            height: responsive.height / 15,
-                            decoration: BoxDecoration(color: Colors.blue[200]),
-                            child: TextFormField(
-                              style: TextStyle(
-                                  fontSize: responsive
-                                      .dp(responsive.isTablet ? 1.9 : 1.6)),
-                              textAlign: TextAlign.center,
-                              enabled: false,
-                              keyboardType: TextInputType.text,
-                              controller: _dateController,
-                              onSaved: (String? val) {},
-                              decoration: const InputDecoration(
-                                disabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide.none),
-                                contentPadding: EdgeInsets.only(top: 0.0),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
+                  children: [
+                    InkTextFormField(
+                      onTap: () async => _selectDate,
+                      controller: _dateController,
+                      fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
+                      width: responsive.width / 1.7,
+                      heigth: responsive.height / 15,
                     ),
                   ],
                 ),
@@ -158,36 +136,13 @@ class _NewReminderFormState extends State<NewReminderForm> {
               SizedBox(
                 width: responsive.width * 0.50,
                 child: Column(
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        const Text('Elrgir la Hora'),
-                        InkWell(
-                          onTap: () {
-                            _selectTime(context);
-                          },
-                          child: Container(
-                            width: responsive.width / 1.7,
-                            height: responsive.height / 15,
-                            decoration: BoxDecoration(color: Colors.blue[200]),
-                            child: TextFormField(
-                              style: TextStyle(
-                                  fontSize: responsive
-                                      .dp(responsive.isTablet ? 1.9 : 1.6)),
-                              textAlign: TextAlign.center,
-                              enabled: false,
-                              keyboardType: TextInputType.text,
-                              controller: _timeController,
-                              onSaved: (String? val) {},
-                              decoration: const InputDecoration(
-                                disabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide.none),
-                                contentPadding: EdgeInsets.only(top: 0.0),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
+                  children: [
+                    InkTextFormField(
+                      onTap: () async => _selectTime(context),
+                      controller: _timeController,
+                      fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
+                      width: responsive.width / 1.7,
+                      heigth: responsive.height / 15,
                     ),
                   ],
                 ),
@@ -217,7 +172,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
                 child: MaterialButton(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: Text(
-                    'Canselar',
+                    'Cancelar',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: responsive.dp(2),
