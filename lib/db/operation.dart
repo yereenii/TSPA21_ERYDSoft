@@ -104,4 +104,6 @@ class OperationDB {
             nombre_recordatorio: recordatorioMap[i]['nombre_recordatorio'],
             fecha: recordatorioMap[i]['fecha']));
   }
+
+
 }

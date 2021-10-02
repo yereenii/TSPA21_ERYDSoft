@@ -25,20 +25,52 @@ class _LoginFormState extends State<LoginForm> {
     return existe;
   }
 
+  _creacionPrimerUsuario() {
+    _operationDB.insertUser(Usuario(
+        id_usuario: '1',
+        nombre: 'user',
+        correo: 'user@erydsoft',
+        password: '1234'));
+  }
+
+  void _showAlertDialog() {
+    showDialog(
+        context: context,
+        builder: (buildcontext) {
+          return AlertDialog(
+            title: Text("Titulo del alert"),
+            content: Text("contenido del alert"),
+            actions: <Widget>[
+              MaterialButton(
+                child: Text(
+                  "CERRAR",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
+
   _summit() {
     final isoOK = _formKey.currentState!.validate();
     if (isoOK) {
-      Navigator.pushNamed(context, 'recordatorio');
-
+      //Navigator.pushNamed(context, 'recordatorio');
+      //bool existeRegistro = _existeUsuario('user@erydsoft', '1234');
+      print("###### $_email    $_password");
+      if (_email == 'user@erydsoft' && _password == '1234') {
+        Navigator.pushNamed(context, 'recordatorio');
+      } else {
+        print("###########datos invalidos ");
+      }
       /*bool existeRegistro = _existeUsuario('user@erydsoft', '1234');
       print("####### Existe registro user@erydsoft  $existeRegistro");
       if (!existeRegistro) {
         //si no existe el usuairo lo crea
-        _operationDB.insertUser(Usuario(
-            id_usuario: '1',
-            nombre: 'user',
-            correo: 'user@erydsoft',
-            password: '1234'));
+        _creacionPrimerUsuario();
         print("##### lo Crea");
       } else {
         print("##### No lo Crea");
@@ -51,6 +83,7 @@ class _LoginFormState extends State<LoginForm> {
         print("##### No Entra");
       }*/
     }
+    return isoOK;
   }
 
   @override

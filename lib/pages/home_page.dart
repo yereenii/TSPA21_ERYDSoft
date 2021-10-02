@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Positioned(
                   //icono
-                  top: blueSize * 0.60,
+                  top: blueSize * 0.45,
                   child: Column(
                     children: <Widget>[
                       IconContainer(
