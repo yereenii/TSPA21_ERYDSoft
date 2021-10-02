@@ -1,6 +1,6 @@
 import 'package:diabits/pages/home_page.dart';
 import 'package:diabits/pages/new_reminder_page.dart';
-import 'package:diabits/pages/recordatorio.dart';
+import 'package:diabits/pages/recordatorio_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
