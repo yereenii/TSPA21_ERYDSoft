@@ -38,13 +38,7 @@ class _RecordatorioState extends State<Recordatorio> {
                   top: blueSize * 0.30,
                   child: Column(
                     children: <Widget>[
-                      Text(
-                        "Nuevo Recordatorio",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: responsive.dp(1.8),
-                        ),
-                      ),
+
                       SizedBox(
                         height: responsive.dp(10),
                       ),
@@ -54,7 +48,7 @@ class _RecordatorioState extends State<Recordatorio> {
                 ),
                 Positioned(
                   //circulo blue
-                  top: -blueSize * -1.4,
+                  top: -blueSize * -2,
                   right: -blueSize * -0.4,
                   child: Circle(
                     size: blueSize,
@@ -63,7 +57,7 @@ class _RecordatorioState extends State<Recordatorio> {
                 ),
                 Positioned(
                   //Circulo cyan
-                  top: -tealAccentSize * -2.45,
+                  top: -tealAccentSize * -3,
                   left: -tealAccentSize * -0.77,
                   child: Circle(
                     size: tealAccentSize,
