@@ -28,7 +28,9 @@ class _LoginFormState extends State<LoginForm> {
   _summit() {
     final isoOK = _formKey.currentState!.validate();
     if (isoOK) {
-      bool existeRegistro = _existeUsuario('user@erydsoft', '1234');
+      Navigator.pushNamed(context, 'recordatorio');
+
+      /*bool existeRegistro = _existeUsuario('user@erydsoft', '1234');
       print("####### Existe registro user@erydsoft  $existeRegistro");
       if (!existeRegistro) {
         //si no existe el usuairo lo crea
@@ -47,7 +49,7 @@ class _LoginFormState extends State<LoginForm> {
         // Navigator.pushNamed(context, 'recordatorio');
       } else {
         print("##### No Entra");
-      }
+      }*/
     }
   }
 
