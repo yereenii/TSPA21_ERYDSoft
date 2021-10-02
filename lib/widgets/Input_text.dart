@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class InputText extends StatelessWidget {
@@ -22,28 +24,41 @@ class InputText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: this.keyboardType, //tipo de teclado
-      obscureText: this.obscureText,
-      onChanged: this.onChanged, //obtiene el texto del campo
-      validator: this.validator,
-      style: TextStyle(
-        fontSize: this.fontSize,
-      ),
-      decoration: InputDecoration(
-        labelText: this.label,
-        enabledBorder: this.borderEnabled
-            ? UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black12,
-                ),
-              )
-            : InputBorder.none,
-        //suffix: Text("Forgot Password"), //solo cuando el elemento tiene el foco de atencion
-        contentPadding: EdgeInsets.symmetric(vertical: 7),
-        labelStyle: TextStyle(
-          color: Colors.black45,
-          fontWeight: FontWeight.w500,
+    return Localizations(
+      locale: const Locale('en', 'US'),
+      delegates: const <LocalizationsDelegate<dynamic>>[
+        DefaultWidgetsLocalizations.delegate,
+        DefaultMaterialLocalizations.delegate,
+      ],
+      child: MediaQuery(
+        data: const MediaQueryData(),
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: TextFormField(
+            keyboardType: keyboardType, //tipo de teclado
+            obscureText: obscureText,
+            onChanged: onChanged, //obtiene el texto del campo
+            validator: validator,
+            style: TextStyle(
+              fontSize: fontSize,
+            ),
+            decoration: InputDecoration(
+              labelText: label,
+              enabledBorder: borderEnabled
+                  ? const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black12,
+                      ),
+                    )
+                  : InputBorder.none,
+              //suffix: Text("Forgot Password"), //solo cuando el elemento tiene el foco de atencion
+              contentPadding: const EdgeInsets.symmetric(vertical: 7),
+              labelStyle: const TextStyle(
+                color: Colors.black45,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
         ),
       ),
     );
