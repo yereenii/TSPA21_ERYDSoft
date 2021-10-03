@@ -33,6 +33,7 @@ class _RecordatorioState extends State<Recordatorio> {
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
+                Calendario(),
                 Positioned(
                   //icono
                   top: blueSize * 0.30,
@@ -48,8 +49,8 @@ class _RecordatorioState extends State<Recordatorio> {
                 ),
                 Positioned(
                   //circulo blue
-                  top: -blueSize * -2,
-                  right: -blueSize * -0.4,
+                  top: -blueSize * -1.85,
+                  right: -blueSize * -0.5,
                   child: Circle(
                     size: blueSize,
                     colors: const [Colors.blue, Colors.blue],
@@ -57,7 +58,7 @@ class _RecordatorioState extends State<Recordatorio> {
                 ),
                 Positioned(
                   //Circulo cyan
-                  top: -tealAccentSize * -3,
+                  top: -tealAccentSize * -2.85,
                   left: -tealAccentSize * -0.77,
                   child: Circle(
                     size: tealAccentSize,
@@ -67,7 +68,7 @@ class _RecordatorioState extends State<Recordatorio> {
                     ],
                   ),
                 ),
-                Calendario(),
+
               ],
             ),
           ),
