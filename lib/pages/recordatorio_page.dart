@@ -49,7 +49,7 @@ class _RecordatorioState extends State<Recordatorio> {
                 ),
                 Positioned(
                   //circulo blue
-                  top: -blueSize * -1.85,
+                  top: -blueSize * -2,
                   right: -blueSize * -0.5,
                   child: Circle(
                     size: blueSize,
