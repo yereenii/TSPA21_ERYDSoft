@@ -21,5 +21,17 @@ class diabitsDatabase {
         "CREATE TABLE recordatorios (id_recordatorios INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_recordatorio VARCHAR2 NOT NULL, fecha DATE NOT NULL, FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario) );"
       );    
     });
+    
+    db = await openDatabase(
+      'my_db.db', 
+      version: 2,
+      onCreate: (
+        Database db, 
+        int version,
+      ) {
+      db.execute(
+        "CREATE TABLE recordatorios (id_recordatorios INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_recordatorio VARCHAR2 NOT NULL, fecha DATE NOT NULL, FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario) );"
+      );    
+    });
   }
 }

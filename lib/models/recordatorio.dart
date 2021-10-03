@@ -12,7 +12,7 @@ class Recordatorio {
     return {
       'id_recordatorios': id_recordatorios,
       'nombre_recordatorio': nombre_recordatorio,
-      'fecha': fecha
+      'fecha': fecha.toString()
     };
   }
 }
