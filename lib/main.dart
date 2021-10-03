@@ -18,26 +18,39 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return MaterialApp(
-      localizationsDelegates: [
-        // ... app-specific localization delegate[s] here
-        SfGlobalLocalizations.delegate
+    return Localizations(
+      locale: const Locale('en', 'US'),
+      delegates: const <LocalizationsDelegate<dynamic>>[
+        DefaultWidgetsLocalizations.delegate,
+        DefaultMaterialLocalizations.delegate,
       ],
-      supportedLocales: [
-        const Locale('es'),
-        const Locale.fromSubtags(languageCode: 'es'),
-        // ... other locales the app supports
-      ],
-      locale: const Locale('es'),
-      title: 'Dia Bits',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      child: MediaQuery(
+        data: const MediaQueryData(),
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: MaterialApp(
+            localizationsDelegates: [
+              // ... app-specific localization delegate[s] here
+              SfGlobalLocalizations.delegate
+            ],
+            supportedLocales: [
+              const Locale('es'),
+              const Locale.fromSubtags(languageCode: 'es'),
+              // ... other locales the app supports
+            ],
+            locale: const Locale('es'),
+            title: 'Dia Bits',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            home: HomePage(),
+            routes: {
+              Recordatorio.routeName: (_) => Recordatorio(),
+              NewReminderPage.routeName: (_) => NewReminderPage(),
+            },
+          ),
+        ),
       ),
-      home: HomePage(),
-      routes: {
-        Recordatorio.routeName: (_) => Recordatorio(),
-        NewReminderPage.routeName: (_) => NewReminderPage(),
-      },
     );
   }
 }
