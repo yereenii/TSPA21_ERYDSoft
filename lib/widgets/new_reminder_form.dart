@@ -1,11 +1,11 @@
 // ignore_for_file: avoid_print
 
+import 'package:diabits/main.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/inkWellTabs.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Input_text.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' as intl;
 import 'package:date_format/date_format.dart';
 
 class NewReminderForm extends StatefulWidget {
@@ -19,7 +19,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   String date = "";
   DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTime = const TimeOfDay(hour: 00, minute: 00);
+  TimeOfDay selectedTime = TimeOfDay.now();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
   String _hour = '', _minute = '', _time = '';
@@ -42,17 +42,19 @@ class _NewReminderFormState extends State<NewReminderForm> {
 
   @override
   void initState() {
-    _dateController.text = DateFormat.yMd().format(DateTime.now());
+    _dateController.text = intl.DateFormat.yMd().format(DateTime.now());
     _timeController.text = formatDate(
-        DateTime(2021, 09, 09, selectedTime.hourOfPeriod, selectedTime.minute),
-        [HH, ':', nn, ' ', am]).toString();
+        DateTime(2021, 09, 09, selectedTime.hour, selectedTime.minute),
+        [HH, ':', nn]).toString();
     _hora = selectedTime.toString();
     super.initState();
   }
 
   //call del datePickerSelect
-  _selectDate() async {
+  _selectDate(BuildContext context) async {
+    print("entre al metodo");
     final DateTime? selected = await showDatePicker(
+      locale: const Locale('es', 'MX'),
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2010),
@@ -61,10 +63,11 @@ class _NewReminderFormState extends State<NewReminderForm> {
       cancelText: "CANCELAR",
       confirmText: "OK",
     );
+    print("pase el datepicker");
     if (selected != null && selected != selectedDate) {
       setState(() {
         selectedDate = selected;
-        _dateController.text = DateFormat.yMd().format(selectedDate);
+        _dateController.text = intl.DateFormat.yMd().format(selectedDate);
       });
     }
   }
@@ -82,8 +85,11 @@ class _NewReminderFormState extends State<NewReminderForm> {
         _time = _hour + ' : ' + _minute;
         _timeController.text = _time;
         _timeController.text = formatDate(
-            DateTime(2021, 09, 09, selectedTime.hour, selectedTime.minute),
-            [HH, ':', nn, ' ']).toString();
+            DateTime(2021, 09, 09, selectedTime.hour, selectedTime.minute), [
+          HH,
+          ':',
+          nn,
+        ]).toString();
       });
     }
   }
@@ -120,16 +126,13 @@ class _NewReminderFormState extends State<NewReminderForm> {
               SizedBox(height: responsive.dp(2)),
               SizedBox(
                 width: responsive.width * 0.50,
-                child: Column(
-                  children: [
-                    InkTextFormField(
-                      onTap: () async => _selectDate,
-                      controller: _dateController,
-                      fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
-                      width: responsive.width / 1.7,
-                      heigth: responsive.height / 15,
-                    ),
-                  ],
+                child: InkTextFormField(
+                  onTap: () async => _selectDate(context),
+                  label: "Seleccionar la Fecha",
+                  controller: _dateController,
+                  fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
+                  width: responsive.width / 1.7,
+                  heigth: responsive.height / 15,
                 ),
               ),
               SizedBox(height: responsive.dp(2)),
@@ -139,6 +142,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
                   children: [
                     InkTextFormField(
                       onTap: () async => _selectTime(context),
+                      label: "Seleccionar Hora",
                       controller: _timeController,
                       fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
                       width: responsive.width / 1.7,
