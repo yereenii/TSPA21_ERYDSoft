@@ -8,15 +8,12 @@ import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 void main() {
   runApp(MaterialApp(
     home: MyApp(),
-    localizationsDelegates: [
+    locale: const Locale("en", "US"),
+    localizationsDelegates: const [
       DefaultWidgetsLocalizations.delegate,
       DefaultMaterialLocalizations.delegate,
+      //DefaultMaterialLocalizations();
       SfGlobalLocalizations.delegate
-    ],
-    supportedLocales: const [
-      Locale('en', 'US'),
-      Locale('es', ''),
-      // ... other locales the app supports
     ],
   ));
 }

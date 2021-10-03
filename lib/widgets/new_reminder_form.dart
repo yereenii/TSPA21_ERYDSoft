@@ -1,9 +1,6 @@
 // ignore_for_file: avoid_print
 
 //import 'package:diabits/main.dart';
-import 'package:diabits/db/operation.dart';
-import 'package:diabits/models/recordatorio.dart';
-import 'package:diabits/models/usuario.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/inkWellTabs.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +28,6 @@ class _NewReminderFormState extends State<NewReminderForm> {
   String _fecha = '';
   String _hora = '';
   DateTime _fechaCompleta = DateTime.now();
-  OperationDB _operationDB = OperationDB();
 
   // ignore: duplicate_ignore
   _summit() {
@@ -44,23 +40,17 @@ class _NewReminderFormState extends State<NewReminderForm> {
       print(_hora);
       print('fechacompleta = ' + _fechaCompleta.toString());
       //consumir servicio rest para iniciar sesion
-    _creacionRecordatorio();
     }
   }
 
-  _creacionRecordatorio(){
-     _operationDB.insertRecordatorio(Recordatorio(
-       id_recordatorios: 1,
-       nombre_recordatorio: _nombre,
-       fecha: _fechaCompleta,));
-  }
   _regresarCalendar() {
     Navigator.pushNamed(context, 'recordatorio');
   }
 
   @override
   void initState() {
-    _dateController.text = intl.DateFormat.yMd().format(DateTime.now());
+    //dMY().format(DateTime.now())
+    _dateController.text = intl.DateFormat.yMd("es").format(DateTime.now());
     _timeController.text = formatDate(
         DateTime(2021, 09, 09, selectedTime.hour, selectedTime.minute),
         [HH, ':', nn]).toString();
@@ -71,7 +61,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
   //call del datePickerSelect
   _selectDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
-      //locale: const Locale('es', 'MX'),
+      locale: const Locale('en', 'US'),
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2010),
@@ -83,7 +73,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
     if (selected != null && selected != selectedDate) {
       setState(() {
         selectedDate = selected;
-        _dateController.text = intl.DateFormat.yMd().format(selectedDate);
+        _dateController.text = intl.DateFormat.yMd("es").format(selectedDate);
       });
       _fecha = selected.toString();
       _fechaCompleta = selectedDate;
@@ -94,6 +84,16 @@ class _NewReminderFormState extends State<NewReminderForm> {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: selectedTime,
+      builder: (
+        BuildContext context,
+        Widget? child,
+      ) {
+        return Localizations.override(
+          context: context,
+          locale: const Locale('en', 'US'),
+          child: child!,
+        );
+      },
     );
     if (picked != null && picked != selectedTime) {
       setState(() {
