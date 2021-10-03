@@ -27,7 +27,7 @@ class _LoginFormState extends State<LoginForm> {
 
   _creacionPrimerUsuario() {
     _operationDB.insertUser(Usuario(
-        id_usuario: '1',
+        id_usuario: 1,
         nombre: 'user',
         correo: 'user@erydsoft',
         password: '1234'));

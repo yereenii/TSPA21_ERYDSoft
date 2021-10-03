@@ -16,8 +16,8 @@ class OperationDB {
       onCreate: (db, version) {
         return db.execute(
           // Ejecuta la sentencia CREATE TABLE en la base de datos
-          "CREATE TABLE usuarios (id_usuario CHAR PRIMARY KEY, nombre VARCHAR2 NOT NULL, correo VARCHAR2 NOT NULL, password VARCHAR2 NOT NULL);" +
-              "CREATE TABLE recordatorios (id_recordatorios CHAR PRIMARY KEY, nombre_recordatorio VARCHAR2 NOT NULL, fecha DATE NOT NULL, FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario) );",
+          "CREATE TABLE usuarios (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre VARCHAR2 NOT NULL, correo VARCHAR2 NOT NULL, password VARCHAR2 NOT NULL);" +
+              "CREATE TABLE recordatorios (id_recordatorios INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_recordatorio VARCHAR2 NOT NULL, fecha DATE NOT NULL, FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario) );",
         );
       },
       version: 2,

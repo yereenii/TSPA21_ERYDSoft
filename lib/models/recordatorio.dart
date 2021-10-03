@@ -1,5 +1,5 @@
 class Recordatorio {
-  final String id_recordatorios;
+  final int id_recordatorios;
   final String nombre_recordatorio;
   final DateTime fecha;
 
