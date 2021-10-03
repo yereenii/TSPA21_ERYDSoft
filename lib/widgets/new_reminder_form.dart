@@ -1,12 +1,13 @@
 // ignore_for_file: avoid_print
 
-import 'package:diabits/main.dart';
+//import 'package:diabits/main.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/inkWellTabs.dart';
 import 'package:flutter/material.dart';
 import 'Input_text.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:date_format/date_format.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class NewReminderForm extends StatefulWidget {
   const NewReminderForm({Key? key}) : super(key: key);
@@ -24,8 +25,9 @@ class _NewReminderFormState extends State<NewReminderForm> {
   final TextEditingController _timeController = TextEditingController();
   String _hour = '', _minute = '', _time = '';
   String _nombre = '';
-  final String _fecha = '';
+  String _fecha = '';
   String _hora = '';
+  DateTime _fechaCompleta = DateTime.now();
 
   // ignore: duplicate_ignore
   _summit() {
@@ -36,8 +38,13 @@ class _NewReminderFormState extends State<NewReminderForm> {
       print(_nombre);
       print(_fecha);
       print(_hora);
+      print('fechacompleta = ' + _fechaCompleta.toString());
       //consumir servicio rest para iniciar sesion
     }
+  }
+
+  _regresarCalendar() {
+    Navigator.pushNamed(context, 'recordatorio');
   }
 
   @override
@@ -52,9 +59,8 @@ class _NewReminderFormState extends State<NewReminderForm> {
 
   //call del datePickerSelect
   _selectDate(BuildContext context) async {
-    print("entre al metodo");
     final DateTime? selected = await showDatePicker(
-      locale: const Locale('es', 'MX'),
+      //locale: const Locale('es', 'MX'),
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2010),
@@ -63,12 +69,13 @@ class _NewReminderFormState extends State<NewReminderForm> {
       cancelText: "CANCELAR",
       confirmText: "OK",
     );
-    print("pase el datepicker");
     if (selected != null && selected != selectedDate) {
       setState(() {
         selectedDate = selected;
         _dateController.text = intl.DateFormat.yMd().format(selectedDate);
       });
+      _fecha = selected.toString();
+      _fechaCompleta = selectedDate;
     }
   }
 
@@ -90,6 +97,10 @@ class _NewReminderFormState extends State<NewReminderForm> {
           ':',
           nn,
         ]).toString();
+        _hora = selectedTime.toString();
+        DateTime dt = DateTime(_fechaCompleta.year, _fechaCompleta.month,
+            _fechaCompleta.day, selectedTime.hour, selectedTime.minute);
+        _fechaCompleta = dt;
       });
     }
   }
@@ -124,18 +135,26 @@ class _NewReminderFormState extends State<NewReminderForm> {
                 label: 'Nombre del Recordtorio',
               ),
               SizedBox(height: responsive.dp(2)),
+              /*************************************** */
               SizedBox(
                 width: responsive.width * 0.50,
-                child: InkTextFormField(
-                  onTap: () async => _selectDate(context),
-                  label: "Seleccionar la Fecha",
-                  controller: _dateController,
-                  fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
-                  width: responsive.width / 1.7,
-                  heigth: responsive.height / 15,
+                child: Column(
+                  children: [
+                    InkTextFormField(
+                      onTap: () async => _selectDate(context),
+                      label: "Seleccionar la Fecha",
+                      controller: _dateController,
+                      fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
+                      width: responsive.width / 1.7,
+                      heigth: responsive.height / 15,
+                    ),
+                  ],
                 ),
               ),
+
+              /*************************************** */
               SizedBox(height: responsive.dp(2)),
+              /*************************************** */
               SizedBox(
                 width: responsive.width * 0.50,
                 child: Column(
@@ -151,6 +170,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
                   ],
                 ),
               ),
+              /*************************************** */
               SizedBox(height: responsive.dp(2)),
               SizedBox(
                 width: responsive.width * 0.50,
@@ -182,7 +202,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
                       fontSize: responsive.dp(2),
                     ),
                   ),
-                  onPressed: _summit,
+                  onPressed: _regresarCalendar,
                   color: Colors.red.shade800,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),

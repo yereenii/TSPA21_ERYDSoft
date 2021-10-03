@@ -41,6 +41,7 @@ dependencies:
   flutter_svg: ^0.22.0
   sqflite: ^2.0.0+4
   date_format: ^2.0.4
+  datetime_picker_formfield: ^2.0.0
 
 dev_dependencies:
   flutter_test:
