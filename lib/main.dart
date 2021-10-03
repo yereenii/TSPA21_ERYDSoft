@@ -6,7 +6,19 @@ import 'package:flutter/services.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    home: MyApp(),
+    localizationsDelegates: [
+      DefaultWidgetsLocalizations.delegate,
+      DefaultMaterialLocalizations.delegate,
+      SfGlobalLocalizations.delegate
+    ],
+    supportedLocales: const [
+      Locale('en', 'US'),
+      Locale('es', ''),
+      // ... other locales the app supports
+    ],
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,22 +35,13 @@ class MyApp extends StatelessWidget {
       delegates: const <LocalizationsDelegate<dynamic>>[
         DefaultWidgetsLocalizations.delegate,
         DefaultMaterialLocalizations.delegate,
+        SfGlobalLocalizations.delegate
       ],
       child: MediaQuery(
         data: const MediaQueryData(),
         child: Directionality(
           textDirection: TextDirection.ltr,
           child: MaterialApp(
-            localizationsDelegates: [
-              // ... app-specific localization delegate[s] here
-              SfGlobalLocalizations.delegate
-            ],
-            supportedLocales: [
-              const Locale('es'),
-              const Locale.fromSubtags(languageCode: 'es'),
-              // ... other locales the app supports
-            ],
-            locale: const Locale('es'),
             title: 'Dia Bits',
             theme: ThemeData(
               primarySwatch: Colors.blue,

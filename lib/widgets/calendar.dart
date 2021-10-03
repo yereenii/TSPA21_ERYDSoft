@@ -1,4 +1,3 @@
-import 'package:diabits/pages/new_reminder_page.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:diabits/utils/responsive.dart';
@@ -14,13 +13,12 @@ class Calendario extends StatefulWidget {
 @override
 Widget _build(BuildContext context) {
   return MaterialApp(
-    localizationsDelegates: [
+    localizationsDelegates: const [
       // ... app-specific localization delegate[s] here
       SfGlobalLocalizations.delegate
     ],
-    supportedLocales: [
-      const Locale('es'),
-      const Locale.fromSubtags(languageCode: 'es'),
+    supportedLocales: const [
+      Locale('es'),
       // ... other locales the app supports
     ],
     locale: const Locale('es'),
@@ -29,7 +27,7 @@ Widget _build(BuildContext context) {
 }
 
 class _CalendarioState extends State<Calendario> {
-  GlobalKey<FormState> _formKey = GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
   _summit() {
     Navigator.pushNamed(context, 'nuevorecordatorio');

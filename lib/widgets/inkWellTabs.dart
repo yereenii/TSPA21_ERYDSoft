@@ -7,6 +7,7 @@ class InkTextFormField extends StatelessWidget {
   final double? width;
   final double? heigth;
   final double? fontSize;
+  final String? label;
 
   const InkTextFormField(
       {Key? key,
@@ -14,14 +15,15 @@ class InkTextFormField extends StatelessWidget {
       this.onTap,
       this.width,
       this.heigth,
-      this.fontSize})
+      this.fontSize,
+      this.label})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const Text('Elegir la Fecha'),
+        Text(label!),
         InkWell(
           onTap: onTap,
           child: Container(
