@@ -12,15 +12,14 @@ class OperationDB {
     // complemento `path` es la mejor práctica para asegurar que la ruta sea correctamente
     // construida para cada plataforma.
     return openDatabase(
-      join(await getDatabasesPath(), 'db_diabits.db'),
+      join(await getDatabasesPath(), 'db_diabitss.db'),
       onCreate: (db, version) {
         return db.execute(
-          // Ejecuta la sentencia CREATE TABLE en la base de datos
-          "CREATE TABLE usuarios (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre VARCHAR2 NOT NULL, correo VARCHAR2 NOT NULL, password VARCHAR2 NOT NULL);" +
-              "CREATE TABLE recordatorios (id_recordatorios INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_recordatorio VARCHAR2 NOT NULL, fecha DATE NOT NULL, FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario) );",
-        );
+            // Ejecuta la sentencia CREATE TABLE en la base de datos
+            //"CREATE TABLE usuarios (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre VARCHAR2 NOT NULL, correo VARCHAR2 NOT NULL, password VARCHAR2 NOT NULL);" +
+            "CREATE TABLE recordatorios (id_recordatorio INTEGER PRIMARY KEY, nombre_recordatorio VARCHAR2 NOT NULL, fecha Date NOT NULL);");
       },
-      version: 2,
+      version: 4,
     );
   }
 
@@ -85,25 +84,23 @@ class OperationDB {
   Future<List<Recordatorio>> getRecordatorio() async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> recordatorioMap =
-        await database.query("recordatorio");
+        await database.query("recordatorios");
     for (var n in recordatorioMap) {
       //ver que funcione
       print("____" +
-          n['nombre'] +
+          n['id_recordatorio'] +
           "_" +
-          n['id_usuario'] +
+          n['nombre_recordatorio'] +
           "_" +
-          n['correo'] +
-          "_" +
-          n['password']);
+          n['fecha']);
     }
     return List.generate(
         recordatorioMap.length,
         (i) => Recordatorio(
-            id_recordatorios: recordatorioMap[i]['fecha'],
-            nombre_recordatorio: recordatorioMap[i]['nombre_recordatorio'],
-            fecha: recordatorioMap[i]['fecha']));
+              id_recordatorio: recordatorioMap[i]['fecha'],
+              nombre_recordatorio: recordatorioMap[i]['nombre_recordatorio'],
+              fecha: recordatorioMap[i]['fecha'],
+              //id_usuario: recordatorioMap[i]['id_usuario']
+            ));
   }
-
-
 }
