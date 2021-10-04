@@ -38,9 +38,16 @@ class _CalendarioState extends State<Calendario> {
   }
 
   @override
+  void initState() {
+    r = getAppointments();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
     r = getAppointments();
+    Calendario();
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -76,10 +83,10 @@ class _CalendarioState extends State<Calendario> {
 
 List<Appointment> getAppointments() {
   //Arreglo para los recordatorios
-  //OperationDB odb = OperationDB();
+  OperationDB odb = OperationDB();
   List<Appointment> recordatorios = <Appointment>[];
   //List<Recordatorio> auxRec = await odb.getRecordatorios();
-  //odb.getRecordatorios();
+  odb.getRecordatorios();
   List<Recordatorio> lr = OperationDB.listaRecordatorios;
   for (Recordatorio r in lr) {
     DateTime startTime = r.fecha;
