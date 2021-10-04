@@ -1,6 +1,3 @@
-// ignore_for_file: avoid_print
-
-//import 'package:diabits/main.dart';
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/recordatorio.dart';
 import 'package:diabits/models/usuario.dart';
@@ -11,14 +8,14 @@ import 'Input_text.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:date_format/date_format.dart';
 
-class NewReminderForm extends StatefulWidget {
-  const NewReminderForm({Key? key}) : super(key: key);
+class EditReminderForm extends StatefulWidget {
+  const EditReminderForm({Key? key}) : super(key: key);
 
   @override
-  _NewReminderFormState createState() => _NewReminderFormState();
+  _EditReminderFormState createState() => _EditReminderFormState();
 }
 
-class _NewReminderFormState extends State<NewReminderForm> {
+class _EditReminderFormState extends State<EditReminderForm> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   String date = "";
   DateTime selectedDate = DateTime.now();
@@ -43,13 +40,12 @@ class _NewReminderFormState extends State<NewReminderForm> {
       print(_hora);
       print('fechacompleta = ' + _fechaCompleta.toString());
       //consumir servicio rest para iniciar sesion
-      //_creacionRecordatorio();
-      //_creacionRecordatorio();
+      _edicionRecordatorio();
     }
     _regresarCalendar();
   }
 
-  _editarRecordatorio() {
+  _edicionRecordatorio() {
     _operationDB.insertRecordatorio(Recordatorio(
       id_recordatorio: null,
       nombre_recordatorio: _nombre,
@@ -59,7 +55,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
   }
 
   _regresarCalendar() {
-    Navigator.pushNamed(context, 'recordatorio');
+    Navigator.pushNamed(context, 'editarrecordatorio');
   }
 
   @override
@@ -100,9 +96,9 @@ class _NewReminderFormState extends State<NewReminderForm> {
       context: context,
       initialTime: selectedTime,
       builder: (
-        BuildContext context,
-        Widget? child,
-      ) {
+          BuildContext context,
+          Widget? child,
+          ) {
         return Localizations.override(
           context: context,
           locale: const Locale('en', 'US'),
@@ -158,7 +154,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
                   }
                   return null;
                 },
-                label: 'Nombre del Recordtorio',
+                label: 'Modificar Nombre del Recordatorio',
               ),
               SizedBox(height: responsive.dp(2)),
               /*************************************** */
@@ -203,7 +199,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
                 child: MaterialButton(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: Text(
-                    'Agregar',
+                    'Editar',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: responsive.dp(2),
