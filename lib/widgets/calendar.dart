@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
+import 'package:diabits/widgets/buton_nuevorecordatorio.dart';
 
 class Calendario extends StatefulWidget {
   Calendario({Key? key}) : super(key: key);
@@ -36,28 +37,34 @@ class _CalendarioState extends State<Calendario> {
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
-    return Positioned(
-
-      child: Column(children: <Widget>[
-        SizedBox(height: responsive.dp(1)),
-        SizedBox(
-          height: responsive.dp(90),
-          child: SfCalendar(
-            view: CalendarView.month,
-            monthViewSettings: MonthViewSettings(
-              showAgenda: true,
-              agendaItemHeight: 40, //altura de los bordes de la agenda
-              agendaViewHeight: 200, // altura de la ageda
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          child: Column(children: <Widget>[
+            SizedBox(
+              height: responsive.height * .8,
+              width: responsive.width,
+              child: SfCalendar(
+                view: CalendarView.month,
+                monthViewSettings: MonthViewSettings(
+                  showAgenda: true,
+                  agendaViewHeight: 250,
+                ),
+                firstDayOfWeek: 7,
+                timeRegionBuilder: (context, timeRegionDetails) =>
+                    _build(context),
+                dataSource: FechaRecordatorioSource(getAppointments()),
+              ),
             ),
-            firstDayOfWeek: 7,
-            timeRegionBuilder: (context, timeRegionDetails) =>
-                _build(context),
-            dataSource: FechaRecordatorioSource(getAppointments()),
-          ),
+            SizedBox(
+              width: responsive.width * 0.50,
+              child: Button(
+                onTap: _summit,
+              ),
+            ),
+          ]),
         ),
-
-      ]),
-
+      ),
     );
   }
 }
@@ -67,7 +74,7 @@ List<Appointment> getAppointments() {
   List<Appointment> recordatorios = <Appointment>[];
   final DateTime today = DateTime.now();
   final DateTime startTime =
-  DateTime(today.year, today.month, today.day, 22, 0, 0);
+      DateTime(today.year, today.month, today.day, 22, 0, 0);
   final DateTime endTime = startTime.add(const Duration(hours: 1));
 
   recordatorios.add(Appointment(
