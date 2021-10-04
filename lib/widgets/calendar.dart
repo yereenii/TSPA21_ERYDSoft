@@ -37,18 +37,12 @@ class _CalendarioState extends State<Calendario> {
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
     return Positioned(
-      child: Container(
-        constraints: BoxConstraints(
-          //ancho del dispositivo si es tablet 430 si no ancho-1
-          maxWidth: responsive.isTablet ? 430 : responsive.width - 5,
-        ),
+
         child: Column(children: <Widget>[
-          SizedBox(height: responsive.dp(2)),
+          SizedBox(height: responsive.dp(1)),
           SizedBox(
-            height: responsive.dp(60),
+            height: responsive.dp(90),
             child: SfCalendar(
-              headerHeight: 0,
-              viewHeaderHeight: 120,
               view: CalendarView.month,
               monthViewSettings: MonthViewSettings(
                 showAgenda: true,
@@ -61,28 +55,9 @@ class _CalendarioState extends State<Calendario> {
               dataSource: FechaRecordatorioSource(getAppointments()),
             ),
           ),
-          SizedBox(height: responsive.dp(2)),
-          SizedBox(
-            //height: responsive.dp(7),
-            width: responsive.width * 0.62,
-            child: MaterialButton(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Text(
-                'Nuevo Recordatorio',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: responsive.dp(2),
-                ),
-              ),
-              onPressed: _summit,
-              color: Colors.blue.shade800,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-            ),
-          ),
+
         ]),
-      ),
+
     );
   }
 }

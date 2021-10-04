@@ -1,4 +1,5 @@
 import 'package:diabits/utils/responsive.dart';
+import 'package:diabits/widgets/buton_nuevorecordatorio.dart';
 import 'package:diabits/widgets/circle.dart';
 import 'package:diabits/widgets/calendar.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,7 @@ class _RecordatorioState extends State<Recordatorio> {
                     ],
                   ),
                 ),
-
+                Button(),
               ],
             ),
           ),
