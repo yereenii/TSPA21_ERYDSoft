@@ -81,7 +81,7 @@ class OperationDB {
     return database.insert('recordatorios', recordatorio.toMap());
   }
 
-  Future<List<Recordatorio>> getRecordatorio() async {
+  Future<List<Recordatorio>> getRecordatorios() async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> recordatorioMap =
         await database.query("recordatorios");
@@ -97,10 +97,10 @@ class OperationDB {
     return List.generate(
         recordatorioMap.length,
         (i) => Recordatorio(
-              id_recordatorio: recordatorioMap[i]['fecha'],
-              nombre_recordatorio: recordatorioMap[i]['nombre_recordatorio'],
-              fecha: recordatorioMap[i]['fecha'],
-              //id_usuario: recordatorioMap[i]['id_usuario']
+            id_recordatorio: recordatorioMap[i]['id_recordatorio'],
+            nombre_recordatorio: recordatorioMap[i]['nombre_recordatorio'],
+            fecha: recordatorioMap[i]['fecha']
+            //id_usuario: recordatorioMap[i]['id_usuario']
             ));
   }
 }

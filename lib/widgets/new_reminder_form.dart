@@ -50,10 +50,11 @@ class _NewReminderFormState extends State<NewReminderForm> {
 
   _creacionRecordatorio() {
     _operationDB.insertRecordatorio(Recordatorio(
-      id_recordatorios: 1,
+      id_recordatorio: null,
       nombre_recordatorio: _nombre,
       fecha: _fechaCompleta,
     ));
+    _operationDB.getRecordatorios();
   }
 
   _regresarCalendar() {
