@@ -40,35 +40,30 @@ class _CalendarioState extends State<Calendario> {
     return MaterialApp(
       home: Scaffold(
         body: Container(
-          child: Column(
-            children: <Widget>[
-              SizedBox (
-                height: responsive.dp(90),
-                child: SfCalendar(
-                  view: CalendarView.month,
-                  monthViewSettings: MonthViewSettings(
-                    showAgenda: true,
-                    agendaViewHeight: 250,
-                  ),
-                  firstDayOfWeek: 7,
-                  timeRegionBuilder: (context, timeRegionDetails) =>
-                      _build(context),
-                  dataSource: FechaRecordatorioSource(getAppointments()),
+          child: Column(children: <Widget>[
+            SizedBox(
+              height: responsive.height * .8,
+              width: responsive.width,
+              child: SfCalendar(
+                view: CalendarView.month,
+                monthViewSettings: MonthViewSettings(
+                  showAgenda: true,
+                  agendaViewHeight: 250,
                 ),
+                firstDayOfWeek: 7,
+                timeRegionBuilder: (context, timeRegionDetails) =>
+                    _build(context),
+                dataSource: FechaRecordatorioSource(getAppointments()),
               ),
-              SizedBox(
-                height: responsive.height * .90,
-                child: Button(),
+            ),
+            SizedBox(
+              width: responsive.width * 0.50,
+              child: Button(
+                onTap: _summit,
               ),
-            ]
-          ),
-
+            ),
+          ]),
         ),
-
-
-
-
-
       ),
     );
   }
@@ -79,7 +74,7 @@ List<Appointment> getAppointments() {
   List<Appointment> recordatorios = <Appointment>[];
   final DateTime today = DateTime.now();
   final DateTime startTime =
-  DateTime(today.year, today.month, today.day, 22, 0, 0);
+      DateTime(today.year, today.month, today.day, 22, 0, 0);
   final DateTime endTime = startTime.add(const Duration(hours: 1));
 
   recordatorios.add(Appointment(

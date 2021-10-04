@@ -34,7 +34,6 @@ class _RecordatorioState extends State<Recordatorio> {
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
-                Calendario(),
                 Positioned(
                   //circulo blue
                   top: -blueSize * -2,
@@ -56,7 +55,8 @@ class _RecordatorioState extends State<Recordatorio> {
                     ],
                   ),
                 ),
-               // Button(),
+                // Button(),
+                Calendario(),
               ],
             ),
           ),
