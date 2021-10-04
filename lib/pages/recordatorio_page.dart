@@ -35,40 +35,29 @@ class _RecordatorioState extends State<Recordatorio> {
               alignment: Alignment.center,
               children: <Widget>[
                 Calendario(),
-                Positioned(
-                  //icono
-                  top: blueSize * 0.30,
-                  child: Column(
-                    children: <Widget>[
 
-                      SizedBox(
-                        height: responsive.dp(10),
-                      ),
-                      /***/
-                    ],
-                  ),
-                ),
-                Positioned(
+
+                //Positioned(
                   //circulo blue
-                  top: -blueSize * -2,
-                  right: -blueSize * -0.5,
-                  child: Circle(
-                    size: blueSize,
-                    colors: const [Colors.blue, Colors.blue],
-                  ),
-                ),
-                Positioned(
+                  //top: -blueSize * -2,
+                  //right: -blueSize * -0.5,
+                  //child: Circle(
+                    //size: blueSize,
+                    //colors: const [Colors.blue, Colors.blue],
+                 // ),
+                //),
+                //Positioned(
                   //Circulo cyan
-                  top: -tealAccentSize * -2.85,
-                  left: -tealAccentSize * -0.77,
-                  child: Circle(
-                    size: tealAccentSize,
-                    colors: [
-                      Colors.tealAccent.shade400,
-                      Colors.tealAccent.shade400
-                    ],
-                  ),
-                ),
+                  //top: -tealAccentSize * -2.85,
+                  //left: -tealAccentSize * -0.77,
+                  //child: Circle(
+                    //size: tealAccentSize,
+                    //colors: [
+                      //Colors.tealAccent.shade400,
+                      //Colors.tealAccent.shade400
+                   // ],
+                  //),
+                //),
                 Button(),
               ],
             ),

@@ -38,25 +38,25 @@ class _CalendarioState extends State<Calendario> {
     final Responsive responsive = Responsive.of(context);
     return Positioned(
 
-        child: Column(children: <Widget>[
-          SizedBox(height: responsive.dp(1)),
-          SizedBox(
-            height: responsive.dp(90),
-            child: SfCalendar(
-              view: CalendarView.month,
-              monthViewSettings: MonthViewSettings(
-                showAgenda: true,
-                agendaItemHeight: 40, //altura de los bordes de la agenda
-                agendaViewHeight: 200, // altura de la ageda
-              ),
-              firstDayOfWeek: 7,
-              timeRegionBuilder: (context, timeRegionDetails) =>
-                  _build(context),
-              dataSource: FechaRecordatorioSource(getAppointments()),
+      child: Column(children: <Widget>[
+        SizedBox(height: responsive.dp(1)),
+        SizedBox(
+          height: responsive.dp(90),
+          child: SfCalendar(
+            view: CalendarView.month,
+            monthViewSettings: MonthViewSettings(
+              showAgenda: true,
+              agendaItemHeight: 40, //altura de los bordes de la agenda
+              agendaViewHeight: 200, // altura de la ageda
             ),
+            firstDayOfWeek: 7,
+            timeRegionBuilder: (context, timeRegionDetails) =>
+                _build(context),
+            dataSource: FechaRecordatorioSource(getAppointments()),
           ),
+        ),
 
-        ]),
+      ]),
 
     );
   }
