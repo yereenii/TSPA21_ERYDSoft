@@ -22,7 +22,7 @@ Widget _build(BuildContext context) {
       Locale('es'),
       // ... other locales the app supports
     ],
-    locale: const Locale('es'),
+    locale: const Locale('es', " "),
     home: Calendario(),
   );
 }
@@ -41,6 +41,7 @@ class _CalendarioState extends State<Calendario> {
       home: Scaffold(
         body: Container(
           child: Column(children: <Widget>[
+            SizedBox(height: responsive.dp(3)),
             SizedBox(
               height: responsive.height * .8,
               width: responsive.width,
