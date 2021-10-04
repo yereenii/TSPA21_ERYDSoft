@@ -11,7 +11,6 @@ import 'Input_text.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:date_format/date_format.dart';
 
-
 class NewReminderForm extends StatefulWidget {
   const NewReminderForm({Key? key}) : super(key: key);
 
@@ -46,6 +45,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
       //consumir servicio rest para iniciar sesion
       _creacionRecordatorio();
     }
+    _regresarCalendar();
   }
 
   _creacionRecordatorio() {

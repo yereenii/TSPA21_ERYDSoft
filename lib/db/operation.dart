@@ -88,19 +88,17 @@ class OperationDB {
     for (var n in recordatorioMap) {
       //ver que funcione
       print("____" +
-          n['id_recordatorio'] +
+          n['id_recordatorio'].toString() +
           "_" +
-          n['nombre_recordatorio'] +
+          n['nombre_recordatorio'].toString() +
           "_" +
-          n['fecha']);
+          n['fecha'].toString());
     }
     return List.generate(
         recordatorioMap.length,
         (i) => Recordatorio(
             id_recordatorio: recordatorioMap[i]['id_recordatorio'],
             nombre_recordatorio: recordatorioMap[i]['nombre_recordatorio'],
-            fecha: recordatorioMap[i]['fecha']
-            //id_usuario: recordatorioMap[i]['id_usuario']
-            ));
+            fecha: DateTime.parse((recordatorioMap[i]['fecha']))));
   }
 }
