@@ -31,7 +31,7 @@ Widget _build(BuildContext context) {
 
 class _CalendarioState extends State<Calendario> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  List<Recordatorio> recordatoriosList = [];
+  List<Appointment> r = getAppointments();
 
   _summit() {
     Navigator.pushNamed(context, 'nuevorecordatorio');
@@ -40,7 +40,7 @@ class _CalendarioState extends State<Calendario> {
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
-
+    r = getAppointments();
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -58,7 +58,7 @@ class _CalendarioState extends State<Calendario> {
                 firstDayOfWeek: 7,
                 timeRegionBuilder: (context, timeRegionDetails) =>
                     _build(context),
-                dataSource: FechaRecordatorioSource(getAppointments()),
+                dataSource: FechaRecordatorioSource(r),
               ),
             ),
             SizedBox(
@@ -76,11 +76,11 @@ class _CalendarioState extends State<Calendario> {
 
 List<Appointment> getAppointments() {
   //Arreglo para los recordatorios
+  //OperationDB odb = OperationDB();
   List<Appointment> recordatorios = <Appointment>[];
-  OperationDB odb = OperationDB();
   //List<Recordatorio> auxRec = await odb.getRecordatorios();
-  odb.getListaRecordatorios();
-  List<Recordatorio> lr = odb.getListaRecordatorios();
+  //odb.getRecordatorios();
+  List<Recordatorio> lr = OperationDB.listaRecordatorios;
   for (Recordatorio r in lr) {
     DateTime startTime = r.fecha;
     DateTime endTime = startTime.add(const Duration(hours: 1));
@@ -93,17 +93,6 @@ List<Appointment> getAppointments() {
   }
   return recordatorios;
 }
-
-/*_addRecordatorio(Recordatorio r) {
-  DateTime startTime = r.fecha;
-  DateTime endTime = startTime.add(const Duration(hours: 1));
-  String nombreR = r.nombre_recordatorio;
-  recordatorios.add(Appointment(
-      startTime: startTime,
-      endTime: endTime,
-      subject: nombreR,
-      color: Colors.blue));
-}*/
 
 class FechaRecordatorioSource extends CalendarDataSource {
   FechaRecordatorioSource(List<Appointment> source) {

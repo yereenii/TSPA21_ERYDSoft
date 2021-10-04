@@ -5,7 +5,7 @@ import 'package:path/path.dart';
 import 'dart:async';
 
 class OperationDB {
-  List<Recordatorio> listaRecordatorios = [];
+  static List<Recordatorio> listaRecordatorios = [];
   bool _existeUsuario = false;
 // Abre la base de datos y guarda la referencia.
   Future<Database> _openDB() async {
@@ -86,12 +86,13 @@ class OperationDB {
     Database database = await _openDB();
     final List<Map<String, dynamic>> recordatorioMap =
         await database.query("recordatorios");
+    List<Recordatorio> auxListaRecordatorios = [];
+    listaRecordatorios = auxListaRecordatorios;
     for (var n in recordatorioMap) {
       listaRecordatorios.add(Recordatorio(
-        id_recordatorio: n['id_recordatorio'],
-        nombre_recordatorio: n['nombre_recordatorio'].toString(),
-        fecha: DateTime.parse(n['fecha'].toString())));
-      //ver que funcione
+          id_recordatorio: n['id_recordatorio'],
+          nombre_recordatorio: n['nombre_recordatorio'].toString(),
+          fecha: DateTime.parse(n['fecha'].toString())));
       print("____" +
           n['id_recordatorio'].toString() +
           "_" +
@@ -105,9 +106,5 @@ class OperationDB {
             id_recordatorio: recordatorioMap[i]['id_recordatorio'],
             nombre_recordatorio: recordatorioMap[i]['nombre_recordatorio'],
             fecha: DateTime.parse((recordatorioMap[i]['fecha']))));
-  }
-
-  List<Recordatorio> getListaRecordatorios() {
-    return listaRecordatorios;
   }
 }
