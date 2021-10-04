@@ -44,8 +44,8 @@ class _NewReminderFormState extends State<NewReminderForm> {
       print('fechacompleta = ' + _fechaCompleta.toString());
       //consumir servicio rest para iniciar sesion
       _creacionRecordatorio();
+      _regresarCalendar();
     }
-    _regresarCalendar();
   }
 
   _creacionRecordatorio() {
