@@ -14,6 +14,7 @@ class Button extends StatelessWidget {
     final Responsive responsive = Responsive.of(context);
     return Container(
       child: MaterialButton(
+
         padding: const EdgeInsets.symmetric(vertical: 15),
         child: Text(
           'Nuevo Recordatorio',
