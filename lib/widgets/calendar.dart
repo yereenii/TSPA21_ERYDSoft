@@ -1,3 +1,5 @@
+import 'package:diabits/db/operation.dart';
+import 'package:diabits/models/recordatorio.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:diabits/utils/responsive.dart';
@@ -29,6 +31,7 @@ Widget _build(BuildContext context) {
 
 class _CalendarioState extends State<Calendario> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  List<Recordatorio> recordatoriosList = [];
 
   _summit() {
     Navigator.pushNamed(context, 'nuevorecordatorio');
@@ -37,6 +40,7 @@ class _CalendarioState extends State<Calendario> {
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
+
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -73,21 +77,33 @@ class _CalendarioState extends State<Calendario> {
 List<Appointment> getAppointments() {
   //Arreglo para los recordatorios
   List<Appointment> recordatorios = <Appointment>[];
-  final DateTime today = DateTime.now();
-  final DateTime startTime =
-      DateTime(today.year, today.month, today.day, 22, 0, 0);
-  final DateTime endTime = startTime.add(const Duration(hours: 1));
+  OperationDB odb = OperationDB();
+  //List<Recordatorio> auxRec = await odb.getRecordatorios();
+  odb.getListaRecordatorios();
+  List<Recordatorio> lr = odb.getListaRecordatorios();
+  for (Recordatorio r in lr) {
+    DateTime startTime = r.fecha;
+    DateTime endTime = startTime.add(const Duration(hours: 1));
+    String nombreR = r.nombre_recordatorio;
+    recordatorios.add(Appointment(
+        startTime: startTime,
+        endTime: endTime,
+        subject: nombreR,
+        color: Colors.blue));
+  }
+  return recordatorios;
+}
 
+/*_addRecordatorio(Recordatorio r) {
+  DateTime startTime = r.fecha;
+  DateTime endTime = startTime.add(const Duration(hours: 1));
+  String nombreR = r.nombre_recordatorio;
   recordatorios.add(Appointment(
       startTime: startTime,
       endTime: endTime,
-      subject: 'Board Meeting',
-      color: Colors.blue,
-      //recurrenceRule: 'FREQ=DAILY;COUNT=10',
-      isAllDay: false));
-
-  return recordatorios;
-}
+      subject: nombreR,
+      color: Colors.blue));
+}*/
 
 class FechaRecordatorioSource extends CalendarDataSource {
   FechaRecordatorioSource(List<Appointment> source) {
