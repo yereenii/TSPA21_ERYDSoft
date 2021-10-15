@@ -1,7 +1,6 @@
 import 'package:diabits/utils/responsive.dart';
-import 'package:diabits/widgets/buton_nuevorecordatorio.dart';
-import 'package:diabits/widgets/circle.dart';
 import 'package:diabits/widgets/calendar.dart';
+import 'package:diabits/widgets/circles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -35,27 +34,9 @@ class _RecordatorioState extends State<Recordatorio> {
               alignment: Alignment.center,
               children: <Widget>[
                 Positioned(
-                  //circulo blue
-                  top: -blueSize * -2,
-                  right: -blueSize * -0.5,
-                  child: Circle(
-                    size: blueSize,
-                    colors: const [Colors.blue, Colors.blue],
-                  ),
+                  top: responsive.wp(.01),
+                  child: const Circles(),
                 ),
-                Positioned(
-                  //Circulo cyan
-                  top: -tealAccentSize * -2.85,
-                  left: -tealAccentSize * -0.77,
-                  child: Circle(
-                    size: tealAccentSize,
-                    colors: [
-                      Colors.tealAccent.shade400,
-                      Colors.tealAccent.shade400
-                    ],
-                  ),
-                ),
-                // Button(),
                 Calendario(),
               ],
             ),

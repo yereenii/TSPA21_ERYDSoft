@@ -1,5 +1,6 @@
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/circle.dart';
+import 'package:diabits/widgets/circles.dart';
 import 'package:diabits/widgets/new_reminder_form.dart';
 import 'package:flutter/material.dart';
 
@@ -35,29 +36,11 @@ class _HomePageState extends State<NewReminderPage> {
               alignment: Alignment.center,
               children: <Widget>[
                 Positioned(
-                  //circulo blue
-                  top: -blueSize * -1.4,
-                  right: -blueSize * -0.4,
-                  child: Circle(
-                    size: blueSize,
-                    colors: const [Colors.blue, Colors.blue],
-                  ),
+                  top: responsive.wp(.01),
+                  child: const Circles(),
                 ),
                 Positioned(
-                  //Circulo cyan
-                  top: -tealAccentSize * -2.45,
-                  left: -tealAccentSize * -0.77,
-                  child: Circle(
-                    size: tealAccentSize,
-                    colors: [
-                      Colors.tealAccent.shade400,
-                      Colors.tealAccent.shade400
-                    ],
-                  ),
-                ),
-                Positioned(
-                  //icono
-                  top: blueSize * 0.60,
+                  top: responsive.height * 0.10,
                   child: Column(
                     children: <Widget>[
                       Text(
@@ -67,14 +50,11 @@ class _HomePageState extends State<NewReminderPage> {
                           fontSize: responsive.dp(1.8),
                         ),
                       ),
-                      SizedBox(
-                        height: responsive.dp(10),
-                      ),
-                      /***/
+                      SizedBox(height: responsive.dp(20)),
+                      const NewReminderForm(),
                     ],
                   ),
                 ),
-                const NewReminderForm(),
               ],
             ),
           ),

@@ -50,19 +50,26 @@ class _CalendarioState extends State<Calendario> {
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
     recargarWidget();
-    return MaterialApp(
-      home: Scaffold(
-        body: Container(
-          child: Column(children: <Widget>[
+    return Positioned(
+      bottom: 70,
+      child: Container(
+        child: Column(
+          children: <Widget>[
             SizedBox(height: responsive.dp(3)),
             SizedBox(
-              height: responsive.height * .8,
+              height: responsive.height * .8, //altura calendario
               width: responsive.width,
               child: SfCalendar(
                 view: CalendarView.month,
+                cellBorderColor: Colors.black26,
+                backgroundColor: Colors.white10,
+                // ignore: prefer_const_constructors
                 monthViewSettings: MonthViewSettings(
                   showAgenda: true,
-                  agendaViewHeight: 250,
+                  agendaStyle: AgendaStyle(
+                    backgroundColor: Colors.white70,
+                  ),
+                  agendaViewHeight: 260,
                 ),
                 firstDayOfWeek: 7,
                 timeRegionBuilder: (context, timeRegionDetails) =>
@@ -70,13 +77,26 @@ class _CalendarioState extends State<Calendario> {
                 dataSource: FechaRecordatorioSource(r),
               ),
             ),
+            SizedBox(height: responsive.dp(1.5)),
             SizedBox(
               width: responsive.width * 0.50,
-              child: Button(
-                onTap: _summit,
+              child: MaterialButton(
+                padding: EdgeInsets.symmetric(vertical: 15),
+                child: Text(
+                  'Nuevo Recordatorio',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: responsive.dp(2),
+                  ),
+                ),
+                onPressed: _summit,
+                color: Colors.blue.shade800,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
               ),
             ),
-          ]),
+          ],
         ),
       ),
     );

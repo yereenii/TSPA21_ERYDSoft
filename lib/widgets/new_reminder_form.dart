@@ -146,7 +146,6 @@ class _NewReminderFormState extends State<NewReminderForm> {
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
     return Positioned(
-      bottom: 0,
       child: Container(
         constraints: BoxConstraints(
           //ancho del dispositivo si es tablet 430 si no ancho-30

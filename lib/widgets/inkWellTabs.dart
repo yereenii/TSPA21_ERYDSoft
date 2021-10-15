@@ -26,10 +26,8 @@ class InkTextFormField extends StatelessWidget {
         Text(label!),
         InkWell(
           onTap: onTap,
-          child: Container(
-            width: width,
-            height: heigth,
-            decoration: BoxDecoration(color: Colors.blue[200]),
+          child: InputDecorator(
+            decoration: const InputDecoration(enabled: true),
             child: Localizations(
               locale: const Locale('en', 'US'),
               delegates: const <LocalizationsDelegate<dynamic>>[
