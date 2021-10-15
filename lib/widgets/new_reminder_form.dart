@@ -5,6 +5,7 @@ import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/recordatorio.dart';
 import 'package:diabits/models/usuario.dart';
 import 'package:diabits/utils/responsive.dart';
+import 'package:diabits/widgets/calendar.dart';
 import 'package:diabits/widgets/inkWellTabs.dart';
 import 'package:flutter/material.dart';
 import 'Input_text.dart';
@@ -31,6 +32,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
   String _hora = '';
   DateTime _fechaCompleta = DateTime.now();
   OperationDB _operationDB = OperationDB();
+  Calendario _calendar = Calendario();
 
   // ignore: duplicate_ignore
   _summit() {
@@ -58,7 +60,16 @@ class _NewReminderFormState extends State<NewReminderForm> {
   }
 
   _regresarCalendar() {
-    Navigator.pushNamed(context, 'recordatorio');
+    setState(() {
+      Navigator.pop(context, 'recordatorio');
+      _calendar.recargaridget(context);
+    });
+    //Navigator.pushNamed(context, 'recordatorio');
+  }
+
+  @override
+  dispose() {
+    super.dispose();
   }
 
   @override

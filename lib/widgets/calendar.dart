@@ -11,6 +11,10 @@ class Calendario extends StatefulWidget {
 
   @override
   _CalendarioState createState() => _CalendarioState();
+
+  recargaridget(BuildContext context) {
+    _CalendarioState().build(context);
+  }
 }
 
 @override
@@ -37,17 +41,15 @@ class _CalendarioState extends State<Calendario> {
     Navigator.pushNamed(context, 'nuevorecordatorio');
   }
 
-  @override
-  void initState() {
+  recargarWidget() {
     r = getAppointments();
-    super.initState();
+    print('Entre al reccargarWidget: ' + r.length.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
-    r = getAppointments();
-    Calendario();
+    recargarWidget();
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -88,6 +90,7 @@ List<Appointment> getAppointments() {
   //List<Recordatorio> auxRec = await odb.getRecordatorios();
   odb.getRecordatorios();
   List<Recordatorio> lr = OperationDB.listaRecordatorios;
+  print('Tamaño recordatorio ' + lr.length.toString());
   for (Recordatorio r in lr) {
     DateTime startTime = r.fecha;
     DateTime endTime = startTime.add(const Duration(hours: 1));
