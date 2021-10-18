@@ -2,6 +2,7 @@ import 'package:diabits/pages/home_page.dart';
 import 'package:diabits/pages/new_reminder_page.dart';
 import 'package:diabits/pages/edit_reminder_page.dart';
 import 'package:diabits/pages/recordatorio_page.dart';
+import 'package:diabits/pages/home_start_page.dart';
 import 'package:diabits/utils/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +10,7 @@ import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  NotificationService().init(); // 
+  NotificationService().init(); //
 
   runApp(MaterialApp(
     home: MyApp(),
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
               Recordatorio.routeName: (_) => Recordatorio(),
               NewReminderPage.routeName: (_) => NewReminderPage(),
               EditReminderPage.routeName: (_) => EditReminderPage(),
+              HomeStartPage.routeName: (_) => HomeStartPage(),
             },
           ),
         ),

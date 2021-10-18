@@ -62,7 +62,7 @@ class _LoginFormState extends State<LoginForm> {
       //bool existeRegistro = _existeUsuario('user@erydsoft', '1234');
       print("###### $_email    $_password");
       if (_email == 'user@erydsoft' && _password == '1234') {
-        Navigator.pushNamed(context, 'recordatorio');
+        Navigator.pushNamed(context, 'paginainicio');
       } else {
         print("###########datos invalidos ");
       }
