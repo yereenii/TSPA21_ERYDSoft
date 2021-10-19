@@ -66,7 +66,8 @@ class _HomeStartForm extends State<HomeStartForm> {
                 child: Column(
                   children: [
                     InkTextFormField(
-                      //onTap: () async => _selectTime(context),
+                       onTap: () async =>
+                          Navigator.pushNamed(context, 'alimentos'),
                       label: "",
                       controller: _alimentoController,
                       fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),

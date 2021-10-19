@@ -1,3 +1,4 @@
+import 'package:diabits/pages/alimentos_page.dart';
 import 'package:diabits/pages/home_page.dart';
 import 'package:diabits/pages/new_reminder_page.dart';
 import 'package:diabits/pages/edit_reminder_page.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
               NewReminderPage.routeName: (_) => NewReminderPage(),
               EditReminderPage.routeName: (_) => EditReminderPage(),
               HomeStartPage.routeName: (_) => HomeStartPage(),
+              ListadoAlimentos.routeName: (_) => ListadoAlimentos(),
             },
           ),
         ),
