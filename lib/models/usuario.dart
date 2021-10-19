@@ -1,12 +1,11 @@
-
 class Usuario {
-  final int id_usuario;
+  final int? id_usuario;
   final String nombre;
   final String correo;
   final String password;
 
   Usuario(
-      {required this.id_usuario,
+      {this.id_usuario,
       required this.nombre,
       required this.correo,
       required this.password});

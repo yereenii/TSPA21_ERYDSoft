@@ -26,11 +26,8 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   _creacionPrimerUsuario() {
-    _operationDB.insertUser(Usuario(
-        id_usuario: 1,
-        nombre: 'user',
-        correo: 'user@erydsoft',
-        password: '1234'));
+    _operationDB.insertUser(
+        Usuario(nombre: 'user', correo: 'user@erydsoft', password: '1234'));
   }
 
   void _showAlertDialog() {
@@ -57,10 +54,15 @@ class _LoginFormState extends State<LoginForm> {
 
   _summit() {
     final isoOK = _formKey.currentState!.validate();
+
     if (isoOK) {
       //Navigator.pushNamed(context, 'recordatorio');
       //bool existeRegistro = _existeUsuario('user@erydsoft', '1234');
       print("###### $_email    $_password");
+      if (_existeUsuario(_email, _password)) {
+      } else {
+        _creacionPrimerUsuario();
+      }
       if (_email == 'user@erydsoft' && _password == '1234') {
         Navigator.pushNamed(context, 'paginainicio');
       } else {
