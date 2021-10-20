@@ -35,7 +35,7 @@ class _NewFoodForm extends State<NewFoodForm> {
   _insertarAlimento() {
     _operationDB.inserAlimento(Alimento(
         nombreAlimento: _nombre, nota: _descropcion, danino: _harmful));
-    _operationDB.getAlimentos();
+    //_operationDB.getAlimentos();
   }
 
   _regresarAlimentos() {}

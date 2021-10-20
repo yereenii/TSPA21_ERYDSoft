@@ -45,10 +45,6 @@ class _ListadoAlimentosState extends State<ListadoAlimentos> {
               alignment: Alignment.center,
               children: <Widget>[
                 Positioned(
-                  top: responsive.wp(.01),
-                  child: const Circles(),
-                ),
-                Positioned(
                   top: responsive.height * 0.02,
                   child: Column(
                     children: <Widget>[
@@ -89,7 +85,7 @@ class _ListadoAlimentosState extends State<ListadoAlimentos> {
                           ),
                         ),
                       ),
-                      SizedBox(height: responsive.dp(1)),
+                      SizedBox(height: responsive.dp(30)),
                       SizedBox(
                         width: responsive.width * 0.50,
                         child: MaterialButton(
@@ -111,6 +107,10 @@ class _ListadoAlimentosState extends State<ListadoAlimentos> {
                       ),
                     ],
                   ),
+                ),
+                Positioned(
+                  top: responsive.wp(-25),
+                  child: const Circles(),
                 ),
               ],
             ),

@@ -129,17 +129,18 @@ class OperationDB {
     return str != '0' && str != 'false' && str != '';
   }
 
-  Future<List<Alimento>> getAlimentos() async {
+  Future<List<Alimento>> getAlimentos(bool danino) async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> alimentoMap =
         await database.query("alimentos");
     for (var n in alimentoMap) {
-      listaAlimentos.add(Alimento(
+      if(toBoolean(n['danino']) == danino){
+        listaAlimentos.add(Alimento(
           idAlimento: n['id_alimento'],
           nombreAlimento: n['nombre_alimento'],
           nota: n['nota'],
           danino: toBoolean(n['danino'])));
-      print("_____ idAlimento " +
+           print("_____ idAlimento " +
           n['id_alimento'].toString() +
           " _ nombreAlimento " +
           n['nombre_alimento'].toString() +
@@ -147,6 +148,9 @@ class OperationDB {
           n['nota'].toString() +
           " _ dañino " +
           n['danino'].toString());
+      }
+      
+     
     }
 
     return List.generate(
