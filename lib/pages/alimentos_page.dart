@@ -101,7 +101,8 @@ class _ListadoAlimentosState extends State<ListadoAlimentos> {
                               fontSize: responsive.dp(2),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () async =>
+                              Navigator.pushNamed(context, 'nuevoalimento'),
                           color: Colors.blue.shade800,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),

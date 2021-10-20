@@ -1,3 +1,4 @@
+import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/alimento.dart';
 import 'package:flutter/material.dart';
 
@@ -11,18 +12,24 @@ class ListaAlimentosDaninos extends StatefulWidget {
 
 class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
   final String _titlepage = 'Listado Alimentos Dañinos';
-  List<Alimento> _items = [];
+  late List<Alimento> _items = [];
 
   _generarLista() {
-    _items.add((Alimento(
-        idAlimento: 1,
-        nombreAlimento: 'cheves',
-        danino: true,
-        nota: 'A pistear')));
+    OperationDB odb = OperationDB();
+    odb.getAlimentos();
+    _items = OperationDB.listaAlimentos;
   }
 
-  _editar(Alimento alimento) {
-    print(alimento.nombreAlimento);
+  void _editar(int idiceEditar) {
+    Alimento a = _items[idiceEditar];
+    print('editar' +
+        '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
+  }
+
+  void _eliminar(int idiceEditar) {
+    Alimento a = _items[idiceEditar];
+    print('eliminar' +
+        '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
   }
 
   @override
@@ -38,20 +45,46 @@ class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
           return ListTile(
             title: Text(
               _items[index].nombreAlimento,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
+              textAlign: TextAlign.center,
             ),
             subtitle: Text(
               _items[index].nota,
-              style: TextStyle(color: Colors.grey),
+              style: const TextStyle(color: Colors.grey),
+              textAlign: TextAlign.center,
             ),
             tileColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            leading: IconButton(
-              alignment: Alignment.center,
-              icon: const Icon(Icons.edit),
-              onPressed: _editar(_items[index]), //se manda el objeto a editar
+            leading: Container(
+              width: 90,
+              color: Colors.black12,
+              child: Stack(
+                alignment: Alignment.bottomRight,
+                children: <Widget>[
+                  Positioned(
+                    left: 0,
+                    child: IconButton(
+                      alignment: Alignment.topLeft,
+                      icon: const Icon(Icons.delete),
+                      onPressed: () {
+                        return _eliminar(index);
+                      },
+                    ),
+                  ),
+                  Positioned(
+                    left: 30,
+                    child: IconButton(
+                      alignment: Alignment.topRight,
+                      icon: const Icon(Icons.edit),
+                      onPressed: () {
+                        return _editar(index);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
