@@ -122,7 +122,7 @@ class OperationDB {
     return database.insert('alimentos', alimento.toMap());
   }
 
-  bool toBoolean(String str, [bool strict = false]) {
+  bool toBoolean(String str, [bool strict = true]) {
     if (strict == true) {
       return str == '1' || str == 'true';
     }
@@ -139,13 +139,13 @@ class OperationDB {
           nombreAlimento: n['nombre_alimento'],
           nota: n['nota'],
           danino: toBoolean(n['danino'])));
-      print("_____" +
+      print("_____ idAlimento " +
           n['id_alimento'].toString() +
-          "_" +
+          " _ nombreAlimento " +
           n['nombe_alimento'].toString() +
-          "_" +
+          " _ nota " +
           n['nota'].toString() +
-          "_" +
+          " _ dañino " +
           n['danino'].toString());
     }
 
@@ -155,6 +155,6 @@ class OperationDB {
             idAlimento: alimentoMap[i]['id_alimento'],
             nombreAlimento: alimentoMap[i]['nombre_alimento'],
             nota: alimentoMap[i]['nota'],
-            danino: alimentoMap[i]['danino']));
+            danino: toBoolean(alimentoMap[i]['danino'])));
   }
 }
