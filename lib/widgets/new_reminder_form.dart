@@ -155,6 +155,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
           key: _formKey, //ayuda a validar los campos. se usa en sumit
           child: Column(
             children: <Widget>[
+              SizedBox(height: responsive.dp(20)),
               InputText(
                 keyboardType: TextInputType.emailAddress,
                 fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
@@ -173,17 +174,13 @@ class _NewReminderFormState extends State<NewReminderForm> {
               /*************************************** */
               SizedBox(
                 width: responsive.width * 0.50,
-                child: Column(
-                  children: [
-                    InkTextFormField(
-                      onTap: () async => _selectDate(context),
-                      label: "Seleccionar la Fecha",
-                      controller: _dateController,
-                      fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
-                      width: responsive.width / 1.7,
-                      heigth: responsive.height / 15,
-                    ),
-                  ],
+                child: InkTextFormField(
+                  onTap: () async => _selectDate(context),
+                  label: "Seleccionar la Fecha",
+                  controller: _dateController,
+                  fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
+                  width: responsive.width / 1.7,
+                  heigth: responsive.height / 15,
                 ),
               ),
 
@@ -192,17 +189,13 @@ class _NewReminderFormState extends State<NewReminderForm> {
               /*************************************** */
               SizedBox(
                 width: responsive.width * 0.50,
-                child: Column(
-                  children: [
-                    InkTextFormField(
-                      onTap: () async => _selectTime(context),
-                      label: "Seleccionar Hora",
-                      controller: _timeController,
-                      fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
-                      width: responsive.width / 1.7,
-                      heigth: responsive.height / 15,
-                    ),
-                  ],
+                child: InkTextFormField(
+                  onTap: () async => _selectTime(context),
+                  label: "Seleccionar Hora",
+                  controller: _timeController,
+                  fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
+                  width: responsive.width / 1.7,
+                  heigth: responsive.height / 15,
                 ),
               ),
               /*************************************** */

@@ -13,8 +13,8 @@ class Alimento {
 
   Map<String, dynamic> toMap() {
     return {
-      'id_Alimento': idAlimento,
-      'nombre_Alimento': nombreAlimento,
+      'id_alimento': idAlimento,
+      'nombre_alimento': nombreAlimento,
       'nota': nota,
       'danino': danino.toString()
     };

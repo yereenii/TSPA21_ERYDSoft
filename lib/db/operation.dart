@@ -142,7 +142,7 @@ class OperationDB {
       print("_____ idAlimento " +
           n['id_alimento'].toString() +
           " _ nombreAlimento " +
-          n['nombe_alimento'].toString() +
+          n['nombre_alimento'].toString() +
           " _ nota " +
           n['nota'].toString() +
           " _ dañino " +
