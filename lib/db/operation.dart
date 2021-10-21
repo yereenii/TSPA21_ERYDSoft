@@ -133,6 +133,8 @@ class OperationDB {
     Database database = await _openDB();
     final List<Map<String, dynamic>> alimentoMap =
         await database.query("alimentos");
+    List<Alimento> auxListaAlimentos = [];
+    listaAlimentos = auxListaAlimentos;    
     for (var n in alimentoMap) {
       if(toBoolean(n['danino']) == danino){
         listaAlimentos.add(Alimento(

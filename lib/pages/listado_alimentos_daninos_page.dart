@@ -26,8 +26,8 @@ class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
         '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
   }
 
-  void _eliminar(int idiceEditar) {
-    Alimento a = _items[idiceEditar];
+  void _eliminar(int idiceeliminar) {
+    Alimento a = _items[idiceeliminar];
     print('eliminar' +
         '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
   }
