@@ -163,4 +163,9 @@ class OperationDB {
             nota: alimentoMap[i]['nota'],
             danino: toBoolean(alimentoMap[i]['danino'])));
   }
+
+  Future<int> deleteA(Alimento alimento) async {
+    Database database = await _openDB();
+    return database.delete("alimentos", where: 'id_alimento=?',whereArgs: [alimento.idAlimento]);
+  }
 }

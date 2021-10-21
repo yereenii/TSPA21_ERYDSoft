@@ -21,13 +21,18 @@ class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
   }
 
   void _editar(int idiceEditar) {
+    
     Alimento a = _items[idiceEditar];
+    
     print('editar' +
         '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
   }
 
   void _eliminar(int idiceeliminar) {
+    OperationDB odb = OperationDB();
     Alimento a = _items[idiceeliminar];
+
+    odb.deleteA(a);
     print('eliminar' +
         '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
   }
