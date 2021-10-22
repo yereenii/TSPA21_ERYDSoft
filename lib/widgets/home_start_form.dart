@@ -73,7 +73,7 @@ class _HomeStartForm extends State<HomeStartForm> {
             width: responsive.width * 0.50,
             child: InkTextFormField(
               fillColor: Colors.tealAccent.shade400,
-              onTap: () async => Navigator.pushNamed(context, 'nuevoalimento'),
+              //onTap: () async => Navigator.pushNamed(context, 'nuevoalimento'),
               label: "",
               controller: _sabiasQueController,
               fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),

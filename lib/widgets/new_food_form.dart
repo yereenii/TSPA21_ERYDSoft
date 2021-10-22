@@ -29,6 +29,7 @@ class _NewFoodForm extends State<NewFoodForm> {
       print(_descropcion);
       print(_harmful);
       _insertarAlimento();
+      _regresarAlimentos();
     }
   }
 
@@ -38,7 +39,9 @@ class _NewFoodForm extends State<NewFoodForm> {
     //_operationDB.getAlimentos();
   }
 
-  _regresarAlimentos() {}
+  _regresarAlimentos() {
+    Navigator.pop(context, 'alimentos');
+  }
 
   @override
   void initState() {
@@ -48,18 +51,6 @@ class _NewFoodForm extends State<NewFoodForm> {
 
   @override
   Widget build(BuildContext context) {
-    Color getColor(Set<MaterialState> states) {
-      const Set<MaterialState> interactiveStates = <MaterialState>{
-        MaterialState.pressed,
-        MaterialState.hovered,
-        MaterialState.focused,
-      };
-      if (states.any(interactiveStates.contains)) {
-        return Colors.blue;
-      }
-      return Colors.red;
-    }
-
     final Responsive responsive = Responsive.of(context);
     return Container(
       constraints: BoxConstraints(
