@@ -1,9 +1,6 @@
-// ignore_for_file: avoid_print
-
-//import 'package:diabits/main.dart';
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/recordatorio.dart';
-import 'package:diabits/models/usuario.dart';
+import 'package:diabits/utils/notifications.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/calendar.dart';
 import 'package:diabits/widgets/inkWellTabs.dart';
@@ -20,6 +17,7 @@ class NewReminderForm extends StatefulWidget {
 }
 
 class _NewReminderFormState extends State<NewReminderForm> {
+  final Notifications_Remember _notifications = Notifications_Remember();
   final GlobalKey<FormState> _formKey = GlobalKey();
   String date = "";
   DateTime selectedDate = DateTime.now();
@@ -57,6 +55,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
       fecha: _fechaCompleta,
     ));
     _operationDB.getRecordatorios();
+    _pushNotification();
   }
 
   _regresarCalendar() {
@@ -81,6 +80,12 @@ class _NewReminderFormState extends State<NewReminderForm> {
         [HH, ':', nn]).toString();
     _hora = selectedTime.toString();
     super.initState();
+    //init notificacciones
+    this._notifications.initNotifications();
+  }
+
+  void _pushNotification() {
+    this._notifications.pushNotification(_nombre);
   }
 
   //call del datePickerSelect
@@ -245,3 +250,5 @@ class _NewReminderFormState extends State<NewReminderForm> {
     );
   }
 }
+
+mixin Notifications {}
