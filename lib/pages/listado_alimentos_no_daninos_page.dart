@@ -21,17 +21,17 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
     _items = OperationDB.listaAlimentos;
   }
 
-  void _editar(int idiceEditar) {
+  void _editar(int indiceEditar) {
     OperationDB odb = OperationDB();
-    Alimento a = _items[idiceEditar];
-
+    Alimento a = _items[indiceEditar];
+    odb.editA(a);
     print('editar' +
         '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
   }
 
-  void _eliminar(int idiceEliminar) {
+  void _eliminar(int indiceEliminar) {
     OperationDB odb = OperationDB();
-    Alimento a = _items[idiceEliminar];
+    Alimento a = _items[indiceEliminar];
     odb.deleteA(a);
     print('eliminar' +
         '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
