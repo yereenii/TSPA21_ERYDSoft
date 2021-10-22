@@ -1,6 +1,7 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/alimento.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ListaAlimentosNoDaninos extends StatefulWidget {
   //const ListaAlimentosDaninos({Key? key}) : super(key: key);
@@ -21,13 +22,17 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
   }
 
   void _editar(int idiceEditar) {
+    OperationDB odb = OperationDB();
     Alimento a = _items[idiceEditar];
+
     print('editar' +
         '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
   }
 
-  void _eliminar(int idiceEditar) {
-    Alimento a = _items[idiceEditar];
+  void _eliminar(int idiceEliminar) {
+    OperationDB odb = OperationDB();
+    Alimento a = _items[idiceEliminar];
+    odb.deleteA(a);
     print('eliminar' +
         '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
   }
