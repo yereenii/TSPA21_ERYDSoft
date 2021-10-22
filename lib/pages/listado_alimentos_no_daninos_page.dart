@@ -16,7 +16,7 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
 
   _generarLista() {
     OperationDB odb = OperationDB();
-    odb.getAlimentos(true);
+    odb.getAlimentos(false);
     _items = OperationDB.listaAlimentos;
   }
 
