@@ -168,4 +168,17 @@ class OperationDB {
     Database database = await _openDB();
     return database.delete("alimentos", where: 'id_alimento=?',whereArgs: [alimento.idAlimento]);
   }
+
+  //Future<int> editA(Alimento alimento) async {
+    //Database database = await _openDB();
+    //return database.update("alimentos", ;
+    
+  //}
+  //"CREATE TABLE alimentos (id_alimento INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  // nombre_alimento VARCHAR2 NOT NULL, nota VARCHAR2 NOT NULL, danino BOOLEAN);";
+  //Future<int> otro(Alimento alimento) async {
+    //Database database = await _openDB();
+    //return database.updat
+
+  //}
 }
