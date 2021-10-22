@@ -21,13 +21,13 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
     _items = OperationDB.listaAlimentos;
   }
 
-  void _editar(int indiceEditar) {
-    OperationDB odb = OperationDB();
-    Alimento a = _items[indiceEditar];
-    odb.editA(a);
-    print('editar' +
-        '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
-  }
+  //void _editar(int indiceEditar) {
+    //OperationDB odb = OperationDB();
+    //Alimento a = _items[indiceEditar];
+    //odb.editA(a);
+    //print('editar' +
+      //  '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
+ // }
 
   void _eliminar(int indiceEliminar) {
     OperationDB odb = OperationDB();
@@ -83,8 +83,8 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
                     child: IconButton(
                       alignment: Alignment.topRight,
                       icon: const Icon(Icons.edit),
-                      onPressed: () {
-                        return _editar(index);
+                      onPressed: () async => {
+                        Navigator.pushNamed(context, 'editaAlimento')
                       },
                     ),
                   ),
