@@ -7,6 +7,7 @@ import 'package:diabits/pages/edit_reminder_page.dart';
 import 'package:diabits/pages/recordatorio_page.dart';
 import 'package:diabits/pages/home_start_page.dart';
 import 'package:diabits/pages/new_food_page.dart';
+import 'package:diabits/pages/edit_food_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
               ListaAlimentosNoDaninos.routeName: (_) =>
                   ListaAlimentosNoDaninos(),
               NewFoodPage.routeName: (_) => NewFoodPage(),
+              EditFoodPage.routeName: (_) => EditFoodPage(),
             },
           ),
         ),

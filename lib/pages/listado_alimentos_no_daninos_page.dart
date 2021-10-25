@@ -86,8 +86,8 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
                       icon: const Icon(Icons.edit),
                       onPressed: () async => {
                         //onPressed: () async => {
-                        //Navigator.pushNamed(context, 'editaAlimento')
-                        const EditFoodForm(),
+                        Navigator.pushNamed(context, 'editaAlimento')
+                        //const EditFoodForm(),
                       },
                     ),
 
