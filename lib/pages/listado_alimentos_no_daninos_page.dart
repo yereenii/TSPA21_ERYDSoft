@@ -1,5 +1,6 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/alimento.dart';
+import 'package:diabits/pages/edit_food_page.dart';
 import 'package:diabits/widgets/edit_food_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,8 @@ class ListaAlimentosNoDaninos extends StatefulWidget {
   static const routeName = 'listadoalimentosnodaninos';
 
   @override
-  _ListaAlimentosNoDaninosState createState() => _ListaAlimentosNoDaninosState();
+  _ListaAlimentosNoDaninosState createState() =>
+      _ListaAlimentosNoDaninosState();
 }
 
 class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
@@ -22,13 +24,11 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
     _items = OperationDB.listaAlimentos;
   }
 
-  //void _editar(int indiceEditar) {
-    //OperationDB odb = OperationDB();
-    //Alimento a = _items[indiceEditar];
-    //odb.editA(a);
-    //print('editar' +
-      //  '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
- // }
+  @override
+  void initState() {
+    _generarLista();
+    super.initState();
+  }
 
   void _eliminar(int indiceEliminar) {
     OperationDB odb = OperationDB();
@@ -40,7 +40,7 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
 
   @override
   Widget build(BuildContext context) {
-    _generarLista();
+    //initState();
     return Scaffold(
       appBar: AppBar(
         title: Text(_titlepage),
@@ -86,11 +86,10 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
                       icon: const Icon(Icons.edit),
                       onPressed: () async => {
                         //onPressed: () async => {
-                        Navigator.pushNamed(context, 'editaAlimento')
-                        //const EditFoodForm(),
+                        Navigator.pushNamed(context, 'editaAlimento',
+                            arguments: _items[index])
                       },
                     ),
-
                   ),
                 ],
               ),

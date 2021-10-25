@@ -10,6 +10,7 @@ class InputText extends StatelessWidget {
   final double fontSize;
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
+  final TextEditingController? controller;
 
   const InputText({
     Key? key,
@@ -20,6 +21,7 @@ class InputText extends StatelessWidget {
     this.fontSize = 15,
     this.onChanged,
     this.validator,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -35,6 +37,7 @@ class InputText extends StatelessWidget {
         child: Directionality(
           textDirection: TextDirection.ltr,
           child: TextFormField(
+            controller: controller,
             keyboardType: keyboardType, //tipo de teclado
             obscureText: obscureText,
             onChanged: onChanged, //obtiene el texto del campo

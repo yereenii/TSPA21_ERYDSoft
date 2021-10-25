@@ -7,19 +7,26 @@ import 'package:flutter/rendering.dart';
 import 'Input_text.dart';
 
 class EditFoodForm extends StatefulWidget {
-  const EditFoodForm({Key? key}) : super(key: key);
+  final Alimento? alimento;
+  const EditFoodForm({Key? key, this.alimento}) : super(key: key);
 
   @override
-  _EditFoodForm createState() => _EditFoodForm();
+  _EditFoodForm createState() => _EditFoodForm(alimento: alimento);
 }
 
 class _EditFoodForm extends State<EditFoodForm> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final Alimento? alimento;
+  int _idAlimento = 0;
   String _nombre = "";
   String _descripcion = "";
   bool _harmful = false;
   OperationDB _operationDB = OperationDB();
 
+  _EditFoodForm({this.alimento});
+
+  final _nombreController = TextEditingController();
+  final _descripcionController = TextEditingController();
   _summit() {
     //metodo que ejecuta las validaciones que pongas en el form
     final isoOK = _formKey.currentState!.validate();
@@ -34,7 +41,11 @@ class _EditFoodForm extends State<EditFoodForm> {
   }
 
   _editarAlimento() {
-    _operationDB.editA(Alimento(nombreAlimento: _nombre, nota: _descripcion, danino: _harmful));
+    _operationDB.editA(Alimento(
+        idAlimento: _idAlimento,
+        nombreAlimento: _nombre,
+        nota: _descripcion,
+        danino: _harmful));
     //_operationDB.getAlimentos();
   }
 
@@ -44,13 +55,17 @@ class _EditFoodForm extends State<EditFoodForm> {
 
   @override
   void initState() {
-    _harmful = false;
+    _idAlimento = alimento!.idAlimento!;
+    _nombreController.text = alimento!.nombreAlimento.toString();
+    _descripcionController.text = alimento!.nota.toString();
+    _harmful = alimento!.danino;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
+    //initState();
     return Container(
       constraints: BoxConstraints(
         //ancho del dispositivo si es tablet 430 si no ancho-30
@@ -61,28 +76,34 @@ class _EditFoodForm extends State<EditFoodForm> {
         child: Column(
           children: <Widget>[
             InputText(
+              controller: _nombreController,
               keyboardType: TextInputType.emailAddress,
               fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
-              onChanged: (text) {
-                _nombre = text;
-              },
+              /*onChanged: (_nombre) {
+                _nombre = _nombreController.text;
+                print(_nombre);
+              },*/
               validator: (text) {
+                _nombre = _nombreController.text;
                 if (text!.isEmpty) {
                   return "Nombre inválido";
                 }
                 return null;
               },
-              label: 'Nombre del Alimento',
+              label: 'Nombre Alimento',
             ),
             SizedBox(height: responsive.dp(2)),
             /*************************************** */
             InputText(
+              controller: _descripcionController,
               keyboardType: TextInputType.emailAddress,
               fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
-              onChanged: (text) {
-                _descripcion = text;
-              },
+              /*onChanged: (text) {
+                _descripcion = _descripcionController.text;
+                print(_descripcion);
+              },*/
               validator: (text) {
+                _descripcion = _descripcionController.text;
                 if (text!.isEmpty) {
                   return "Dscripción inválida";
                 }

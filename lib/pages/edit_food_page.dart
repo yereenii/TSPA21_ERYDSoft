@@ -1,3 +1,4 @@
+import 'package:diabits/models/alimento.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/circle.dart';
 import 'package:diabits/widgets/circles.dart';
@@ -7,6 +8,9 @@ import 'package:flutter/material.dart';
 //sft
 class EditFoodPage extends StatefulWidget {
   static const routeName = 'editaAlimento';
+  const EditFoodPage({
+    Key? key,
+  }) : super(key: key);
   //const NewFoodPage({Key? key}) : super(key: key);
 
   @override
@@ -14,11 +18,14 @@ class EditFoodPage extends StatefulWidget {
 }
 
 class _HomePageState extends State<EditFoodPage> {
+  _HomePageState();
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
     final double blueSize = responsive.wp(80); //80% del ancho del dispo
     final double tealAccentSize = responsive.wp(60);
+    Alimento? alimento =
+        ModalRoute.of(context)!.settings.arguments as Alimento?;
 
     return Scaffold(
       body: GestureDetector(
@@ -51,7 +58,9 @@ class _HomePageState extends State<EditFoodPage> {
                         ),
                       ),
                       SizedBox(height: responsive.dp(20)),
-                      const EditFoodForm(),
+                      EditFoodForm(
+                        alimento: alimento,
+                      ),
                     ],
                   ),
                 ),
