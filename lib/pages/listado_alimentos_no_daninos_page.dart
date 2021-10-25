@@ -1,5 +1,6 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/alimento.dart';
+import 'package:diabits/widgets/edit_food_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -84,9 +85,12 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
                       alignment: Alignment.topRight,
                       icon: const Icon(Icons.edit),
                       onPressed: () async => {
-                        Navigator.pushNamed(context, 'editaAlimento')
+                        //onPressed: () async => {
+                        //Navigator.pushNamed(context, 'editaAlimento')
+                        const EditFoodForm(),
                       },
                     ),
+
                   ),
                 ],
               ),

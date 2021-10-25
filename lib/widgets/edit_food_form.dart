@@ -28,14 +28,13 @@ class _EditFoodForm extends State<EditFoodForm> {
       print(_nombre);
       print(_descripcion);
       print(_harmful);
-      _insertarAlimento();
+      _editarAlimento();
       _regresarAlimentos();
     }
   }
 
-  _insertarAlimento() {
-    _operationDB.editA(Alimento(
-        nombreAlimento: _nombre, nota: _descripcion, danino: _harmful));
+  _editarAlimento() {
+    _operationDB.editA(Alimento(nombreAlimento: _nombre, nota: _descripcion, danino: _harmful));
     //_operationDB.getAlimentos();
   }
 
