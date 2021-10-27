@@ -83,8 +83,9 @@ class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
                     child: IconButton(
                       alignment: Alignment.topRight,
                       icon: const Icon(Icons.edit),
-                      onPressed: () {
-                        return _editar(index);
+                      onPressed: () async => {
+                        Navigator.pushNamed(context, 'editaAlimento',
+                            arguments: _items[index])
                       },
                     ),
                   ),
