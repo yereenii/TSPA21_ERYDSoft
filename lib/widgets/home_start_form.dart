@@ -25,7 +25,7 @@ class _HomeStartForm extends State<HomeStartForm> {
     _alimentoController.text = "Alimentos";
     _sabiasQueController.text = "¿Sabías que?";
     super.initState();
-    NotificationApi.init();
+    NotificationApi.init(initSheduled: true);
   }
 
   @override
