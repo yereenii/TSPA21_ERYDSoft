@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 //import 'package:diabits/main.dart';
+import 'package:diabits/utils/notification_api.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/inkWellTabs.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class _HomeStartForm extends State<HomeStartForm> {
     _alimentoController.text = "Alimentos";
     _sabiasQueController.text = "¿Sabías que?";
     super.initState();
+    NotificationApi.init();
   }
 
   @override
@@ -73,7 +75,24 @@ class _HomeStartForm extends State<HomeStartForm> {
             width: responsive.width * 0.50,
             child: InkTextFormField(
               fillColor: Colors.tealAccent.shade400,
-              //onTap: () async => Navigator.pushNamed(context, 'nuevoalimento'),
+              onTap: () {
+                NotificationApi.showScheduledNotification(
+                  title: 'Dinner',
+                  body: 'Today at 6 PM',
+                  payload: 'dinner_6pm',
+                  scheduledDate: DateTime.now().add(Duration(seconds: 12)),
+                );
+                final snackBar = SnackBar(
+                  content: Text(
+                    'scheduled in 12 seconds!',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  backgroundColor: Colors.green,
+                );
+                ScaffoldMessenger.of(context)
+                  ..removeCurrentSnackBar()
+                  ..showSnackBar(snackBar);
+              },
               label: "",
               controller: _sabiasQueController,
               fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
