@@ -31,12 +31,12 @@ class NotificationApi {
         onNotifications.add(payload);
       },
     );
-    if (initSheduled){
+    /**if (initSheduled){
       tz.initializeTimeZones();
       final locationName = 
         await FlutterNativeTimezone.getLocalTimezone(
           tz.setLocalLocation(tz.getLocation(locationName)));
-    }
+    }*/
   }
 
   static Future showNotification({
