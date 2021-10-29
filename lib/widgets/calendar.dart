@@ -43,7 +43,6 @@ class _CalendarioState extends State<Calendario> {
 
   recargarWidget() {
     r = getAppointments();
-    print('Entre al reccargarWidget: ' + r.length.toString());
   }
 
   @override
@@ -110,7 +109,6 @@ List<Appointment> getAppointments() {
   //List<Recordatorio> auxRec = await odb.getRecordatorios();
   odb.getRecordatorios();
   List<Recordatorio> lr = OperationDB.listaRecordatorios;
-  print('Tamaño recordatorio ' + lr.length.toString());
   for (Recordatorio r in lr) {
     DateTime startTime = r.fecha;
     DateTime endTime = startTime.add(const Duration(hours: 1));

@@ -1,5 +1,6 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/recordatorio.dart';
+import 'package:diabits/utils/notification_api.dart';
 import 'package:diabits/utils/notifications.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/calendar.dart';
@@ -36,16 +37,40 @@ class _NewReminderFormState extends State<NewReminderForm> {
   _summit() {
     //metodo que ejecuta las validaciones que pongas en el form
     final isoOK = _formKey.currentState!.validate();
-    print("form isOK $isoOK");
     if (isoOK) {
-      print(_nombre);
-      print(_fecha);
-      print(_hora);
-      print('fechacompleta = ' + _fechaCompleta.toString());
-      //consumir servicio rest para iniciar sesion
       _regresarCalendar();
       _creacionRecordatorio();
     }
+  }
+
+  void _pushNotification() {
+    OperationDB odb = OperationDB();
+    odb.getRecordatorios();
+    List<Recordatorio> listaRecordatorios = OperationDB.listaRecordatorios;
+    NotificationApi.init(initSheduled: true);
+    int recordatorioID = listaRecordatorios.length + 1;
+    String recordatorioTitle = _nombre + ' ';
+    String recordatorioBody = 'Hoy a las: ' + _hora;
+    print("<><><><id" + recordatorioID.toString());
+    //this._notifications.pushNotification(_nombre);
+    NotificationApi.showScheduledNotification(
+        id: recordatorioID,
+        title: recordatorioTitle,
+        body: recordatorioBody,
+        payload: recordatorioTitle,
+        scheduledDate:
+            _fechaCompleta // DateTime.now().add(Duration(seconds: 12)),
+        );
+    final snackBar = const SnackBar(
+      content: const Text(
+        'Nuevo Recordatorio Programado',
+        style: const TextStyle(fontSize: 20),
+      ),
+      backgroundColor: Colors.blueAccent,
+    );
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(snackBar);
   }
 
   _creacionRecordatorio() {
@@ -81,11 +106,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
     _hora = selectedTime.toString();
     super.initState();
     //init notificacciones
-    this._notifications.initNotifications();
-  }
-
-  void _pushNotification() {
-    this._notifications.pushNotification(_nombre);
+    //this._notifications.initNotifications();
   }
 
   //call del datePickerSelect
