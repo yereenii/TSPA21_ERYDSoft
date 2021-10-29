@@ -129,30 +129,52 @@ class OperationDB {
     return str != '0' && str != 'false' && str != '';
   }
 
+  Future<List<Alimento>> getAlimentoss(bool danino) async {
+  Database database = await _openDB();
+    final List<Map<String, dynamic>> alimentoMap =
+        await database.query("alimentos");
+    List<Alimento> auxListaAlimentos = [];
+    listaAlimentos = auxListaAlimentos;
+    for (var n in alimentoMap) {
+      if (toBoolean(n['danino']) == danino) {
+        listaAlimentos.add(Alimento(
+            idAlimento: n['id_alimento'],
+            nombreAlimento: n['nombre_alimento'],
+            nota: n['nota'],
+            danino: toBoolean(n['danino'])));
+      }
+    }
+    return List.generate(
+        alimentoMap.length,
+        (i) => Alimento(
+            idAlimento: alimentoMap[i]['id_alimento'],
+            nombreAlimento: alimentoMap[i]['nombre_alimento'],
+            nota: alimentoMap[i]['nota'],
+            danino: toBoolean(alimentoMap[i]['danino'])));
+  }
+
   Future<List<Alimento>> getAlimentos(bool danino) async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> alimentoMap =
         await database.query("alimentos");
     List<Alimento> auxListaAlimentos = [];
-    listaAlimentos = auxListaAlimentos;    
+    listaAlimentos = auxListaAlimentos;
     for (var n in alimentoMap) {
-      if(toBoolean(n['danino']) == danino){
+      if (toBoolean(n['danino']) == danino) {
         listaAlimentos.add(Alimento(
-          idAlimento: n['id_alimento'],
-          nombreAlimento: n['nombre_alimento'],
-          nota: n['nota'],
-          danino: toBoolean(n['danino'])));
-           print("_____ idAlimento " +
-          n['id_alimento'].toString() +
-          " _ nombreAlimento " +
-          n['nombre_alimento'].toString() +
-          " _ nota " +
-          n['nota'].toString() +
-          " _ dañino " +
-          n['danino'].toString());
+            idAlimento: n['id_alimento'],
+            nombreAlimento: n['nombre_alimento'],
+            nota: n['nota'],
+            danino: toBoolean(n['danino'])));
+        print("_____ idAlimento " +
+            n['id_alimento'].toString() +
+            " _ nombreAlimento " +
+            n['nombre_alimento'].toString() +
+            " _ nota " +
+            n['nota'].toString() +
+            " _ dañino " +
+            n['danino'].toString());
       }
-      
-     
     }
 
     return List.generate(
@@ -166,22 +188,24 @@ class OperationDB {
 
   Future<int> deleteA(Alimento alimento) async {
     Database database = await _openDB();
-    return database.delete("alimentos", where: 'id_alimento=?',whereArgs: [alimento.idAlimento]);
+    return database.delete("alimentos",
+        where: 'id_alimento=?', whereArgs: [alimento.idAlimento]);
   }
+
   //Future<int> inserAlimento(Alimento alimento) async {
   //     Database database = await _openDB();
   //     return database.insert('alimentos', alimento.toMap());
   //   }
   Future<int> editA(Alimento alimento) async {
     Database database = await _openDB();
-    return database.update("alimentos",alimento.toMap(), where: 'id_alimento=?',whereArgs: [alimento.idAlimento]);
-    
+    return database.update("alimentos", alimento.toMap(),
+        where: 'id_alimento=?', whereArgs: [alimento.idAlimento]);
   }
   //"CREATE TABLE alimentos (id_alimento INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   // nombre_alimento VARCHAR2 NOT NULL, nota VARCHAR2 NOT NULL, danino BOOLEAN);";
   //Future<int> otro(Alimento alimento) async {
-    //Database database = await _openDB();
-    //return database.updat
+  //Database database = await _openDB();
+  //return database.updat
 
   //}
 }
