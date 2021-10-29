@@ -1,9 +1,7 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/recordatorio.dart';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:diabits/utils/responsive.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
 class Calendario extends StatefulWidget {
@@ -24,7 +22,7 @@ Widget _build(BuildContext context) {
       Locale('es'),
       // ... other locales the app supports
     ],
-    locale: const Locale('es', " "),
+    locale: const Locale('es', ' '),
     home: Calendario(),
   );
 }
@@ -35,7 +33,13 @@ class _CalendarioState extends State<Calendario> {
   late List<String> _views;
 
   _summit() {
-    Navigator.pushNamed(context, 'nuevorecordatorio');
+    Navigator.pushNamed(context, 'nuevorecordatorio')
+        .then((value) => setState(() {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => super.widget));
+            }));
   }
 
   _actualizar() {}
@@ -48,12 +52,19 @@ class _CalendarioState extends State<Calendario> {
 
   @override
   Widget build(BuildContext context) {
-    final Responsive responsive = Responsive.of(context);
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: _summit,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
       appBar: AppBar(
-          title: Text('Calendario de Recordatorios'),
+          title: const Text('Calendario de Recordatorios'),
           leading: PopupMenuButton<String>(
-            icon: Icon(Icons.calendar_today),
+            icon: const Icon(Icons.calendar_today),
             itemBuilder: (BuildContext context) => _views.map((String choice) {
               return PopupMenuItem<String>(
                 value: choice,
@@ -74,33 +85,45 @@ class _CalendarioState extends State<Calendario> {
           future: operationDB.getRecordatorios(),
           builder: (context, snapshot) {
             List<Appointment> collection = <Appointment>[];
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: 1,
-                itemExtent: 550,
-                itemBuilder: (context, position) {
-                  var item = snapshot.data![position];
 
-                  for (int i = 0;
-                      i < (snapshot.data as List).toList().length;
-                      i++) {
-                    collection.add(
-                      Appointment(
-                        subject: item.row[1],
-                        startTime: _convertDateFromString(item.row[2]),
-                        endTime: _convertDateFromString(item.row[3]),
+            if (snapshot.hasData) {
+              return Stack(children: <Widget>[
+                ListView.builder(
+                  itemCount: 1,
+                  itemExtent: 550,
+                  itemBuilder: (context, position) {
+                    List items = snapshot.data as List;
+                    for (Recordatorio r in items) {
+                      collection.add(
+                        Appointment(
+                          color: Colors.blue,
+                          subject: r.nombre_recordatorio,
+                          startTime: r.fecha,
+                          endTime: r.fecha.add(const Duration(hours: 1)),
+                        ),
+                      );
+                    }
+                    return SfCalendar(
+                      view: CalendarView.month,
+                      cellBorderColor: Colors.black26,
+                      backgroundColor: Colors.white10,
+                      // ignore: prefer_const_constructors
+                      monthViewSettings: MonthViewSettings(
+                        showAgenda: true,
+                        agendaStyle: const AgendaStyle(
+                          backgroundColor: Colors.white70,
+                        ),
                       ),
+                      firstDayOfWeek: 7,
+                      timeRegionBuilder: (context, timeRegionDetails) =>
+                          _build(context),
+                      dataSource: _getCalendarDataSource(collection),
+
+                      //SizedBox(height: responsive.dp(.5)),
                     );
-                  }
-                  return SfCalendar(
-                    view: CalendarView.month,
-                    initialDisplayDate: DateTime(2021, 1, 4, 9, 0, 0),
-                    monthViewSettings:
-                        const MonthViewSettings(showAgenda: true),
-                    dataSource: _getCalendarDataSource(collection),
-                  );
-                },
-              );
+                  },
+                ),
+              ]);
             } else {
               return const CircularProgressIndicator();
             }
@@ -111,11 +134,8 @@ class _CalendarioState extends State<Calendario> {
 
 FechaRecordatorioSource _getCalendarDataSource(List<Appointment> collection) {
   List<Appointment> appointments = collection;
-  return FechaRecordatorioSource(appointments);
-}
 
-DateTime _convertDateFromString(String date) {
-  return DateTime.parse(date);
+  return FechaRecordatorioSource(appointments);
 }
 
 class FechaRecordatorioSource extends CalendarDataSource {

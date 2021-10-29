@@ -4,10 +4,11 @@ import 'package:diabits/pages/listado_alimentos_daninos_page.dart';
 import 'package:diabits/pages/listado_alimentos_no_daninos_page.dart';
 import 'package:diabits/pages/new_reminder_page.dart';
 import 'package:diabits/pages/edit_reminder_page.dart';
-import 'package:diabits/pages/recordatorio_page.dart';
 import 'package:diabits/pages/home_start_page.dart';
 import 'package:diabits/pages/new_food_page.dart';
 import 'package:diabits/pages/edit_food_page.dart';
+import 'package:diabits/pages/calendar_page.dart';
+import 'package:diabits/pages/did_you_know_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
@@ -54,7 +55,6 @@ class MyApp extends StatelessWidget {
             ),
             home: HomePage(),
             routes: {
-              Recordatorio.routeName: (_) => Recordatorio(),
               NewReminderPage.routeName: (_) => NewReminderPage(),
               EditReminderPage.routeName: (_) => EditReminderPage(),
               HomeStartPage.routeName: (_) => HomeStartPage(),
@@ -64,6 +64,8 @@ class MyApp extends StatelessWidget {
                   ListaAlimentosNoDaninos(),
               NewFoodPage.routeName: (_) => NewFoodPage(),
               EditFoodPage.routeName: (_) => EditFoodPage(),
+              CalendarioPage.routeName: (_) => CalendarioPage(),
+              SabiasQue.routeName: (_) => SabiasQue(),
             },
           ),
         ),

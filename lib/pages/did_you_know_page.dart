@@ -1,22 +1,19 @@
 import 'package:diabits/utils/responsive.dart';
-import 'package:diabits/widgets/calendar_form.dart';
 import 'package:diabits/widgets/circles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class CalendarioPage extends StatefulWidget {
+class SabiasQue extends StatefulWidget {
   //const Recordatorio({Key? key}) : super(key: key);
-  static const routeName = 'calendario';
+  static const routeName = 'sabiasque';
   @override
-  _CalendarioPage createState() => _CalendarioPage();
+  _SabiasQue createState() => _SabiasQue();
 }
 
-class _CalendarioPage extends State<CalendarioPage> {
+class _SabiasQue extends State<SabiasQue> {
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
-    final double blueSize = responsive.wp(80); //80% del ancho del dispo
-    final double tealAccentSize = responsive.wp(60);
 
     return Scaffold(
       body: GestureDetector(
@@ -33,7 +30,7 @@ class _CalendarioPage extends State<CalendarioPage> {
                   top: responsive.wp(.01),
                   child: const Circles(),
                 ),
-                Calendario(),
+                const Text("Trabajo en progreso"),
               ],
             ),
           ),

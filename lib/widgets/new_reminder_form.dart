@@ -1,9 +1,7 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/recordatorio.dart';
 import 'package:diabits/utils/notification_api.dart';
-import 'package:diabits/utils/notifications.dart';
 import 'package:diabits/utils/responsive.dart';
-import 'package:diabits/widgets/calendar.dart';
 import 'package:diabits/widgets/inkWellTabs.dart';
 import 'package:flutter/material.dart';
 import 'Input_text.dart';
@@ -18,7 +16,6 @@ class NewReminderForm extends StatefulWidget {
 }
 
 class _NewReminderFormState extends State<NewReminderForm> {
-  final Notifications_Remember _notifications = Notifications_Remember();
   final GlobalKey<FormState> _formKey = GlobalKey();
   String date = "";
   DateTime selectedDate = DateTime.now();
@@ -27,11 +24,9 @@ class _NewReminderFormState extends State<NewReminderForm> {
   final TextEditingController _timeController = TextEditingController();
   String _hour = '', _minute = '', _time = '';
   String _nombre = '';
-  String _fecha = '';
   String _hora = '';
   DateTime _fechaCompleta = DateTime.now();
-  OperationDB _operationDB = OperationDB();
-  Calendario _calendar = Calendario();
+  final OperationDB _operationDB = OperationDB();
 
   // ignore: duplicate_ignore
   _summit() {
@@ -51,8 +46,6 @@ class _NewReminderFormState extends State<NewReminderForm> {
     int recordatorioID = listaRecordatorios.length + 1;
     String recordatorioTitle = _nombre + ' ';
     String recordatorioBody = 'Hoy a las: ' + _hora;
-    print("<><><><id" + recordatorioID.toString());
-    //this._notifications.pushNotification(_nombre);
     NotificationApi.showScheduledNotification(
         id: recordatorioID,
         title: recordatorioTitle,
@@ -61,10 +54,10 @@ class _NewReminderFormState extends State<NewReminderForm> {
         scheduledDate:
             _fechaCompleta // DateTime.now().add(Duration(seconds: 12)),
         );
-    final snackBar = const SnackBar(
-      content: const Text(
+    const snackBar = SnackBar(
+      content: Text(
         'Nuevo Recordatorio Programado',
-        style: const TextStyle(fontSize: 20),
+        style: TextStyle(fontSize: 20),
       ),
       backgroundColor: Colors.blueAccent,
     );
@@ -86,9 +79,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
   _regresarCalendar() {
     setState(() {
       Navigator.pop(context, 'recordatorio');
-      _calendar.recargaridget(context);
     });
-    //Navigator.pushNamed(context, 'recordatorio');
   }
 
   @override
@@ -126,7 +117,6 @@ class _NewReminderFormState extends State<NewReminderForm> {
         selectedDate = selected;
         _dateController.text = intl.DateFormat.yMd("es").format(selectedDate);
       });
-      _fecha = selected.toString();
       _fechaCompleta = selectedDate;
     }
   }

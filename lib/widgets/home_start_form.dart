@@ -44,7 +44,7 @@ class _HomeStartForm extends State<HomeStartForm> {
             width: responsive.width * 0.50,
             child: InkTextFormField(
               fillColor: Colors.tealAccent.shade400,
-              onTap: () async => Navigator.pushNamed(context, 'recordatorio'),
+              onTap: () async => Navigator.pushNamed(context, 'calendario'),
               label: "",
               controller: _recordatorioController,
               fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
@@ -75,24 +75,7 @@ class _HomeStartForm extends State<HomeStartForm> {
             width: responsive.width * 0.50,
             child: InkTextFormField(
               fillColor: Colors.tealAccent.shade400,
-              onTap: () {
-                NotificationApi.showScheduledNotification(
-                  title: 'Dinner',
-                  body: 'Today at 6 PM',
-                  payload: 'dinner_6pm',
-                  scheduledDate: DateTime.now().add(Duration(seconds: 12)),
-                );
-                final snackBar = SnackBar(
-                  content: Text(
-                    'scheduled in 12 seconds!',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  backgroundColor: Colors.green,
-                );
-                ScaffoldMessenger.of(context)
-                  ..removeCurrentSnackBar()
-                  ..showSnackBar(snackBar);
-              },
+              onTap: () async => Navigator.pushNamed(context, 'sabiasque'),
               label: "",
               controller: _sabiasQueController,
               fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
