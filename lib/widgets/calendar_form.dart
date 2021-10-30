@@ -1,5 +1,6 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/recordatorio.dart';
+import 'package:diabits/pages/alimentos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
@@ -32,18 +33,21 @@ class _CalendarioState extends State<Calendario> {
   OperationDB operationDB = OperationDB();
   late List<String> _views;
 
+  _listadoRecordatorios(DateTime date) {
+    Navigator.pushNamed(context, 'listarecordatoriospage',
+        arguments: date);
+  }
+
   _summit() {
     Navigator.pushNamed(context, 'nuevorecordatorio')
         .then((value) => setState(() {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => super.widget));
-    }));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => super.widget));
+            }));
   }
 
-  _actualizar() {}
-  _eliminar() {}
   @override
   void initState() {
     _views = <String>['Actualizar', 'Eliminar'];
@@ -74,67 +78,63 @@ class _CalendarioState extends State<Calendario> {
             onSelected: (String value) {
               setState(() {
                 if (value == 'Actulizar') {
-                  _actualizar();
+                  //_actualizar();
                 } else {
-                  _eliminar();
+                  //_eliminar();
                 }
               });
             },
           )),
       body: FutureBuilder(
-          future: operationDB.getRecordatorios(),
-          builder: (context, snapshot) {
-            List<Appointment> collection = <Appointment>[];
-
-            if (snapshot.hasData) {
-              return Stack(children: <Widget>[
-                ListView.builder(
-                  itemCount: 1,
-                  itemExtent: 550,
-                  itemBuilder: (context, position) {
-                    List items = snapshot.data as List;
-                    for (Recordatorio r in items) {
-                      collection.add(
-                        Appointment(
-                          color: Colors.blue,
-                          subject: r.nombre_recordatorio,
-                          startTime: r.fecha,
-                          endTime: r.fecha.add(const Duration(hours: 1)),
-                        ),
-                      );
-                    }
-                    return SfCalendar(
-                      view: CalendarView.month,
-                      cellBorderColor: Colors.black26,
-                      backgroundColor: Colors.white10,
-                      // ignore: prefer_const_constructors
-                      monthViewSettings: MonthViewSettings(
-                        showAgenda: true,
-                        agendaStyle: const AgendaStyle(
-                          backgroundColor: Colors.white70,
-                        ),
+        future: operationDB.getRecordatorios(),
+        builder: (context, snapshot) {
+          List<Appointment> collection = <Appointment>[];
+          if (snapshot.hasData) {
+            return Stack(children: <Widget>[
+              ListView.builder(
+                itemCount: 1,
+                itemExtent: 550,
+                itemBuilder: (context, position) {
+                  List items = snapshot.data as List;
+                  for (Recordatorio r in items) {
+                    collection.add(
+                      Appointment(
+                        color: Colors.blue,
+                        subject: r.nombre_recordatorio,
+                        startTime: r.fecha,
+                        endTime: r.fecha.add(const Duration(hours: 1)),
                       ),
-                      firstDayOfWeek: 7,
-                      timeRegionBuilder: (context, timeRegionDetails) =>
-                          _build(context),
-                      dataSource: _getCalendarDataSource(collection),
-
-                      //SizedBox(height: responsive.dp(.5)),
                     );
-                  },
-                ),
-              ]);
-            } else {
-              return const CircularProgressIndicator();
-            }
-          }),
+                  }
+                  return SfCalendar(
+                    view: CalendarView.month,
+                    cellBorderColor: Colors.black26,
+                    backgroundColor: Colors.white10,
+                    // ignore: prefer_const_constructors
+                    monthViewSettings: MonthViewSettings(),
+                    firstDayOfWeek: 7,
+                    timeRegionBuilder: (context, timeRegionDetails) =>
+                        _build(context),
+                    dataSource: _getCalendarDataSource(collection),
+                    onSelectionChanged: (CalendarSelectionDetails details) {
+                      DateTime date = details.date!;
+                      _listadoRecordatorios(date);
+                    },
+                  );
+                },
+              ),
+            ]);
+          } else {
+            return const CircularProgressIndicator();
+          }
+        },
+      ),
     );
   }
 }
 
 FechaRecordatorioSource _getCalendarDataSource(List<Appointment> collection) {
   List<Appointment> appointments = collection;
-
   return FechaRecordatorioSource(appointments);
 }
 

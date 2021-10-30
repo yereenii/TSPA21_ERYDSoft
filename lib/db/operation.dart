@@ -43,17 +43,6 @@ class OperationDB {
     Database database = await _openDB();
     final List<Map<String, dynamic>> usuariosMap =
         await database.query("usuarios");
-    for (var n in usuariosMap) {
-      //ver que funcione
-      print("____" +
-          n['nombre'] +
-          "_" +
-          n['id_usuario'] +
-          "_" +
-          n['correo'] +
-          "_" +
-          n['password']);
-    }
     return List.generate(
         usuariosMap.length,
         (i) => Usuario(
@@ -71,18 +60,14 @@ class OperationDB {
     for (var n in usuariosMap) {
       if (n['correo'].toString().compareTo(correo) == 0 &&
           n['password'].toString().compareTo(password) == 0) {
-        print("####### si existeUser");
         _existeUsuario = true;
       }
     }
-    print(
-        "####### existeUser >>> correo: $correo password: $password  $_existeUsuario");
     return Future<bool>.value(true);
   }
 
   bool existeUser(String correo, String password) {
     _existeUser2(correo, password);
-    print(" valor final existeUser : $_existeUsuario");
     return _existeUsuario;
   }
 
@@ -102,12 +87,33 @@ class OperationDB {
           id_recordatorio: n['id_recordatorio'],
           nombre_recordatorio: n['nombre_recordatorio'].toString(),
           fecha: DateTime.parse(n['fecha'].toString())));
-      print("____" +
-          n['id_recordatorio'].toString() +
-          "_" +
-          n['nombre_recordatorio'].toString() +
-          "_" +
-          n['fecha'].toString());
+    }
+    return List.generate(
+        recordatorioMap.length,
+        (i) => Recordatorio(
+            id_recordatorio: recordatorioMap[i]['id_recordatorio'],
+            nombre_recordatorio: recordatorioMap[i]['nombre_recordatorio'],
+            fecha: DateTime.parse((recordatorioMap[i]['fecha']))));
+  }
+
+  Future<List<Recordatorio>> getRecordatoriosFecha(DateTime date) async {
+    Database database = await _openDB();
+    final List<Map<String, dynamic>> recordatorioMap =
+        await database.query("recordatorios");
+    List<Recordatorio> auxListaRecordatorios = [];
+    listaRecordatorios = auxListaRecordatorios;
+    for (var n in recordatorioMap) {
+      DateTime dt = DateTime.parse(n['fecha']);
+      if (date.year == dt.year &&
+          date.month == dt.month &&
+          date.day == dt.day) {
+        listaRecordatorios.add(Recordatorio(
+            id_recordatorio: n['id_recordatorio'],
+            nombre_recordatorio: n['nombre_recordatorio'].toString(),
+            fecha: DateTime.parse(n['fecha'].toString())));
+        print(
+            listaRecordatorios[listaRecordatorios.length - 1].id_recordatorio);
+      }
     }
     return List.generate(
         recordatorioMap.length,
@@ -130,30 +136,6 @@ class OperationDB {
   }
 
   Future<List<Alimento>> getAlimentoss(bool danino) async {
-  Database database = await _openDB();
-    final List<Map<String, dynamic>> alimentoMap =
-        await database.query("alimentos");
-    List<Alimento> auxListaAlimentos = [];
-    listaAlimentos = auxListaAlimentos;
-    for (var n in alimentoMap) {
-      if (toBoolean(n['danino']) == danino) {
-        listaAlimentos.add(Alimento(
-            idAlimento: n['id_alimento'],
-            nombreAlimento: n['nombre_alimento'],
-            nota: n['nota'],
-            danino: toBoolean(n['danino'])));
-      }
-    }
-    return List.generate(
-        alimentoMap.length,
-        (i) => Alimento(
-            idAlimento: alimentoMap[i]['id_alimento'],
-            nombreAlimento: alimentoMap[i]['nombre_alimento'],
-            nota: alimentoMap[i]['nota'],
-            danino: toBoolean(alimentoMap[i]['danino'])));
-  }
-
-  Future<List<Alimento>> getAlimentos(bool danino) async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> alimentoMap =
         await database.query("alimentos");
@@ -166,17 +148,8 @@ class OperationDB {
             nombreAlimento: n['nombre_alimento'],
             nota: n['nota'],
             danino: toBoolean(n['danino'])));
-        print("_____ idAlimento " +
-            n['id_alimento'].toString() +
-            " _ nombreAlimento " +
-            n['nombre_alimento'].toString() +
-            " _ nota " +
-            n['nota'].toString() +
-            " _ dañino " +
-            n['danino'].toString());
       }
     }
-
     return List.generate(
         alimentoMap.length,
         (i) => Alimento(
@@ -192,20 +165,9 @@ class OperationDB {
         where: 'id_alimento=?', whereArgs: [alimento.idAlimento]);
   }
 
-  //Future<int> inserAlimento(Alimento alimento) async {
-  //     Database database = await _openDB();
-  //     return database.insert('alimentos', alimento.toMap());
-  //   }
   Future<int> editA(Alimento alimento) async {
     Database database = await _openDB();
     return database.update("alimentos", alimento.toMap(),
         where: 'id_alimento=?', whereArgs: [alimento.idAlimento]);
   }
-  //"CREATE TABLE alimentos (id_alimento INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  // nombre_alimento VARCHAR2 NOT NULL, nota VARCHAR2 NOT NULL, danino BOOLEAN);";
-  //Future<int> otro(Alimento alimento) async {
-  //Database database = await _openDB();
-  //return database.updat
-
-  //}
 }
