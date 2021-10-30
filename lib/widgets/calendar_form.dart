@@ -35,11 +35,11 @@ class _CalendarioState extends State<Calendario> {
   _summit() {
     Navigator.pushNamed(context, 'nuevorecordatorio')
         .then((value) => setState(() {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => super.widget));
-            }));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => super.widget));
+    }));
   }
 
   _actualizar() {}

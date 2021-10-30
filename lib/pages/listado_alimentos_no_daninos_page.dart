@@ -1,101 +1,112 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/alimento.dart';
-import 'package:diabits/pages/edit_food_page.dart';
-import 'package:diabits/widgets/edit_food_form.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ListaAlimentosNoDaninos extends StatefulWidget {
   //const ListaAlimentosDaninos({Key? key}) : super(key: key);
   static const routeName = 'listadoalimentosnodaninos';
 
   @override
-  _ListaAlimentosNoDaninosState createState() =>
-      _ListaAlimentosNoDaninosState();
+  _ListaAlimentosNoDaninosState createState() => _ListaAlimentosNoDaninosState();
 }
 
 class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
   final String _titlepage = 'Listado Alimentos No Dañinos';
-  late List<Alimento> _items = [];
+  final List<Map> _listaAlimentos = [];
+  List<Alimento> _items = [];
+  OperationDB mydb = OperationDB();
 
-  _generarLista() {
-    OperationDB odb = OperationDB();
-    odb.getAlimentos(false);
-    //_items = OperationDB.listaAlimentos;
+  void _editar(int indiceEditar) {
+    Navigator.pushNamed(context, 'editaAlimento',
+        arguments: _items[indiceEditar]);
+  }
+
+  void _eliminar(int index) {
+    Alimento a = _items[index];
+    mydb.deleteA(a);
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (BuildContext context) => super.widget));
+    getdata();
   }
 
   @override
   void initState() {
-    _generarLista();
+    getdata();
     super.initState();
   }
 
-  void _eliminar(int indiceEliminar) {
-    OperationDB odb = OperationDB();
-    Alimento a = _items[indiceEliminar];
-    odb.deleteA(a);
-    print('eliminar' +
-        '${a.idAlimento} ${a.nombreAlimento} ${a.nota} ${a.danino.toString()}');
+  getdata() {
+    Future.delayed(Duration(milliseconds: 500), () async {
+      OperationDB odb = OperationDB();
+      _items = await odb.getAlimentoss(false);
+      setState(() {});
+      for (int i = 0; i < _items.length; i++) {
+        _listaAlimentos.add(_items[i].toMap());
+      }
+    });
+  }
+
+  int _getIndex(int id) {
+    int index = -1;
+    print(id);
+    for (int i = 0; i < _items.length; i++) {
+      //print(id + " " + _items[i]);
+      if (_items[i].idAlimento == id) {
+        index = i;
+      }
+    }
+    return index;
   }
 
   @override
   Widget build(BuildContext context) {
-    //initState();
     return Scaffold(
       appBar: AppBar(
         title: Text(_titlepage),
       ),
-      body: ListView.builder(
-        itemCount: _items.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(
-              _items[index].nombreAlimento,
-              style: const TextStyle(color: Colors.black),
-              textAlign: TextAlign.center,
-            ),
-            subtitle: Text(
-              _items[index].nota,
-              style: const TextStyle(color: Colors.grey),
-              textAlign: TextAlign.center,
-            ),
-            tileColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            leading: Container(
-              width: 90,
-              color: Colors.black12,
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: <Widget>[
-                  Positioned(
-                    left: 0,
-                    child: IconButton(
-                      alignment: Alignment.topLeft,
-                      icon: const Icon(Icons.delete),
+      body: _buildListItem(),
+    );
+  }
+
+  Widget _buildListItem() {
+    return SingleChildScrollView(
+      child: Container(
+        child: _listaAlimentos.length == 0
+            ? Text("No hay alimentos agregados.")
+            : Column(
+          children: _listaAlimentos.map((stuone) {
+            return Card(
+              child: ListTile(
+                leading: Icon(Icons.dining),
+                title: Text(
+                  stuone["nombre_alimento"],
+                ),
+                subtitle: Text(
+                  stuone["nota"],
+                ),
+                trailing: Wrap(
+                  children: [
+                    IconButton(
                       onPressed: () {
-                        return _eliminar(index);
+                        //navigate to edit page, pass student roll no to edit
+                        int id = stuone['id_alimento'];
+                        _editar(_getIndex(id));
                       },
+                      icon: Icon(Icons.edit),
                     ),
-                  ),
-                  Positioned(
-                    left: 30,
-                    child: IconButton(
-                      alignment: Alignment.topRight,
-                      icon: const Icon(Icons.edit),
-                      onPressed: () async => {
-                        //onPressed: () async => {
-                        Navigator.pushNamed(context, 'editaAlimento',
-                            arguments: _items[index])
+                    IconButton(
+                      onPressed: () {
+                        int id = stuone['id_alimento'];
+                        _eliminar(_getIndex(id));
                       },
-                    ),
-                  ),
-                ],
+                      icon: Icon(Icons.delete, color: Colors.red),
+                    )
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          }).toList(),
+        ),
       ),
     );
   }
