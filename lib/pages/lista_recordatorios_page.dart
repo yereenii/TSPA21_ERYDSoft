@@ -11,21 +11,12 @@ class ListaRecordatoriosPage extends StatefulWidget {
 }
 
 class _ListaRecordatoriosPageState extends State<ListaRecordatoriosPage> {
+  OperationDB _mydb = OperationDB();
   final String _titlepage = 'Listado Recordatorios';
   final List<Map> _listaRecordatorios = [];
   List<Recordatorio> _items = [];
   OperationDB mydb = OperationDB();
-
-  _getdata(DateTime date) {
-    Future.delayed(Duration(milliseconds: 500), () async {
-      OperationDB odb = OperationDB();
-      _items = await odb.getRecordatoriosFecha(date);
-      for (Recordatorio r in _items) {
-        _listaRecordatorios.add(r.toMap());
-      }
-      setState(() {});
-    });
-  }
+  bool _primeraVez = true;
 
   @override
   void initState() {
@@ -34,7 +25,14 @@ class _ListaRecordatoriosPageState extends State<ListaRecordatoriosPage> {
 
   void _editar(int indiceEditar) {}
 
-  void _eliminar(int index) {}
+  void _eliminar(int index) {
+    Recordatorio r = _items[index]; //recordatorio a eliminar
+    _listaRecordatorios.removeAt(index);
+    _items.removeAt(index);
+    //llamar a la bd para borrar
+    //_mydb.
+    setState(() {});
+  }
 
   int _getIndex(int id) {
     int index = -1;
@@ -48,8 +46,13 @@ class _ListaRecordatoriosPageState extends State<ListaRecordatoriosPage> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime date = ModalRoute.of(context)!.settings.arguments as DateTime;
-    _getdata(date); //se repite por esta linea
+    if (_primeraVez) {
+      _items = ModalRoute.of(context)!.settings.arguments as List<Recordatorio>;
+      for (Recordatorio r in _items) {
+        _listaRecordatorios.add(r.toMap());
+      }
+      _primeraVez = false;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Recordatorios'),

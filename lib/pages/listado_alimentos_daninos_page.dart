@@ -16,6 +16,12 @@ class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
   List<Alimento> _items = [];
   OperationDB mydb = OperationDB();
 
+  @override
+  void initState() {
+    getdata();
+    super.initState();
+  }
+
   void _editar(int indiceEditar) {
     Navigator.pushNamed(context, 'editaAlimento',
         arguments: _items[indiceEditar]);
@@ -23,27 +29,25 @@ class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
 
   void _eliminar(int index) {
     Alimento a = _items[index];
+    _items.removeAt(index);
+    _listaAlimentos.removeAt(index);
     mydb.deleteA(a);
-    Navigator.pushReplacement(context,
+    /*Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (BuildContext context) => super.widget));
-    getdata();
+  */
+    setState(() {});
   }
 
   getdata() {
     Future.delayed(Duration(milliseconds: 500), () async {
       OperationDB odb = OperationDB();
+      _listaAlimentos.clear();
       _items = await odb.getAlimentoss(true);
       for (int i = 0; i < _items.length; i++) {
         _listaAlimentos.add(_items[i].toMap());
       }
       setState(() {});
     });
-  }
-
-  @override
-  void initState() {
-    getdata();
-    super.initState();
   }
 
   int _getIndex(int id) {

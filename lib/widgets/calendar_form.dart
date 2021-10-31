@@ -31,11 +31,22 @@ Widget _build(BuildContext context) {
 class _CalendarioState extends State<Calendario> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   OperationDB operationDB = OperationDB();
-  late List<String> _views;
+  List<Recordatorio> _items = [];
 
   _listadoRecordatorios(DateTime date) {
+    //creamos la lista para mandarla al listado de recordatorios
+    //a partir de los items obtenidos de un año, mes, dia seleccionado.
+    List<Recordatorio> _itemsAux = [];
+    for (Recordatorio r in _items) {
+      DateTime dt = r.fecha;
+      if (date.year == dt.year &&
+          date.month == dt.month &&
+          date.day == dt.day) {
+        _itemsAux.add(r);
+      }
+    }
     Navigator.pushNamed(context, 'listarecordatoriospage',
-        arguments: date);
+        arguments: _itemsAux);
   }
 
   _summit() {
@@ -48,9 +59,12 @@ class _CalendarioState extends State<Calendario> {
             }));
   }
 
+  void _regresar() {
+    Navigator.pop(context, 'alimentos');
+  }
+
   @override
   void initState() {
-    _views = <String>['Actualizar', 'Eliminar'];
     super.initState();
   }
 
@@ -66,25 +80,17 @@ class _CalendarioState extends State<Calendario> {
         ),
       ),
       appBar: AppBar(
-          title: const Text('Calendario de Recordatorios'),
-          leading: PopupMenuButton<String>(
-            icon: const Icon(Icons.calendar_today),
-            itemBuilder: (BuildContext context) => _views.map((String choice) {
-              return PopupMenuItem<String>(
-                value: choice,
-                child: Text(choice),
-              );
-            }).toList(),
-            onSelected: (String value) {
-              setState(() {
-                if (value == 'Actulizar') {
-                  //_actualizar();
-                } else {
-                  //_eliminar();
-                }
-              });
-            },
-          )),
+        title: const Text('Calendario de Recordatorios'),
+        leading: Row(
+          children: <Widget>[
+            /*const IconButton(
+              onPressed: _regresar, //
+              icon: Icon(Icons.arrow_back),
+            ),*/
+            const Icon(Icons.calendar_today),
+          ],
+        ),
+      ),
       body: FutureBuilder(
         future: operationDB.getRecordatorios(),
         builder: (context, snapshot) {
@@ -96,6 +102,7 @@ class _CalendarioState extends State<Calendario> {
                 itemExtent: 550,
                 itemBuilder: (context, position) {
                   List items = snapshot.data as List;
+                  _items.clear(); //se limpia por si se actualiza.
                   for (Recordatorio r in items) {
                     collection.add(
                       Appointment(
@@ -105,6 +112,7 @@ class _CalendarioState extends State<Calendario> {
                         endTime: r.fecha.add(const Duration(hours: 1)),
                       ),
                     );
+                    _items.add(r);
                   }
                   return SfCalendar(
                     view: CalendarView.month,
@@ -119,6 +127,7 @@ class _CalendarioState extends State<Calendario> {
                     onSelectionChanged: (CalendarSelectionDetails details) {
                       DateTime date = details.date!;
                       _listadoRecordatorios(date);
+                      //setState(() {});
                     },
                   );
                 },
