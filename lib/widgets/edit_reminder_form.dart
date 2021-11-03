@@ -14,7 +14,7 @@ class EditReminderForm extends StatefulWidget {
 
   @override
   //_EditReminderFormState createState() => _EditReminderFormState();
-  _EditReminderForm createState() => _EditReminderForm(recordar : recordar);
+  _EditReminderForm createState() => _EditReminderForm(recordar: recordar);
 }
 
 class _EditReminderForm extends State<EditReminderForm> {
@@ -24,6 +24,7 @@ class _EditReminderForm extends State<EditReminderForm> {
   String date = "";
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
+  final TextEditingController _nombreController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
   String _hour = '', _minute = '', _time = '';
@@ -34,8 +35,6 @@ class _EditReminderForm extends State<EditReminderForm> {
   OperationDB _operationDB = OperationDB();
 
   _EditReminderForm({this.recordar});
-
-
 
   // ignore: duplicate_ignore
   _summit() {
@@ -51,7 +50,6 @@ class _EditReminderForm extends State<EditReminderForm> {
       _edicionRecordatorio();
       _regresarCalendar();
     }
-
   }
 
   _edicionRecordatorio() {
@@ -71,10 +69,14 @@ class _EditReminderForm extends State<EditReminderForm> {
   @override
   void initState() {
     //dMY().format(DateTime.now())
-    _dateController.text = intl.DateFormat.yMd("es").format(DateTime.now());
+    _nombreController.text = recordar!.nombre_recordatorio;
+    _dateController.text = intl.DateFormat.yMd("es").format(recordar!.fecha);
     _timeController.text = formatDate(
-        DateTime(2021, 09, 09, selectedTime.hour, selectedTime.minute),
+        DateTime(2021, 09, 09, recordar!.fecha.hour, recordar!.fecha.minute),
         [HH, ':', nn]).toString();
+    selectedDate = recordar!.fecha;
+    selectedTime = TimeOfDay.fromDateTime(recordar!.fecha);
+    _fechaCompleta = recordar!.fecha;
     _hora = selectedTime.toString();
     super.initState();
   }
@@ -106,9 +108,9 @@ class _EditReminderForm extends State<EditReminderForm> {
       context: context,
       initialTime: selectedTime,
       builder: (
-          BuildContext context,
-          Widget? child,
-          ) {
+        BuildContext context,
+        Widget? child,
+      ) {
         return Localizations.override(
           context: context,
           locale: const Locale('en', 'US'),
@@ -153,12 +155,14 @@ class _EditReminderForm extends State<EditReminderForm> {
           child: Column(
             children: <Widget>[
               InputText(
+                controller: _nombreController,
                 keyboardType: TextInputType.emailAddress,
                 fontSize: responsive.dp(responsive.isTablet ? 1.9 : 1.6),
-                onChanged: (text) {
+                /*onChanged: (text) {
                   _nombre = text;
-                },
+                },*/
                 validator: (text) {
+                  _nombre = _nombreController.text;
                   if (text!.isEmpty) {
                     return "Nombre inválido";
                   }
