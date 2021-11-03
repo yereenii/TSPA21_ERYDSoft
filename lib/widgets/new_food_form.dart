@@ -40,7 +40,9 @@ class _NewFoodForm extends State<NewFoodForm> {
   }
 
   _regresarAlimentos() {
-    FocusScope.of(context).unfocus();
+    setState(() {
+      Navigator.pop(context, 'alimento');
+    });
   }
 
   @override
