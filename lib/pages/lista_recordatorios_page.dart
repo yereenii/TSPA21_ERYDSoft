@@ -33,6 +33,7 @@ class _ListaRecordatoriosPageState extends State<ListaRecordatoriosPage> {
     _listaRecordatorios.removeAt(index);
     _items.removeAt(index);
     //llamar a la bd para borrar
+    mydb.deleteR(r);
     //_mydb.
     setState(() {});
   }

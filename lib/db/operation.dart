@@ -176,4 +176,9 @@ class OperationDB {
     return database.update("alimentos", alimento.toMap(),
         where: 'id_alimento=?', whereArgs: [alimento.idAlimento]);
   }
+  Future<int> deleteR(Recordatorio recordatorio) async {
+    Database database = await _openDB();
+    return database.delete("recordatorios",
+        where: 'id_recordatorio=?', whereArgs: [recordatorio.id_recordatorio]);
+  }
 }
