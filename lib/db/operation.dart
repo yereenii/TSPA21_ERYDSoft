@@ -143,8 +143,8 @@ class OperationDB {
 
   Future<List<Alimento>> getAlimentoss(bool danino) async {
     Database database = await _openDB();
-    final List<Map<String, dynamic>> alimentoMap =
-        await database.query("alimentos");
+    final List<Map<String, dynamic>> alimentoMap = await database
+        .query("alimentos", where: 'danino=?', whereArgs: [danino]);
     List<Alimento> auxListaAlimentos = [];
     listaAlimentos = auxListaAlimentos;
     for (var n in alimentoMap) {
@@ -155,6 +155,8 @@ class OperationDB {
             nota: n['nota'],
             danino: toBoolean(n['danino'])));
       }
+      //return database.update("alimentos", alimento.toMap(),
+      //where: 'id_alimento=?', whereArgs: [alimento.idAlimento]);
     }
     return List.generate(
         alimentoMap.length,
@@ -176,6 +178,7 @@ class OperationDB {
     return database.update("alimentos", alimento.toMap(),
         where: 'id_alimento=?', whereArgs: [alimento.idAlimento]);
   }
+
   Future<int> deleteR(Recordatorio recordatorio) async {
     Database database = await _openDB();
     return database.delete("recordatorios",
