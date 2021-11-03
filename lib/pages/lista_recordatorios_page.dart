@@ -23,7 +23,10 @@ class _ListaRecordatoriosPageState extends State<ListaRecordatoriosPage> {
     super.initState();
   }
 
-  void _editar(int indiceEditar) {}
+  void _editar(int indiceEditar) {
+    Navigator.pushNamed(context, 'editarecordatorio',
+        arguments: _items[indiceEditar]);
+  }
 
   void _eliminar(int index) {
     Recordatorio r = _items[index]; //recordatorio a eliminar

@@ -1,3 +1,4 @@
+import 'package:diabits/models/recordatorio.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/circle.dart';
 import 'package:diabits/widgets/edit_reminder_form.dart';
@@ -7,7 +8,9 @@ import 'package:flutter/material.dart';
 class EditReminderPage extends StatefulWidget {
   static const routeName = 'editarecordatorio';
   //const NewReminderPage({Key? key}) : super(key: key);
-
+  const EditReminderPage({
+    Key? key,
+  }) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -18,6 +21,8 @@ class _HomePageState extends State<EditReminderPage> {
     final Responsive responsive = Responsive.of(context);
     final double blueSize = responsive.wp(80); //80% del ancho del dispo
     final double tealAccentSize = responsive.wp(60);
+    Recordatorio? recordar =
+      ModalRoute.of(context)!.settings.arguments as Recordatorio?;
 
     return Scaffold(
       body: GestureDetector(
@@ -70,11 +75,14 @@ class _HomePageState extends State<EditReminderPage> {
                       SizedBox(
                         height: responsive.dp(10),
                       ),
+                     // EditReminderForm(
+                       // recordar: recordar,
+                     // ),
                       /***/
                     ],
                   ),
                 ),
-                const EditReminderForm(),
+                 EditReminderForm(recordar : recordar,),
               ],
             ),
           ),

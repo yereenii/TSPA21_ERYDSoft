@@ -9,14 +9,18 @@ import 'package:intl/intl.dart' as intl;
 import 'package:date_format/date_format.dart';
 
 class EditReminderForm extends StatefulWidget {
-  const EditReminderForm({Key? key}) : super(key: key);
+  final Recordatorio? recordar;
+  const EditReminderForm({Key? key, this.recordar}) : super(key: key);
 
   @override
-  _EditReminderFormState createState() => _EditReminderFormState();
+  //_EditReminderFormState createState() => _EditReminderFormState();
+  _EditReminderForm createState() => _EditReminderForm(recordar : recordar);
 }
 
-class _EditReminderFormState extends State<EditReminderForm> {
+class _EditReminderForm extends State<EditReminderForm> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final Recordatorio? recordar;
+  int _idRecordatorio = 0;
   String date = "";
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
@@ -28,6 +32,10 @@ class _EditReminderFormState extends State<EditReminderForm> {
   String _hora = '';
   DateTime _fechaCompleta = DateTime.now();
   OperationDB _operationDB = OperationDB();
+
+  _EditReminderForm({this.recordar});
+
+
 
   // ignore: duplicate_ignore
   _summit() {
@@ -41,13 +49,14 @@ class _EditReminderFormState extends State<EditReminderForm> {
       print('fechacompleta = ' + _fechaCompleta.toString());
       //consumir servicio rest para iniciar sesion
       _edicionRecordatorio();
+      _regresarCalendar();
     }
-    _regresarCalendar();
+
   }
 
   _edicionRecordatorio() {
-    _operationDB.insertRecordatorio(Recordatorio(
-      id_recordatorio: null,
+    _operationDB.editaRecordatorioBD(Recordatorio(
+      id_recordatorio: _idRecordatorio,
       nombre_recordatorio: _nombre,
       fecha: _fechaCompleta,
     ));
@@ -55,7 +64,8 @@ class _EditReminderFormState extends State<EditReminderForm> {
   }
 
   _regresarCalendar() {
-    Navigator.pushNamed(context, 'editarrecordatorio');
+    //Navigator.pushNamed(context, 'editarrecordatorio');
+    Navigator.pop(context, 'recordar');
   }
 
   @override

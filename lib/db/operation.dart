@@ -76,6 +76,12 @@ class OperationDB {
     return database.insert('recordatorios', recordatorio.toMap());
   }
 
+  Future<int> editaRecordatorioBD(Recordatorio recordatorio) async {
+    Database database = await _openDB();
+    return database.update("recordatorios", recordatorio.toMap(),
+        where: 'id_recordatorio=?', whereArgs: [recordatorio.id_recordatorio]);
+  }
+
   Future<List<Recordatorio>> getRecordatorios() async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> recordatorioMap =
