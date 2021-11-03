@@ -56,7 +56,7 @@ class _EditReminderForm extends State<EditReminderForm> {
 
   _edicionRecordatorio() {
     _operationDB.editaRecordatorioBD(Recordatorio(
-      id_recordatorio: _idRecordatorio,
+      id_recordatorio: recordar!.id_recordatorio!,
       nombre_recordatorio: _nombre,
       fecha: _fechaCompleta,
     ));
