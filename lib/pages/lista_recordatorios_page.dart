@@ -25,7 +25,10 @@ class _ListaRecordatoriosPageState extends State<ListaRecordatoriosPage> {
 
   void _editar(int indiceEditar) {
     Navigator.pushNamed(context, 'editarecordatorio',
-        arguments: _items[indiceEditar]);
+            arguments: _items[indiceEditar])
+        .then((value) => setState(() {
+              Navigator.pop(context);
+            }));
   }
 
   void _eliminar(int index) {
@@ -35,7 +38,10 @@ class _ListaRecordatoriosPageState extends State<ListaRecordatoriosPage> {
     //llamar a la bd para borrar
     mydb.deleteR(r);
     //_mydb.
-    setState(() {});
+    setState(() {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => super.widget));
+    });
   }
 
   int _getIndex(int id) {

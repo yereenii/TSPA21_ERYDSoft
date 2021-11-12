@@ -45,8 +45,13 @@ class _CalendarioState extends State<Calendario> {
         _itemsAux.add(r);
       }
     }
-    Navigator.pushNamed(context, 'listarecordatoriospage',
-        arguments: _itemsAux);
+    Navigator.pushNamed(context, 'listarecordatoriospage', arguments: _itemsAux)
+        .then((value) => setState(() {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => super.widget));
+            }));
   }
 
   _summit() {
