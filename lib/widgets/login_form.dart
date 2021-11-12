@@ -168,7 +168,7 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
               SizedBox(height: responsive.dp(2)),
-              MaterialButton(
+              /*MaterialButton(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 onPressed: () {},
                 child: Text(
@@ -178,7 +178,7 @@ class _LoginFormState extends State<LoginForm> {
                     fontSize: responsive.dp(responsive.isTablet ? 2 : 1.8),
                   ),
                 ),
-              ),
+              ),*/
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -190,7 +190,9 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                   ),
                   MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'nuevousuario');
+                    },
                     child: Text(
                       'Registrate ahora',
                       style: TextStyle(

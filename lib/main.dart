@@ -10,6 +10,7 @@ import 'package:diabits/pages/new_food_page.dart';
 import 'package:diabits/pages/edit_food_page.dart';
 import 'package:diabits/pages/calendar_page.dart';
 import 'package:diabits/pages/did_you_know_page.dart';
+import 'package:diabits/pages/new_user_login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
               EditFoodPage.routeName: (_) => EditFoodPage(),
               CalendarioPage.routeName: (_) => CalendarioPage(),
               SabiasQue.routeName: (_) => SabiasQue(),
+              NewUserLoginPage.routeName: (_) => NewUserLoginPage(),
             },
           ),
         ),
