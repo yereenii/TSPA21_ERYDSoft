@@ -1,4 +1,8 @@
 import 'package:diabits/pages/alimentos_page.dart';
+import 'package:diabits/pages/articulos/articulo1_page.dart';
+import 'package:diabits/pages/articulos/articulo2_page.dart';
+import 'package:diabits/pages/articulos/articulo3_page.dart';
+import 'package:diabits/pages/articulos/articulo4_page.dart';
 import 'package:diabits/pages/home_page.dart';
 import 'package:diabits/pages/lista_recordatorios_page.dart';
 import 'package:diabits/pages/listado_alimentos_daninos_page.dart';
@@ -11,6 +15,7 @@ import 'package:diabits/pages/edit_food_page.dart';
 import 'package:diabits/pages/calendar_page.dart';
 import 'package:diabits/pages/did_you_know_page.dart';
 import 'package:diabits/pages/new_user_login_page.dart';
+import 'package:diabits/pages/sabiasque_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
@@ -63,13 +68,17 @@ class MyApp extends StatelessWidget {
               HomeStartPage.routeName: (_) => HomeStartPage(),
               ListadoAlimentos.routeName: (_) => ListadoAlimentos(),
               ListaAlimentosDaninos.routeName: (_) => ListaAlimentosDaninos(),
-              ListaAlimentosNoDaninos.routeName: (_) =>
-                  ListaAlimentosNoDaninos(),
+              ListaAlimentosNoDaninos.routeName: (_) => ListaAlimentosNoDaninos(),
               NewFoodPage.routeName: (_) => NewFoodPage(),
               EditFoodPage.routeName: (_) => EditFoodPage(),
               CalendarioPage.routeName: (_) => CalendarioPage(),
               SabiasQue.routeName: (_) => SabiasQue(),
               NewUserLoginPage.routeName: (_) => NewUserLoginPage(),
+              SabiasQuePage.routeName: (_) => SabiasQuePage(),
+              Articulo1Page.routeName: (_) => Articulo1Page(),
+              Articulo2Page.routeName: (_) => Articulo2Page(),
+              Articulo3Page.routeName: (_) => Articulo3Page(),
+              Articulo4Page.routeName: (_) => Articulo4Page(),
             },
           ),
         ),
