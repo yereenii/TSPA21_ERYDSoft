@@ -1,5 +1,7 @@
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/Input_text.dart';
+import 'package:diabits/db/operation.dart';
+import 'package:diabits/models/usuario.dart';
 import 'package:flutter/material.dart';
 
 class NewUserLoginForm extends StatefulWidget {
@@ -11,6 +13,7 @@ class NewUserLoginForm extends StatefulWidget {
 
 class _NewUserLoginFormState extends State<NewUserLoginForm> {
   GlobalKey<FormState> _formKey = GlobalKey();
+  OperationDB _operationDB = OperationDB();
   String _nombre = '';
   String _correo = '';
   String _password = '';
@@ -25,9 +28,17 @@ class _NewUserLoginFormState extends State<NewUserLoginForm> {
 
   _agregarUsuario() {
     final isoOK = _formKey.currentState!.validate();
-
+    print("nombre " +
+        _nombre +
+        " Corrreo " +
+        _correo +
+        " contraseña " +
+        _password);
     if (isoOK) {
       //"Agregar"
+      _operationDB.insertUser(
+          Usuario(nombre: _nombre, correo: _correo, password: _password));
+      _cancelar();
     }
   }
 

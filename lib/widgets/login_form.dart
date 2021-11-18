@@ -30,13 +30,13 @@ class _LoginFormState extends State<LoginForm> {
         Usuario(nombre: 'user', correo: 'user@erydsoft', password: '1234'));
   }
 
-  void _showAlertDialog() {
+  void _showAlertDialog(String titulo, String contenido) {
     showDialog(
         context: context,
         builder: (buildcontext) {
           return AlertDialog(
-            title: Text("Titulo del alert"),
-            content: Text("contenido del alert"),
+            title: Text(titulo),
+            content: Text(contenido),
             actions: <Widget>[
               MaterialButton(
                 child: Text(
@@ -52,6 +52,12 @@ class _LoginFormState extends State<LoginForm> {
         });
   }
 
+  @override
+  void initState() {
+    _operationDB.getUsers();
+    super.initState();
+  }
+
   _summit() {
     final isoOK = _formKey.currentState!.validate();
 
@@ -60,30 +66,10 @@ class _LoginFormState extends State<LoginForm> {
       //bool existeRegistro = _existeUsuario('user@erydsoft', '1234');
       print("###### $_email    $_password");
       if (_existeUsuario(_email, _password)) {
-      } else {
-        _creacionPrimerUsuario();
-      }
-      if (_email == 'user@erydsoft' && _password == '1234') {
         Navigator.pushNamed(context, 'paginainicio');
       } else {
-        print("###########datos invalidos ");
+        _showAlertDialog("Inicio de Sesión", "El usuario no existe");
       }
-      /*bool existeRegistro = _existeUsuario('user@erydsoft', '1234');
-      print("####### Existe registro user@erydsoft  $existeRegistro");
-      if (!existeRegistro) {
-        //si no existe el usuairo lo crea
-        _creacionPrimerUsuario();
-        print("##### lo Crea");
-      } else {
-        print("##### No lo Crea");
-      }
-      if (_existeUsuario(_email, _password)) {
-        print("##### Entra");
-        //si existe el usuario se puede logear.
-        // Navigator.pushNamed(context, 'recordatorio');
-      } else {
-        print("##### No Entra");
-      }*/
     }
     return isoOK;
   }
@@ -191,7 +177,8 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                   MaterialButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'nuevousuario');
+                      Navigator.pushNamed(context, 'nuevousuario')
+                          .then((value) => _existeUsuario(_email, _password));
                     },
                     child: Text(
                       'Registrate ahora',
