@@ -15,8 +15,8 @@ class _SabiasQueState extends State<SabiasQuePage> {
   final String _titlepage = '¿Sabías Qué?';
   final String _textoArticulo1 = 'Articulo 1'; //aqui va el nombre del articulo
   final String _textoArticulo2 = 'Articulo 2'; //aqui va el nombre del articulo
-  final String _textoArticulo3 = 'Articulo 3'; //aqui va el nombre del articulo
-  final String _textoArticulo4 = 'Articulo 4'; //aqui va el nombre del articulo
+  final String _textoArticulo3 = '¿Cómo prevenir la diabetes?'; //aqui va el nombre del articulo
+  final String _textoArticulo4 = 'El azúcar en la sangre hace la diferencia.'; //aqui va el nombre del articulo
 
 
 
