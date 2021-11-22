@@ -14,11 +14,12 @@ class SabiasQuePage extends StatefulWidget {
 class _SabiasQueState extends State<SabiasQuePage> {
   final String _titlepage = '¿Sabías Qué?';
   final String _textoArticulo1 = 'Articulo 1'; //aqui va el nombre del articulo
-  final String _textoArticulo2 = 'Articulo 2'; //aqui va el nombre del articulo
-  final String _textoArticulo3 = '¿Cómo prevenir la diabetes?'; //aqui va el nombre del articulo
-  final String _textoArticulo4 = 'El azúcar en la sangre hace la diferencia.'; //aqui va el nombre del articulo
-
-
+  final String _textoArticulo2 =
+      'Complicaciones de la diabetes mellitus'; //aqui va el nombre del articulo
+  final String _textoArticulo3 =
+      '¿Cómo prevenir la diabetes?'; //aqui va el nombre del articulo
+  final String _textoArticulo4 =
+      'El azúcar en la sangre hace la diferencia.'; //aqui va el nombre del articulo
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +84,6 @@ class _SabiasQueState extends State<SabiasQuePage> {
                           ),
                         ),
                       ),
-
                       SizedBox(height: responsive.dp(1)),
                       SizedBox(
                         width: responsive.width * 0.80,
@@ -124,10 +124,6 @@ class _SabiasQueState extends State<SabiasQuePage> {
                           ),
                         ),
                       ),
-
-
-
-
                     ],
                   ),
                 ),
