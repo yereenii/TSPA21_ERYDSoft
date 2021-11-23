@@ -54,7 +54,6 @@ class _Articulo1State extends State<Articulo1Page> {
       child: SingleChildScrollView(
         child: Container(
           width: responsive.width,
-          height: responsive.height,
           color: Colors.white,
           child: Stack(
             alignment: Alignment.center,
@@ -103,10 +102,6 @@ class _Articulo1State extends State<Articulo1Page> {
                     ),
                   ],
                 ),
-              ),
-              Positioned(
-                top: responsive.wp(-25),
-                child: const Circles(),
               ),
             ],
           ),

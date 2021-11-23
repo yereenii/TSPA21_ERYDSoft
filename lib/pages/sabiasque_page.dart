@@ -13,7 +13,8 @@ class SabiasQuePage extends StatefulWidget {
 
 class _SabiasQueState extends State<SabiasQuePage> {
   final String _titlepage = '¿Sabías Qué?';
-  final String _textoArticulo1 = 'Articulo 1'; //aqui va el nombre del articulo
+  final String _textoArticulo1 = 
+      'Cuidados sobre piel diabetica'; //aqui va el nombre del articulo
   final String _textoArticulo2 =
       'Complicaciones de la diabetes mellitus'; //aqui va el nombre del articulo
   final String _textoArticulo3 =
