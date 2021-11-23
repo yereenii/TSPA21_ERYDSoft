@@ -65,6 +65,28 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
     return index;
   }
 
+  void _showAlertDialog(String titulo, String contenido) {
+    showDialog(
+        context: context,
+        builder: (buildcontext) {
+          return AlertDialog(
+            title: Text(titulo),
+            content: Text(contenido),
+            actions: <Widget>[
+              MaterialButton(
+                child: Text(
+                  "CERRAR",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,12 +106,17 @@ class _ListaAlimentosNoDaninosState extends State<ListaAlimentosNoDaninos> {
                 children: _listaAlimentos.map((stuone) {
                   return Card(
                     child: ListTile(
-                      leading: Icon(Icons.dining),
+                      leading: IconButton(
+                        onPressed: () {
+                          int id = stuone['id_alimento'];
+                          String nombre = stuone['nombre_alimento'];
+                          String nota = stuone['nota'];
+                          _showAlertDialog(nombre, nota);
+                        },
+                        icon: Icon(Icons.dining),
+                      ),
                       title: Text(
                         stuone["nombre_alimento"],
-                      ),
-                      subtitle: Text(
-                        stuone["nota"],
                       ),
                       trailing: Wrap(
                         children: [
