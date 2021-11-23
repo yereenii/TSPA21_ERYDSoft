@@ -24,7 +24,13 @@ class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
 
   void _editar(int indiceEditar) {
     Navigator.pushNamed(context, 'editaAlimento',
-        arguments: _items[indiceEditar]);
+            arguments: _items[indiceEditar])
+        .then((value) => setState(() {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => super.widget));
+            }));
   }
 
   void _eliminar(int index) {
@@ -104,9 +110,9 @@ class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
                       leading: IconButton(
                         onPressed: () {
                           int id = stuone['id_alimento'];
-                          String nombre=stuone['nombre_alimento'];
-                          String nota=stuone['nota'];
-                          _showAlertDialog(nombre,nota);
+                          String nombre = stuone['nombre_alimento'];
+                          String nota = stuone['nota'];
+                          _showAlertDialog(nombre, nota);
                         },
                         icon: Icon(Icons.dining),
                       ),
