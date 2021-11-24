@@ -119,9 +119,6 @@ class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
                       title: Text(
                         stuone["nombre_alimento"],
                       ),
-                      subtitle: Text(
-                        stuone["nota"],
-                      ),
                       trailing: Wrap(
                         children: [
                           IconButton(
