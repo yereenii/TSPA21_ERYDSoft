@@ -17,9 +17,15 @@ class _LoginFormState extends State<LoginForm> {
   String _email = '';
   String _password = '';
   OperationDB _operationDB = OperationDB();
+  late List<Usuario> _listUsers;
 
   bool _existeUsuario(String e, String p) {
-    bool existe = _operationDB.existeUser(e, p);
+    bool existe = false;
+    for (var n in _listUsers) {
+      if (n.correo == e && n.password == p) {
+        existe = true;
+      }
+    }
     print(
         "####### metodo existeUsuario return>>> email: $e password: $p $existe");
     return existe;
@@ -39,7 +45,7 @@ class _LoginFormState extends State<LoginForm> {
             content: Text(contenido),
             actions: <Widget>[
               MaterialButton(
-                child: Text(
+                child: const Text(
                   "CERRAR",
                   style: TextStyle(color: Colors.white),
                 ),
@@ -54,8 +60,14 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   void initState() {
+    _getListUser();
     _operationDB.getUsers();
     super.initState();
+  }
+
+  Future<List<Usuario>> _getListUser() async {
+    _listUsers = await _operationDB.getUsers();
+    return _listUsers;
   }
 
   _summit() {
@@ -104,7 +116,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
               SizedBox(height: responsive.dp(2)),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
                       color: Colors.black12,
@@ -178,7 +190,7 @@ class _LoginFormState extends State<LoginForm> {
                   MaterialButton(
                     onPressed: () {
                       Navigator.pushNamed(context, 'nuevousuario')
-                          .then((value) => _existeUsuario(_email, _password));
+                          .then((value) => _getListUser());
                     },
                     child: Text(
                       'Registrate ahora',
