@@ -1,5 +1,3 @@
-import 'package:diabits/db/operation.dart';
-import 'package:diabits/models/alimento.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/circles.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +7,7 @@ class Articulo3Page extends StatefulWidget {
   //const ListaAlimentosDaninos({Key? key}) : super(key: key);
   static const routeName = 'articulo3';
 
+  const Articulo3Page({Key? key}) : super(key: key);
   @override
   _Articulo3State createState() => _Articulo3State();
 }
@@ -28,7 +27,7 @@ class _Articulo3State extends State<Articulo3Page> {
   final String _ver1 = 'Si quieres conocer más visita esta página.';
   final String _url2 =
       'https://www.niddk.nih.gov/health-information/informacion-de-la-salud/diabetes/informacion-general/factores-riesgo-tipo-2';
-  final String _ver2 = 'Más informción.';
+  final String _ver2 = 'Más información.';
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +48,6 @@ class _Articulo3State extends State<Articulo3Page> {
       child: SingleChildScrollView(
         child: Container(
           width: responsive.width,
-          //height: responsive.height,
           color: Colors.white,
           child: Stack(
             alignment: Alignment.center,
@@ -61,7 +59,7 @@ class _Articulo3State extends State<Articulo3Page> {
                       padding: const EdgeInsets.all(30),
                       child: Text(
                         _title,
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                       ),
                     ),
                     Container(
@@ -81,7 +79,7 @@ class _Articulo3State extends State<Articulo3Page> {
                         },
                         child: Text(
                           _ver1,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.blue,
                           ),
                         ),
@@ -95,7 +93,7 @@ class _Articulo3State extends State<Articulo3Page> {
                         },
                         child: Text(
                           _ver2,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.blue,
                           ),
                         ),
@@ -104,10 +102,9 @@ class _Articulo3State extends State<Articulo3Page> {
                   ],
                 ),
               ),
-             // Positioned(
-               // top: responsive.wp(-25),
-                //child: const Circles(),
-              //),
+              const Positioned(
+                child: Circles(),
+              ),
             ],
           ),
         ),
