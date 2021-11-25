@@ -2,6 +2,7 @@ import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/recordatorio.dart';
 import 'package:diabits/pages/alimentos_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
@@ -32,6 +33,7 @@ class _CalendarioState extends State<Calendario> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   OperationDB operationDB = OperationDB();
   List<Recordatorio> _items = [];
+  int id_user = -1;
 
   _listadoRecordatorios(DateTime date) {
     //creamos la lista para mandarla al listado de recordatorios
@@ -70,7 +72,15 @@ class _CalendarioState extends State<Calendario> {
 
   @override
   void initState() {
+    print('ID USUARIO ' + id_user.toString());
+    getIdUsuario();
     super.initState();
+  }
+
+  getIdUsuario() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print('id_usuario ' + await pref.getInt('id_usuario').toString());
+    id_user = await pref.getInt('id_usuario')!;
   }
 
   @override
@@ -97,7 +107,7 @@ class _CalendarioState extends State<Calendario> {
         ),
       ),
       body: FutureBuilder(
-        future: operationDB.getRecordatorios(),
+        future: operationDB.getRecordatorios(id_user),
         builder: (context, snapshot) {
           List<Appointment> collection = <Appointment>[];
           if (snapshot.hasData) {

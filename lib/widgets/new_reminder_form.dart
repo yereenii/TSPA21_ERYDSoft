@@ -99,6 +99,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
         DateTime(2021, 09, 09, selectedTime.hour, selectedTime.minute),
         [HH, ':', nn]).toString();
     _hora = selectedTime.toString();
+    getIdUsuario();
     super.initState();
     //init notificacciones
     //this._notifications.initNotifications();

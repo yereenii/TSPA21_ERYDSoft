@@ -62,6 +62,7 @@ class _EditFoodForm extends State<EditFoodForm> {
     _nombreController.text = alimento!.nombreAlimento.toString();
     _descripcionController.text = alimento!.nota.toString();
     _harmful = alimento!.danino;
+    getIdUsuario();
     super.initState();
   }
 

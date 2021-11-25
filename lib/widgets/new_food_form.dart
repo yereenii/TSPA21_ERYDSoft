@@ -55,6 +55,7 @@ class _NewFoodForm extends State<NewFoodForm> {
   @override
   void initState() {
     _harmful = false;
+    getIdUsuario();
     super.initState();
   }
 

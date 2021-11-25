@@ -81,6 +81,7 @@ class _EditReminderForm extends State<EditReminderForm> {
     selectedTime = TimeOfDay.fromDateTime(recordar!.fecha);
     _fechaCompleta = recordar!.fecha;
     _hora = selectedTime.toString();
+    getIdUsuario();
     super.initState();
   }
 
