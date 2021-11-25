@@ -42,7 +42,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
 
   void _pushNotification() {
     OperationDB odb = OperationDB();
-    odb.getRecordatorios();
+    odb.getRecordatorios(id_user);
     List<Recordatorio> listaRecordatorios = OperationDB.listaRecordatorios;
     NotificationApi.init(initSheduled: true);
     int recordatorioID = listaRecordatorios.length + 1;
@@ -76,7 +76,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
       fecha: _fechaCompleta,
       idUsuario: id_user,
     ));
-    _operationDB.getRecordatorios();
+    _operationDB.getRecordatorios(id_user);
     _pushNotification();
   }
 

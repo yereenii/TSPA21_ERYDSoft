@@ -61,7 +61,7 @@ class _EditReminderForm extends State<EditReminderForm> {
       fecha: _fechaCompleta,
       idUsuario: id_user,
     ));
-    _operationDB.getRecordatorios();
+    _operationDB.getRecordatorios(id_user);
   }
 
   _regresarCalendar() {
