@@ -21,6 +21,17 @@ class _HomePageState extends State<HomeStartPage> {
     final double tealAccentSize = responsive.wp(60);
 
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(
+          Icons.logout_outlined,
+        ),
+        onPressed: () => HomeStartForm().cerrarSecion(context),
+        backgroundColor: Colors.red,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
       body: GestureDetector(
         onTap: () {
           //si da click fuera

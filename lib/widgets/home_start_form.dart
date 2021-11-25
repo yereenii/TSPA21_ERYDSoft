@@ -5,9 +5,16 @@ import 'package:diabits/utils/notification_api.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/inkWellTabs.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeStartForm extends StatefulWidget {
   const HomeStartForm({Key? key}) : super(key: key);
+
+  cerrarSecion(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.clear();
+    Navigator.pop(context);
+  }
 
   @override
   _HomeStartForm createState() => _HomeStartForm();

@@ -4,6 +4,7 @@ import 'package:diabits/utils/responsive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Input_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginForm extends StatefulWidget {
   //const LoginForm({Key? key}) : super(key: key);
@@ -16,19 +17,34 @@ class _LoginFormState extends State<LoginForm> {
   GlobalKey<FormState> _formKey = GlobalKey();
   String _email = '';
   String _password = '';
+  int id = 0;
+  String nombre = '';
   OperationDB _operationDB = OperationDB();
   late List<Usuario> _listUsers;
+  late Usuario user;
 
   bool _existeUsuario(String e, String p) {
     bool existe = false;
     for (var n in _listUsers) {
       if (n.correo == e && n.password == p) {
+        print("ID USUARIO LOGIN " + n.id_usuario.toString());
+        guardarDatos(n.id_usuario, n.nombre, n.correo, n.password);
+        user = n;
         existe = true;
       }
     }
     print(
         "####### metodo existeUsuario return>>> email: $e password: $p $existe");
     return existe;
+  }
+
+  Future<void> guardarDatos(id, nombre, email, password) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    await pref.setInt('id_usuario', id);
+    await pref.setString('nombre', nombre);
+    await pref.setString('email', email);
+    await pref.setString('password', password);
   }
 
   _creacionPrimerUsuario() {
@@ -63,6 +79,21 @@ class _LoginFormState extends State<LoginForm> {
     _getListUser();
     _operationDB.getUsers();
     super.initState();
+    showData();
+  }
+
+  Future<void> showData() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    id = await pref.getInt('id_usuario')!;
+    _email = await pref.getString('email')!;
+    _password = await pref.getString('password')!;
+    nombre = await pref.getString('nombre')!;
+
+    print('ID ' + id.toString() + ' Nombre ' + nombre);
+
+    if (id != null) {
+      Navigator.pushNamed(context, 'paginainicio');
+    }
   }
 
   Future<List<Usuario>> _getListUser() async {

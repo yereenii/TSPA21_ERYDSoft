@@ -4,6 +4,7 @@ import 'package:diabits/models/usuario.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/inkWellTabs.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Input_text.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:date_format/date_format.dart';
@@ -33,6 +34,7 @@ class _EditReminderForm extends State<EditReminderForm> {
   String _hora = '';
   DateTime _fechaCompleta = DateTime.now();
   OperationDB _operationDB = OperationDB();
+  int id_user = -1;
 
   _EditReminderForm({this.recordar});
 
@@ -57,6 +59,7 @@ class _EditReminderForm extends State<EditReminderForm> {
       id_recordatorio: recordar!.id_recordatorio!,
       nombre_recordatorio: _nombre,
       fecha: _fechaCompleta,
+      idUsuario: id_user,
     ));
     _operationDB.getRecordatorios();
   }
@@ -79,6 +82,11 @@ class _EditReminderForm extends State<EditReminderForm> {
     _fechaCompleta = recordar!.fecha;
     _hora = selectedTime.toString();
     super.initState();
+  }
+
+  getIdUsuario() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    id_user = await pref.getInt('id_usuario')!;
   }
 
   //call del datePickerSelect

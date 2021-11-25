@@ -4,6 +4,7 @@ import 'package:diabits/models/alimento.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Input_text.dart';
 
 class EditFoodForm extends StatefulWidget {
@@ -22,6 +23,7 @@ class _EditFoodForm extends State<EditFoodForm> {
   String _descripcion = "";
   bool _harmful = false;
   OperationDB _operationDB = OperationDB();
+  int id_user = -1;
 
   _EditFoodForm({this.alimento});
 
@@ -45,7 +47,8 @@ class _EditFoodForm extends State<EditFoodForm> {
         idAlimento: _idAlimento,
         nombreAlimento: _nombre,
         nota: _descripcion,
-        danino: _harmful));
+        danino: _harmful,
+        idUsuario: id_user));
     //_operationDB.getAlimentos();
   }
 
@@ -60,6 +63,11 @@ class _EditFoodForm extends State<EditFoodForm> {
     _descripcionController.text = alimento!.nota.toString();
     _harmful = alimento!.danino;
     super.initState();
+  }
+
+  getIdUsuario() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    id_user = await pref.getInt('id_usuario')!;
   }
 
   @override

@@ -2,8 +2,10 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/alimento.dart';
 import 'package:diabits/utils/responsive.dart';
+import 'package:diabits/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Input_text.dart';
 
 class NewFoodForm extends StatefulWidget {
@@ -19,11 +21,13 @@ class _NewFoodForm extends State<NewFoodForm> {
   String _descropcion = "";
   bool _harmful = false;
   OperationDB _operationDB = OperationDB();
+  int id_user = -1;
 
   _summit() {
     //metodo que ejecuta las validaciones que pongas en el form
     final isoOK = _formKey.currentState!.validate();
     print("form isOK $isoOK");
+
     if (isoOK) {
       print(_nombre);
       print(_descropcion);
@@ -35,7 +39,10 @@ class _NewFoodForm extends State<NewFoodForm> {
 
   _insertarAlimento() {
     _operationDB.inserAlimento(Alimento(
-        nombreAlimento: _nombre, nota: _descropcion, danino: _harmful));
+        nombreAlimento: _nombre,
+        nota: _descropcion,
+        danino: _harmful,
+        idUsuario: id_user));
     //_operationDB.getAlimentos();
   }
 
@@ -49,6 +56,11 @@ class _NewFoodForm extends State<NewFoodForm> {
   void initState() {
     _harmful = false;
     super.initState();
+  }
+
+  getIdUsuario() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    id_user = await pref.getInt('id_usuario')!;
   }
 
   @override

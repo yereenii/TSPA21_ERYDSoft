@@ -1,6 +1,7 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/alimento.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ListaAlimentosDaninos extends StatefulWidget {
   //const ListaAlimentosDaninos({Key? key}) : super(key: key);
@@ -15,11 +16,17 @@ class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
   final List<Map> _listaAlimentos = [];
   List<Alimento> _items = [];
   OperationDB mydb = OperationDB();
-
+  int id_user = -1;
   @override
   void initState() {
     getdata();
+    getIdUsuario();
     super.initState();
+  }
+
+  getIdUsuario() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    id_user = await pref.getInt('id_usuario')!;
   }
 
   void _editar(int indiceEditar) {
@@ -48,7 +55,7 @@ class _ListaAlimentosDaninosState extends State<ListaAlimentosDaninos> {
     Future.delayed(Duration(milliseconds: 500), () async {
       OperationDB odb = OperationDB();
       _listaAlimentos.clear();
-      _items = await odb.getAlimentoss(true);
+      _items = await odb.getAlimentoss(true, id_user);
       for (int i = 0; i < _items.length; i++) {
         _listaAlimentos.add(_items[i].toMap());
       }

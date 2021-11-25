@@ -4,6 +4,7 @@ import 'package:diabits/utils/notification_api.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/inkWellTabs.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Input_text.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:date_format/date_format.dart';
@@ -27,6 +28,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
   String _hora = '';
   DateTime _fechaCompleta = DateTime.now();
   final OperationDB _operationDB = OperationDB();
+  int id_user = -1;
 
   // ignore: duplicate_ignore
   _summit() {
@@ -46,6 +48,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
     int recordatorioID = listaRecordatorios.length + 1;
     String recordatorioTitle = _nombre + ' ';
     String recordatorioBody = 'Hoy a las: ' + _hora;
+
     NotificationApi.showScheduledNotification(
         id: recordatorioID,
         title: recordatorioTitle,
@@ -71,6 +74,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
       id_recordatorio: null,
       nombre_recordatorio: _nombre,
       fecha: _fechaCompleta,
+      idUsuario: id_user,
     ));
     _operationDB.getRecordatorios();
     _pushNotification();
@@ -98,6 +102,11 @@ class _NewReminderFormState extends State<NewReminderForm> {
     super.initState();
     //init notificacciones
     //this._notifications.initNotifications();
+  }
+
+  getIdUsuario() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    id_user = await pref.getInt('id_usuario')!;
   }
 
   //call del datePickerSelect
