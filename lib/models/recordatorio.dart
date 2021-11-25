@@ -2,12 +2,13 @@ class Recordatorio {
   final int? id_recordatorio;
   final String nombre_recordatorio;
   final DateTime fecha;
-  //final int id_usuario;
+  final int idUsuario;
 
   Recordatorio({
     this.id_recordatorio,
     required this.nombre_recordatorio,
     required this.fecha,
+    required this.idUsuario,
   });
 
   Map<String, dynamic> toMap() {
@@ -15,7 +16,7 @@ class Recordatorio {
       'id_recordatorio': id_recordatorio,
       'nombre_recordatorio': nombre_recordatorio,
       'fecha': fecha.toString(),
-      //'id_usuario': id_usuario
+      'id_usuario': idUsuario
     };
   }
 }

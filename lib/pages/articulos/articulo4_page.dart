@@ -3,6 +3,7 @@ import 'package:diabits/models/alimento.dart';
 import 'package:diabits/utils/responsive.dart';
 import 'package:diabits/widgets/circles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Articulo4Page extends StatefulWidget {
@@ -23,6 +24,7 @@ class _Articulo4State extends State<Articulo4Page> {
       'Muchos alimentos se descomponen en azúcar en la sangre, que se utiliza para obtener energía para alimentar nuestro cerebro, corazón y músculos. El azúcar en la sangre proviene de los alimentos que comemos o es hecho por el hígado, y se encuentra en el torrente sanguíneo (ya que se lleva a todos nuestros órganos y células) y dentro de las células (donde se transforma en energía).'
       'Si está luchando para controlar sus niveles de azúcar en la sangre, no está solo.'
       'La buena noticia es que, con las últimas herramientas y estrategias, puede tomar medidas para controlar su azúcar en la sangre, prevenir complicaciones graves y prosperar.';
+
   final String _url =
       'https://www.diabetes.org/healthy-living/medication-treatments/blood-glucose-testing-and-control';
   final String _ver = 'Ver más...';
@@ -46,10 +48,9 @@ class _Articulo4State extends State<Articulo4Page> {
       child: SingleChildScrollView(
         child: Container(
           width: responsive.width,
-          height: responsive.height,
           color: Colors.white,
           child: Stack(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             children: <Widget>[
               Positioned(
                 child: Column(
@@ -58,12 +59,12 @@ class _Articulo4State extends State<Articulo4Page> {
                       padding: const EdgeInsets.all(30),
                       child: Text(
                         _title,
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(30),
-                      //color: Colors.blueGrey.shade200,
                       child: Text(
                         _description,
                         style: TextStyle(fontSize: 17),
@@ -88,7 +89,7 @@ class _Articulo4State extends State<Articulo4Page> {
                 ),
               ),
               Positioned(
-                top: responsive.wp(-25),
+                //top: responsive.wp(-05),
                 child: const Circles(),
               ),
             ],

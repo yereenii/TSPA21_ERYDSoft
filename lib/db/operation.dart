@@ -102,7 +102,8 @@ class OperationDB {
             fecha: DateTime.parse((recordatorioMap[i]['fecha']))));
   }
 
-  Future<List<Recordatorio>> getRecordatoriosFecha(DateTime date) async {
+  Future<List<Recordatorio>> getRecordatoriosFecha(
+    DateTime date, int idUser) async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> recordatorioMap =
         await database.query("recordatorios");
@@ -112,13 +113,13 @@ class OperationDB {
       DateTime dt = DateTime.parse(n['fecha']);
       if (date.year == dt.year &&
           date.month == dt.month &&
-          date.day == dt.day) {
+          date.day == dt.day &&
+          idUser == n['id_usuario']) {
         listaRecordatorios.add(Recordatorio(
             id_recordatorio: n['id_recordatorio'],
             nombre_recordatorio: n['nombre_recordatorio'].toString(),
-            fecha: DateTime.parse(n['fecha'].toString())));
-        print(
-            listaRecordatorios[listaRecordatorios.length - 1].id_recordatorio);
+            fecha: DateTime.parse(n['fecha'].toString()),
+            idUsuario: n['id_usuario']));
       }
     }
     return List.generate(
@@ -141,19 +142,21 @@ class OperationDB {
     return str != '0' && str != 'false' && str != '';
   }
 
-  Future<List<Alimento>> getAlimentoss(bool danino) async {
+  Future<List<Alimento>> getAlimentoss(bool danino, int idUser) async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> alimentoMap = await database
         .query("alimentos", where: 'danino=?', whereArgs: [danino]);
     List<Alimento> auxListaAlimentos = [];
     listaAlimentos = auxListaAlimentos;
     for (var n in alimentoMap) {
-      if (toBoolean(n['danino']) == danino) {
+      if (toBoolean(n['danino']) == danino && idUser == n['id_usuario']) {
         listaAlimentos.add(Alimento(
             idAlimento: n['id_alimento'],
             nombreAlimento: n['nombre_alimento'],
             nota: n['nota'],
-            danino: toBoolean(n['danino'])));
+            danino: toBoolean(n['danino']),
+            idUsuario: n['id_usuario']
+            ));
       }
       //return database.update("alimentos", alimento.toMap(),
       //where: 'id_alimento=?', whereArgs: [alimento.idAlimento]);
