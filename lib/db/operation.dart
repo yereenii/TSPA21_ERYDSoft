@@ -84,8 +84,8 @@ class OperationDB {
 
   Future<List<Recordatorio>> getRecordatorios() async {
     Database database = await _openDB();
-    final List<Map<String, dynamic>> recordatorioMap =
-        await database.query("recordatorios");
+    final List<Map<String, dynamic>> recordatorioMap = await database
+        .query("recordatorios", where: 'id_usuario=?', whereArgs: [idUser]);
     List<Recordatorio> auxListaRecordatorios = [];
     listaRecordatorios = auxListaRecordatorios;
     for (var n in recordatorioMap) {
@@ -104,6 +104,7 @@ class OperationDB {
             idUsuario: recordatorioMap[i]['id_usuario']));
   }
 
+  int idUser = 1;
   Future<List<Recordatorio>> getRecordatoriosFecha(
       DateTime date, int idUser) async {
     Database database = await _openDB();
