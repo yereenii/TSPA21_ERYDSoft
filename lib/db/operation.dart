@@ -92,18 +92,20 @@ class OperationDB {
       listaRecordatorios.add(Recordatorio(
           id_recordatorio: n['id_recordatorio'],
           nombre_recordatorio: n['nombre_recordatorio'].toString(),
-          fecha: DateTime.parse(n['fecha'].toString())));
+          fecha: DateTime.parse(n['fecha'].toString()),
+          idUsuario: n['id_usuario']));
     }
     return List.generate(
         recordatorioMap.length,
         (i) => Recordatorio(
             id_recordatorio: recordatorioMap[i]['id_recordatorio'],
             nombre_recordatorio: recordatorioMap[i]['nombre_recordatorio'],
-            fecha: DateTime.parse((recordatorioMap[i]['fecha']))));
+            fecha: DateTime.parse((recordatorioMap[i]['fecha'])),
+            idUsuario: recordatorioMap[i]['id_usuario']));
   }
 
   Future<List<Recordatorio>> getRecordatoriosFecha(
-    DateTime date, int idUser) async {
+      DateTime date, int idUser) async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> recordatorioMap =
         await database.query("recordatorios");
@@ -127,7 +129,8 @@ class OperationDB {
         (i) => Recordatorio(
             id_recordatorio: recordatorioMap[i]['id_recordatorio'],
             nombre_recordatorio: recordatorioMap[i]['nombre_recordatorio'],
-            fecha: DateTime.parse((recordatorioMap[i]['fecha']))));
+            fecha: DateTime.parse((recordatorioMap[i]['fecha'])),
+            idUsuario: recordatorioMap[i]['id_usuario']));
   }
 
   Future<int> inserAlimento(Alimento alimento) async {
@@ -155,8 +158,7 @@ class OperationDB {
             nombreAlimento: n['nombre_alimento'],
             nota: n['nota'],
             danino: toBoolean(n['danino']),
-            idUsuario: n['id_usuario']
-            ));
+            idUsuario: n['id_usuario']));
       }
       //return database.update("alimentos", alimento.toMap(),
       //where: 'id_alimento=?', whereArgs: [alimento.idAlimento]);
@@ -167,7 +169,8 @@ class OperationDB {
             idAlimento: alimentoMap[i]['id_alimento'],
             nombreAlimento: alimentoMap[i]['nombre_alimento'],
             nota: alimentoMap[i]['nota'],
-            danino: toBoolean(alimentoMap[i]['danino'])));
+            danino: toBoolean(alimentoMap[i]['danino']),
+            idUsuario: alimentoMap[i]['id_usuario']));
   }
 
   Future<int> deleteA(Alimento alimento) async {
