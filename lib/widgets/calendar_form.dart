@@ -72,15 +72,16 @@ class _CalendarioState extends State<Calendario> {
 
   @override
   void initState() {
-    print('ID USUARIO ' + id_user.toString());
     getIdUsuario();
     super.initState();
   }
 
-  getIdUsuario() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    print('id_usuario ' + await pref.getInt('id_usuario').toString());
-    id_user = await pref.getInt('id_usuario')!;
+  getIdUsuario() {
+    Future.delayed(Duration(milliseconds: 500), () async {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      id_user = await pref.getInt('id_usuario')!;
+      setState(() {});
+    });
   }
 
   @override
