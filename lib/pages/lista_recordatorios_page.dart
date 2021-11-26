@@ -39,8 +39,7 @@ class _ListaRecordatoriosPageState extends State<ListaRecordatoriosPage> {
     mydb.deleteR(r);
     //_mydb.
     setState(() {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => super.widget));
+      
     });
   }
 
