@@ -8,4 +8,7 @@ class DataState with ChangeNotifier{
   int currentPage = 0;
   List<Alimento> _items = [];
 
-}
+}'Hoy a las: ' +
+        _fechaCompleta.hour.toString() +
+        ':' +
+        _fechaCompleta.minute.toString();
