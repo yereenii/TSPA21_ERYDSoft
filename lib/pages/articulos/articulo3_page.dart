@@ -15,8 +15,7 @@ class Articulo3Page extends StatefulWidget {
 class _Articulo3State extends State<Articulo3Page> {
   final String _titlepage =
       '¿Cómo se puede prevenir la diabetes?'; //Titulo del articulo
-  final String _title =
-      '¿Cómo se puede prevenir la diabetes?';
+  final String _title = '¿Cómo se puede prevenir la diabetes?';
   final String _description =
       'La diabetes es una enfermedad que afecta a millones de personas en el mundo. '
       ' Antes de diagnosticar la diabetes existe un período en el que los niveles de azucar en la sangre son altos, aunque podemos bajar el consumo de azucar si cambiamos nuestros hábitos alimenticios. '
@@ -59,7 +58,8 @@ class _Articulo3State extends State<Articulo3Page> {
                       padding: const EdgeInsets.all(30),
                       child: Text(
                         _title,
-                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Container(
@@ -101,9 +101,6 @@ class _Articulo3State extends State<Articulo3Page> {
                     ),
                   ],
                 ),
-              ),
-              const Positioned(
-                child: Circles(),
               ),
             ],
           ),

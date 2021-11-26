@@ -101,9 +101,6 @@ class _Articulo2State extends State<Articulo2Page> {
                   ],
                 ),
               ),
-              const Positioned(
-                child: Circles(),
-              ),
             ],
           ),
         ),

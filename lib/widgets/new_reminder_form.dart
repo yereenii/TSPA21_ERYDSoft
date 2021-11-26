@@ -200,7 +200,7 @@ class _NewReminderFormState extends State<NewReminderForm> {
                   }
                   return null;
                 },
-                label: 'Nombre del Recordtorio',
+                label: 'Nombre del Recordatorio',
               ),
               SizedBox(height: responsive.dp(2)),
               /*************************************** */

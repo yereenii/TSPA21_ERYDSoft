@@ -88,10 +88,6 @@ class _Articulo4State extends State<Articulo4Page> {
                   ],
                 ),
               ),
-              Positioned(
-                //top: responsive.wp(-05),
-                child: const Circles(),
-              ),
             ],
           ),
         ),

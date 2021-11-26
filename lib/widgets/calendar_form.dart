@@ -1,6 +1,5 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/recordatorio.dart';
-import 'package:diabits/pages/alimentos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -80,7 +79,7 @@ class _CalendarioState extends State<Calendario> {
     Future.delayed(Duration(milliseconds: 500), () async {
       SharedPreferences pref = await SharedPreferences.getInstance();
       id_user = await pref.getInt('id_usuario')!;
-      setState(() {});
+      //setState(() {});
     });
   }
 

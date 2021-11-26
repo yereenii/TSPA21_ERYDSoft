@@ -55,13 +55,14 @@ class _EditReminderForm extends State<EditReminderForm> {
   }
 
   _edicionRecordatorio() {
-    _operationDB.editaRecordatorioBD(Recordatorio(
+    Recordatorio recordatorio = Recordatorio(
       id_recordatorio: recordar!.id_recordatorio!,
       nombre_recordatorio: _nombre,
       fecha: _fechaCompleta,
-      idUsuario: id_user,
-    ));
-    _operationDB.getRecordatorios(id_user);
+      idUsuario: recordar!.idUsuario,
+    );
+    _operationDB.editaRecordatorioBD(recordatorio);
+    //_operationDB.getRecordatorios(recordatorio.idUsuario);
   }
 
   _regresarCalendar() {
