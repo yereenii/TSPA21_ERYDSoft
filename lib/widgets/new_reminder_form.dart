@@ -164,6 +164,10 @@ class _NewReminderFormState extends State<NewReminderForm> {
             _fechaCompleta.day, selectedTime.hour, selectedTime.minute);
         _fechaCompleta = dt;
       });
+    } else {
+      DateTime dt = DateTime(_fechaCompleta.year, _fechaCompleta.month,
+          _fechaCompleta.day, selectedTime.hour, selectedTime.minute);
+      _fechaCompleta = dt;
     }
   }
 
