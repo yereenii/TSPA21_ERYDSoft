@@ -69,6 +69,10 @@ class NotificationApi {
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
       );
+
+  static Future<void> cancelNotifications(int id) async {
+    await _notifications.cancel(id);
+  }
 }
 
 

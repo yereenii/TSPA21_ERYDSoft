@@ -47,7 +47,10 @@ class _NewReminderFormState extends State<NewReminderForm> {
     NotificationApi.init(initSheduled: true);
     int recordatorioID = listaRecordatorios.length + 1;
     String recordatorioTitle = _nombre + ' ';
-    String recordatorioBody = 'Hoy a las: ' + _hora;
+    String recordatorioBody = 'Hoy a las: ' +
+        _fechaCompleta.hour.toString() +
+        ':' +
+        _fechaCompleta.minute.toString();
 
     NotificationApi.showScheduledNotification(
         id: recordatorioID,
@@ -99,7 +102,6 @@ class _NewReminderFormState extends State<NewReminderForm> {
         DateTime(2021, 09, 09, selectedTime.hour, selectedTime.minute),
         [HH, ':', nn]).toString();
     _hora = selectedTime.toString();
-    getIdUsuario();
     super.initState();
     //init notificacciones
     //this._notifications.initNotifications();

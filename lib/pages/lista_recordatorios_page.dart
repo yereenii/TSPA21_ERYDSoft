@@ -1,5 +1,6 @@
 import 'package:diabits/db/operation.dart';
 import 'package:diabits/models/recordatorio.dart';
+import 'package:diabits/utils/notification_api.dart';
 import 'package:flutter/material.dart';
 
 class ListaRecordatoriosPage extends StatefulWidget {
@@ -38,6 +39,11 @@ class _ListaRecordatoriosPageState extends State<ListaRecordatoriosPage> {
     //llamar a la bd para borrar
     mydb.deleteR(r);
     //_mydb.
+    
+    print("entraa");
+    print(r.id_recordatorio);
+    NotificationApi.init(initSheduled: true);
+    NotificationApi.cancelNotifications(r.id_recordatorio!);
     setState(() {
       
     });
