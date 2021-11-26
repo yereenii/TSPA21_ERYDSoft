@@ -19,9 +19,6 @@ class _CalendarioPage extends State<CalendarioPage> {
     final double tealAccentSize = responsive.wp(60);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Calendario'),
-      ),
       body: GestureDetector(
         child: SingleChildScrollView(
           //la altura es dinamica calculada a los elementos hijos
