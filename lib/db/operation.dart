@@ -17,7 +17,7 @@ class OperationDB {
     String qUsuario =
         "CREATE TABLE usuarios (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre VARCHAR2 NOT NULL, correo VARCHAR2 NOT NULL, password VARCHAR2 NOT NULL);";
     String qRecordatorio =
-        "CREATE TABLE recordatorios (id_recordatorio INTEGER PRIMARY KEY, nombre_recordatorio VARCHAR2 NOT NULL, fecha Date NOT NULL,id_usuario INTEGER NOT NULL,FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario));";
+        "CREATE TABLE recordatorios (id_recordatorio INTEGER PRIMARY KEY, nombre_recordatorio VARCHAR2 NOT NULL, fecha DateTime NOT NULL,id_usuario INTEGER NOT NULL,FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario));";
     String qAlimento =
         "CREATE TABLE alimentos (id_alimento INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_alimento VARCHAR2 NOT NULL, nota VARCHAR2 NOT NULL, danino BOOLEAN,id_usuario INTEGER NOT NULL,FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario));";
     List<String> qCreates = [qUsuario, qRecordatorio, qAlimento];
